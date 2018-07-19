@@ -1,28 +1,39 @@
 package Clases;
 
-public class Tag {
+import javax.persistence.*;
+import java.io.Serializable;
 
-    private int tag_id;
-    private String username;
+@Entity
+@NamedQueries({@NamedQuery(name = "Tag.findAllBytag", query = "select p from Tag  p where p.tag like :tag")})
+public class Tag implements Serializable{
 
-    public Tag(int tag_id, String username) {
-        this.tag_id = tag_id;
-        this.username = username;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "TAG_ID")
+    private long id;
+    private String tag;
+
+    public Tag(long tag_id, String tag) {
+        this.id = tag_id;
+        this.tag = tag;
     }
 
-    public int getTag_id() {
-        return tag_id;
+    public Tag() {
     }
 
-    public void setTag_id(int tag_id) {
-        this.tag_id = tag_id;
+    public long getId() {
+        return id;
     }
 
-    public String getUsername() {
-        return username;
+    public void setId(long id) {
+        this.id = id;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
     }
 }

@@ -1,40 +1,21 @@
 package Clases;
 
 import java.util.ArrayList;
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.List;
 
-public class Comment {
+@Entity
+public class Comment implements Serializable{
 
     private String username;
     private String Text;
-    private ArrayList<Tag> tags;
+    private List<Tag> tags;
+    @ManyToOne()
+    private Post post;
+    @ManyToOne()
+    private image image;
 
-    public Comment(String username, String text, ArrayList<Tag> tags) {
-        this.username = username;
-        Text = text;
-        this.tags = tags;
-    }
 
-    public String getUsername() {
-        return username;
-    }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getText() {
-        return Text;
-    }
-
-    public void setText(String text) {
-        Text = text;
-    }
-
-    public ArrayList<Tag> getTags() {
-        return tags;
-    }
-
-    public void setTags(ArrayList<Tag> tags) {
-        this.tags = tags;
-    }
 }

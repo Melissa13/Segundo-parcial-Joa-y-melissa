@@ -2,97 +2,29 @@ package Clases;
 
 import java.util.ArrayList;
 import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import java.io.Serializable;
+import java.util.List;
+import java.util.Set;
 
-public class User {
+@Entity
+@NamedQueries({@NamedQuery(name = "User.findAllByUsername", query = "select p from User  p where p.username like :username")})
+public class User implements Serializable{
+    @Id
     private String username;
     private String nombre;
     private Date date_birth;
     private String place_birth;
-    private ArrayList<String> Studies;
+    private List<String> Studies;
     private String workplace;
     private boolean Administrador;
     private String actual_place;
     private String job;
+    private Set<User> Friends;
+    private Set<image> Albun;
+    private Set<Notification> news;
 
-    public User(String username, String nombre, Date date_birth, String place_birth, ArrayList<String> studies, String workplace, boolean administrador) {
-        this.username = username;
-        this.nombre = nombre;
-        this.date_birth = date_birth;
-        this.place_birth = place_birth;
-        Studies = studies;
-        this.workplace = workplace;
-        Administrador = administrador;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public Date getDate_birth() {
-        return date_birth;
-    }
-
-    public void setDate_birth(Date date_birth) {
-        this.date_birth = date_birth;
-    }
-
-    public String getPlace_birth() {
-        return place_birth;
-    }
-
-    public void setPlace_birth(String place_birth) {
-        this.place_birth = place_birth;
-    }
-
-    public ArrayList<String> getStudies() {
-        return Studies;
-    }
-
-    public void setStudies(ArrayList<String> studies) {
-        Studies = studies;
-    }
-
-    public String getWorkplace() {
-        return workplace;
-    }
-
-    public void setWorkplace(String workplace) {
-        this.workplace = workplace;
-    }
-
-    public boolean isAdministrador() {
-        return Administrador;
-    }
-
-    public void setAdministrador(boolean administrador) {
-        Administrador = administrador;
-    }
-
-    public String getActual_place() {
-        return actual_place;
-    }
-
-    public void setActual_place(String actual_place) {
-        this.actual_place = actual_place;
-    }
-
-    public String getJob() {
-        return job;
-    }
-
-    public void setJob(String job) {
-        this.job = job;
-    }
 }
