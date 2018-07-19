@@ -23,4 +23,81 @@ public class image implements Serializable{
     private Set<User> UserTagsi;
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<User> likesi;
+
+    public image(byte[] image, String body, User author, Date dateTime, Set<Comment> commentsi, Set<User> userTagsi, Set<User> likesi) {
+        Image = image;
+        this.body = body;
+        Author = author;
+        DateTime = dateTime;
+        this.commentsi = commentsi;
+        UserTagsi = userTagsi;
+        this.likesi = likesi;
+    }
+
+    public image() {
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public byte[] getImage() {
+        return Image;
+    }
+
+    public void setImage(byte[] image) {
+        Image = image;
+    }
+
+    public String getBody() {
+        return body;
+    }
+
+    public void setBody(String body) {
+        this.body = body;
+    }
+
+    public User getAuthor() {
+        return Author;
+    }
+
+    public void setAuthor(User author) {
+        Author = author;
+    }
+
+    public Date getDateTime() {
+        return DateTime;
+    }
+
+    public void setDateTime(Date dateTime) {
+        DateTime = dateTime;
+    }
+
+    public Set<Comment> getCommentsi() {
+        return commentsi;
+    }
+
+    public void setCommentsi(Set<Comment> commentsi) {
+        this.commentsi = commentsi;
+    }
+
+    public Set<User> getUserTagsi() {
+        return UserTagsi;
+    }
+
+    public void setUserTagsi(Set<User> userTagsi) {
+        UserTagsi = userTagsi;
+    }
+
+    public Set<User> getLikesi() {
+        return likesi;
+    }
+
+    public void setLikesi(Set<User> likesi) {
+        this.likesi = likesi;
+    }
 }
