@@ -10,7 +10,8 @@ public class Comment implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String username;
+    @OneToOne()
+    private User usuario;
     private String Text;
     private List<Tag> tags;
     @ManyToOne()
