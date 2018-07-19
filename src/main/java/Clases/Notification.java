@@ -1,11 +1,21 @@
 package Clases;
 
-public class Notification {
+import javax.persistence.*;
+import java.io.Serializable;
 
+@Entity
+public class Notification implements Serializable{
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private User autor;
+    @ManyToOne()
+    private User owner;
+    @OneToOne()
     private Post post;
+    @OneToOne()
     private image imagen;
-    private User destino;
+    @OneToOne()
+    private User origen;
     private String mensaje;
 }
