@@ -55,7 +55,7 @@
 }
 
 .register-background {
-  background-image: url("../paper_img/landscape.jpg");
+  background-image: url("../paper_img/paisaje.jpg");
   background-position: center center;
   background-size: cover;
   min-height: 100vh;
@@ -91,11 +91,11 @@
 }
 
 .register-footer .fa-heart {
-  color: #EB5E28;
+  color: #28afea;
 }
 
 .register-card {
-  background-color: #FF8F5E;
+  background-color: #61e7fe;
   border-radius: 8px;
   color: #fff;
   max-width: 350px;
@@ -109,7 +109,7 @@
 }
 
 .register-card .title {
-  color: #B33C12;
+  color: #1277b4;
   text-align: center;
 }
 

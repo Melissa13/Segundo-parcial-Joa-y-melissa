@@ -22,7 +22,7 @@ public class main {
 
     public static void manejadorFremarker()throws SQLException {
 
-        //staticFileLocation("/public");
+        staticFileLocation("/public");
 
         Configuration configuration= new Configuration(Configuration.VERSION_2_3_23);
         configuration.setClassForTemplateLoading(
@@ -31,6 +31,12 @@ public class main {
 
         //urls
         get("/", (request, response) -> {
+
+            Map<String, Object> mapa = new HashMap<>();
+            return new ModelAndView(mapa, "login.ftl");
+        }, motor);
+
+        get("/inicio", (request, response) -> {
 
             Map<String, Object> mapa = new HashMap<>();
             return new ModelAndView(mapa, "base.ftl");

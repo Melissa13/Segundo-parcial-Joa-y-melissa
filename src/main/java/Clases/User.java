@@ -11,6 +11,8 @@ public class User {
     private ArrayList<String> Studies;
     private String workplace;
     private boolean Administrador;
+    private String actual_place;
+    private String job;
 
     public User(String username, String nombre, Date date_birth, String place_birth, ArrayList<String> studies, String workplace, boolean administrador) {
         this.username = username;
@@ -76,5 +78,21 @@ public class User {
 
     public void setAdministrador(boolean administrador) {
         Administrador = administrador;
+    }
+
+    public String getActual_place() {
+        return actual_place;
+    }
+
+    public void setActual_place(String actual_place) {
+        this.actual_place = actual_place;
+    }
+
+    public String getJob() {
+        return job;
+    }
+
+    public void setJob(String job) {
+        this.job = job;
     }
 }
