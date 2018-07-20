@@ -15,6 +15,7 @@ public class Post implements Serializable{
     private long id;
     private String Title;
     private String Body;
+    @OneToOne()
     private image Image;
     @OneToOne()
     private User Authorp;

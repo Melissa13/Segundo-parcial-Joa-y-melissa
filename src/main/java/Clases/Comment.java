@@ -13,6 +13,7 @@ public class Comment implements Serializable{
     @OneToOne()
     private User usuario;
     private String Text;
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Tag> tags;
     @ManyToOne()
     private Post post;

@@ -12,10 +12,11 @@ import java.util.Set;
 public class User implements Serializable{
     @Id
     private String username;
+    private String Password;
     private String nombre;
     private Date date_birth;
     private String place_birth;
-    private List<String> Studies;
+    private String Studies;  //list
     private String workplace;
     private boolean Administrador;
     private String actual_place;
@@ -27,8 +28,9 @@ public class User implements Serializable{
     @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER)
     private Set<Notification> news;
 
-    public User(String username, String nombre, Date date_birth, String place_birth, List<String> studies, String workplace, boolean administrador, String actual_place, String job, Set<User> friends, Set<image> albun, Set<Notification> news) {
+    public User(String username, String password, String nombre, Date date_birth, String place_birth, String studies, String workplace, boolean administrador, String actual_place, String job, Set<User> friends, Set<image> albun, Set<Notification> news) {
         this.username = username;
+        Password = password;
         this.nombre = nombre;
         this.date_birth = date_birth;
         this.place_birth = place_birth;
@@ -51,6 +53,14 @@ public class User implements Serializable{
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getPassword() {
+        return Password;
+    }
+
+    public void setPassword(String password) {
+        Password = password;
     }
 
     public String getNombre() {
@@ -77,11 +87,11 @@ public class User implements Serializable{
         this.place_birth = place_birth;
     }
 
-    public List<String> getStudies() {
+    public String getStudies() {
         return Studies;
     }
 
-    public void setStudies(List<String> studies) {
+    public void setStudies(String studies) {
         Studies = studies;
     }
 

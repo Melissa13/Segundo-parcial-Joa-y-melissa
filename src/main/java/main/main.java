@@ -1,5 +1,7 @@
 package main;
 
+import Database.*;
+import Clases.*;
 import freemarker.template.Configuration;
 import spark.ModelAndView;
 import spark.template.freemarker.FreeMarkerEngine;
@@ -17,6 +19,26 @@ import static spark.Spark.staticFileLocation;
 public class main {
 
     public static void main(String[] args) throws SQLException {
+
+        //Iniciando el servicio
+        BootStrapService.getInstancia().init();
+
+        //pruebas
+        //Insertando administrador por defecto
+        User insertar = new User();
+        insertar.setUsername("Admin");
+        insertar.setNombre("Carla");
+        insertar.setPassword("123");
+        insertar.setAdministrador(true);
+        UserServices.getInstancia().crear(insertar);
+
+        User a=null;
+        a=UserServices.getInstancia().find("Admin");
+        if(a!=null){
+            System.out.println("Username "+a.getUsername()+" Contraseña"+a.getPassword());
+        }
+        else {System.out.println("no esta");}
+
         manejadorFremarker();
     }
 
@@ -42,6 +64,9 @@ public class main {
             return new ModelAndView(mapa, "base.ftl");
         }, motor);
 
+
+
     }
 
 }
+
