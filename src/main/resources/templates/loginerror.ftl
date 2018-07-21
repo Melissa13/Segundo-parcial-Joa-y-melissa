@@ -7,6 +7,16 @@
 <#macro page_body>
     <div class="container">
         <div class="row">
+            <!-- notifications -->
+            <div id="notifications">
+                <div class="alert alert-danger">
+                    <div class="container">
+                        <b>Error: </b> Nombre de Usuario o contraseña no concuerdan, intente de nuevo.
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div><!--  end notifications -->
+
             <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1 ">
                 <div class="register-card">
                     <h3 class="title">Welcome</h3>

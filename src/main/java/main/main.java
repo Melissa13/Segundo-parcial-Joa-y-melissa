@@ -14,6 +14,10 @@ import java.util.Map;
 
 import static spark.Spark.get;
 import static spark.Spark.staticFileLocation;
+import spark.*;
+import static spark.Spark.*;
+import spark.Session;
+import org.jasypt.util.text.BasicTextEncryptor;
 //import static spark.Spark.staticFiles;
 
 public class main {
@@ -52,11 +56,41 @@ public class main {
         FreeMarkerEngine motor= new FreeMarkerEngine(configuration);
 
         //urls
+        //login
         get("/", (request, response) -> {
 
             Map<String, Object> mapa = new HashMap<>();
             return new ModelAndView(mapa, "login.ftl");
         }, motor);
+
+        Spark.post("/login", (request, response) -> {
+
+
+            String username =request.queryParams("username") != null ? request.queryParams("username") : "unknown";
+            String pass =request.queryParams("username") != null ? request.queryParams("pass") : "unknown";
+
+            User user = UserServices.getInstancia().find(username);
+            //System.out.println("usuario "+ user.getUsername());
+            if(user!=null){
+                if(user.getPassword().equals(pass)) {
+
+                    request.session(true);
+                    request.session().attribute("user", user);
+                    response.cookie("/", "test", encrypt(user.getUsername()), 604800, false);
+                    response.redirect("/inicio");
+
+                } else{
+                    response.redirect("/");
+                }
+
+            }else{
+                response.redirect("/");
+            }
+
+
+            return "";
+
+        });
 
         get("/inicio", (request, response) -> {
 
@@ -78,6 +112,22 @@ public class main {
 
 
 
+    }
+
+    public static String encrypt(String secret){
+        BasicTextEncryptor a = new BasicTextEncryptor();
+        a.setPasswordCharArray("some-random-data".toCharArray());
+        String topsecret = a.encrypt(secret);
+        return topsecret;
+
+    }
+
+    public static String decrypt(String secret){
+        BasicTextEncryptor a = new BasicTextEncryptor();
+        a.setPasswordCharArray("some-random-data".toCharArray());
+        String topsecret = a.decrypt(secret);
+
+        return topsecret;
     }
 
 }
