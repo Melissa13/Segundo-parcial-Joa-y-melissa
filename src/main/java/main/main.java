@@ -97,6 +97,15 @@ public class main {
 
         });
 
+        Spark.get("/logout", (request, response) -> {
+
+            Session actual = request.session(true);
+            actual.invalidate();
+            response.removeCookie("test");
+            response.redirect("/");
+            return "";
+        });
+
         get("/inicio", (request, response) -> {
 
             Map<String, Object> mapa = new HashMap<>();
@@ -114,6 +123,27 @@ public class main {
             Map<String, Object> mapa = new HashMap<>();
             return new ModelAndView(mapa, "baseperfil.ftl");
         }, motor);
+
+        //condiciones before
+        before("/",(request, response) -> {
+            User user =null;
+            String cook=decrypt(request.cookie("test"));
+            System.out.println("El cookie: "+request.cookie("test"));
+            if(cook != null && !cook.isEmpty()){
+                user=UserServices.getInstancia().find(cook);
+                request.session(true);
+                request.session().attribute("user", user);
+                response.redirect("/inicio");
+            }
+            else{
+                user= request.session(true).attribute("user");
+                if(user!= null){
+                    response.redirect("/inicio");
+                }
+
+            }
+
+        });
 
 
 

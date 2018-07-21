@@ -107,7 +107,7 @@
                                 <li class="divider"></li>
                                 <li><a href="#">Separated link</a></li>
                                 <li class="divider"></li>
-                                <li><a href="#">One more separated link</a></li>
+                                <li><a href="/logout"><i class="fa fa-sign-in"></i>Log out</a></li>
                             </ul>
                         </li>
 
