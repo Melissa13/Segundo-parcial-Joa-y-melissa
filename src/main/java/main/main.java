@@ -63,8 +63,13 @@ public class main {
             return new ModelAndView(mapa, "login.ftl");
         }, motor);
 
-        Spark.post("/login", (request, response) -> {
+        get("/loginerror", (request, response) -> {
 
+            Map<String, Object> mapa = new HashMap<>();
+            return new ModelAndView(mapa, "loginerror.ftl");
+        }, motor);
+
+        Spark.post("/login", (request, response) -> {
 
             String username =request.queryParams("username") != null ? request.queryParams("username") : "unknown";
             String pass =request.queryParams("username") != null ? request.queryParams("pass") : "unknown";
@@ -80,11 +85,11 @@ public class main {
                     response.redirect("/inicio");
 
                 } else{
-                    response.redirect("/");
+                    response.redirect("/loginerror");
                 }
 
             }else{
-                response.redirect("/");
+                response.redirect("/loginerror");
             }
 
 

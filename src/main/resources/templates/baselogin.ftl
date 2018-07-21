@@ -13,6 +13,8 @@
     <link href="../assets/css/ct-paper.css" rel="stylesheet"/>
     <link href="../assets/css/demo.css" rel="stylesheet" />
     <link href="../assets/css/examples.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/css/detalles.css">
+    <link rel="stylesheet" href="/assets/css/complemento.css">
 
     <!--     Fonts and icons     -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">

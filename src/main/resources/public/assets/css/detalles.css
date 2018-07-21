@@ -74,3 +74,11 @@
     background-color: steelblue;
     border-radius: 10px;
 }
+
+.alerta{
+    min-width: 50px;
+}
+
+.container .alerta{
+    text-align: center;
+}
