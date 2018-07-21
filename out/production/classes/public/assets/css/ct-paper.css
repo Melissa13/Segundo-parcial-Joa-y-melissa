@@ -2037,10 +2037,10 @@ textarea.form-control {
   color: #A49E93;
 }
 .nav-tabs > li > a:hover {
-  color: #66615b;
+  color: lightgrey;
 }
 .nav-tabs > li.active {
-  color: #66615b;
+  color: white;
   position: relative;
 }
 .nav-tabs > li.active > a,

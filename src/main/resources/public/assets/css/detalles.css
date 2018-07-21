@@ -51,3 +51,24 @@
     padding-left: 40px;
     padding-right: 50px;
 }
+
+.perfil-bar{
+    background-color: #7CE4FE;
+    background-position: center center;
+    min-height: 60px;
+    width: 100%
+}
+
+.tab-color{
+    background-color: lightblue;
+    color: #0b2e13;
+    border-radius: 10px;
+    min-height: 200px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.tab-color-title{
+    background-color: steelblue;
+    border-radius: 10px;
+}
