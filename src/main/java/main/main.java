@@ -125,12 +125,6 @@ public class main {
             return new ModelAndView(mapa, "inicio.ftl");
         }, motor);
 
-        get("/prueba", (request, response) -> {
-
-            Map<String, Object> mapa = new HashMap<>();
-            return new ModelAndView(mapa, "ayuda.ftl");
-        }, motor);
-
         get("/perfil", (request, response) -> {
 
             Map<String, Object> mapa = new HashMap<>();
@@ -174,6 +168,19 @@ public class main {
 
         });
 
+
+
+        get("/prueba", (request, response) -> {
+
+            Map<String, Object> mapa = new HashMap<>();
+            return new ModelAndView(mapa, "ayuda.ftl");
+        }, motor);
+
+        get("/prueba2", (request, response) -> {
+
+            Map<String, Object> mapa = new HashMap<>();
+            return new ModelAndView(mapa, "registro.ftl");
+        }, motor);
 
 
     }

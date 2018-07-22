@@ -14,6 +14,7 @@ public class User implements Serializable{
     private String username;
     private String Password;
     private String nombre;
+    private String descripcion;
     private Date date_birth;
     private String place_birth;
     private String Studies;  //list
@@ -28,10 +29,11 @@ public class User implements Serializable{
     @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER)
     private Set<Notification> news;
 
-    public User(String username, String password, String nombre, Date date_birth, String place_birth, String studies, String workplace, boolean administrador, String actual_place, String job, Set<User> friends, Set<image> albun, Set<Notification> news) {
+    public User(String username, String password, String nombre, String descripcion,Date date_birth, String place_birth, String studies, String workplace, boolean administrador, String actual_place, String job, Set<User> friends, Set<image> albun, Set<Notification> news) {
         this.username = username;
         Password = password;
         this.nombre = nombre;
+        this.descripcion=descripcion;
         this.date_birth = date_birth;
         this.place_birth = place_birth;
         Studies = studies;
@@ -149,5 +151,13 @@ public class User implements Serializable{
 
     public void setNews(Set<Notification> news) {
         this.news = news;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 }

@@ -43,11 +43,9 @@
                         </div>
 
                         <div class="tim-row">
-                            <legend></legend>
                             <div class="area-line">
                                 <h2>Ultimos Posts</h2>
                             </div>
-                            <legend></legend>
                         </div>
 
                         <!-- post row -->

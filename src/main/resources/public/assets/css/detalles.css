@@ -82,3 +82,64 @@
 .container .alerta{
     text-align: center;
 }
+
+/*registro*/
+.registro-card {
+    background-color: #61e7fe;
+    border-radius: 8px;
+    color: #fff;
+    max-width: 800px;
+    margin-top: 20px;
+    margin-bottom: 70px;
+    margin-left: 190px;
+    min-height: 400px;
+    padding: 30px;
+    position: relative;
+}
+
+.registro-card label {
+    margin-top: 15px;
+}
+
+.registro-card .title {
+    color: #1277b4;
+    text-align: center;
+}
+
+.registro-card .btn {
+    margin-top: 30px;
+}
+
+.registro-card .forgot {
+    text-align: center;
+}
+
+.registro-form{
+    width: 300px;
+    float: left;
+    margin-left: 40px;
+}
+.registro-formb{
+    width: 300px;
+    float: left;
+    margin-left: 80px;
+}
+
+.registro-formc{
+    margin-left: 40px;
+    width: 680px;
+}
+
+.registro-label{
+    float: left;
+    margin-left: 40px;
+}
+.registro-labelb{
+    float: left;
+    margin-left: 300px;
+}
+
+.registro-text{
+    margin-left: 40px;
+    width: 680px;
+}

@@ -41,19 +41,9 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav pull-right">
                         <!--                                       primary dropdown -->
-                        <li class="dropdown">
-                            <button href="#" class="dropdown-toggle btn btn-fill btn-primary" data-toggle="dropdown">Primary <b class="caret"></b></button>
-                            <!--                                  You can add classes for different colours on the next element -->
-                            <ul class="dropdown-menu dropdown-primary dropdown-menu-right">
-                                <li class="dropdown-header">Dropdown header</li>
-                                <li><a href="#">Action</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something else here</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">Separated link</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">One more separated link</a></li>
-                            </ul>
+                        <li>
+                            <a href="/prueba" class="btn btn-fill btn-primary">Gestión</a>
+                            </a>
                         </li>
 
                         <li class="dropdown">
