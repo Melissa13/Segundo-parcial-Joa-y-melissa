@@ -4,7 +4,7 @@
     <link rel="icon" type="image/png" href="/assets/paper_img/favicon.ico">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-    <title>Inicio</title>
+    <@page_head/>
 
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
@@ -87,6 +87,7 @@
                         </li>
 
                         <!-- usuario-->
+                        <#if userl??>
                         <li class="dropdown">
                             <button href="#" class="dropdown-toggle espacio" data-toggle="dropdown">
                                 <div class="logo-container">
@@ -94,14 +95,14 @@
                                         <img src="/img/hechicera.png" alt="Creative Tim Logo">
                                     </div>
                                     <div class="brand">
-                                        Melissa
+                                        ${userl.username}
                                         <b class="caret"></b>
                                     </div>
                                 </div>
                             </button>
                             <ul class="dropdown-menu dropdown-primary dropdown-menu-right">
                                 <li class="dropdown-header">Dropdown header</li>
-                                <li><a href="#">Action</a></li>
+                                <li><a href="/perfil">Perfil</a></li>
                                 <li><a href="#">Another action</a></li>
                                 <li><a href="#">Something else here</a></li>
                                 <li class="divider"></li>
@@ -110,6 +111,7 @@
                                 <li><a href="/logout"><i class="fa fa-sign-in"></i>Log out</a></li>
                             </ul>
                         </li>
+                        </#if>
 
 
                     </ul>
@@ -121,85 +123,7 @@
 
 
 <!-- Contenido-->
-<div class="main">
-    <div class="section section-nude">
-        <div class="container">
-            <div class="fondo fixed-bar">
-                <ul>
-                    <li><a href="#buttons-row">Buttons</a></li>
-                    <li><a href="#checkbox-row">Checkbox/Radio</a></li>
-                    <li><a href="#dropdown-row">Dropdown</a></li>
-                    <li><a href="#inputs-row">Inputs</a></li>
-                    <li><a href="#textarea-row">Textarea</a></li>
-                    <li><a href="#navbar-row">Navigation</a></li>
-                    <li><a href="#subscription-row">Footers</a></li>
-                    <li><a href="#pagination-row">Pagination</a></li>
-                    <li><a href="#progressbar-row">Progress Bars</a></li>
-                    <li><a href="#sliders-row">Sliders</a></li>
-                    <li><a href="#labels-row">Labels</a></li>
-                    <li><a href="#datepicker-row">Datepicker</a></li>
-                    <li><a href="#modal-row">Modals</a></li>
-                    <li><a href="#tooltip-row">Tooltips/Popovers</a></li>
-                    <li><a href="#notification-row">Notification</a></li>
-
-                </ul>
-            </div>
-            <div class="row">
-                <div class="leftcolumn">
-                    <br/>
-                </div>
-                <div class="rightcolumn">
-                    <div class="tim-container" style="min-height: 500px;">
-
-                        <!-- post row -->
-                        <div class="tim-row bordec">
-                            <h2> Tooltips</h2>
-                            <legend></legend>
-                            <p style="margin-bottom: 45px;">
-                                We restyled the Bootstrap tooltip.
-                            </p>
-                            <button type="button" class="btn btn-default btn-tooltip" data-toggle="tooltip" data-placement="top" title="Tooltip on top" data-trigger="manual">Button with Tooltip</button>
-                            <div class="area-line">
-                                <a data-target="#tooltipMarkup" href="javascript: void(0);" data-toggle="collapse">See Markup and Javascript</a>
-                                <div id="tooltipMarkup" class="collapse">
-                                </div>
-                            </div>
-                        </div>
-                        <!-- end row -->
-                        <div class="tim-row bordec">
-                            <h2> Post 1</h2>
-                            <legend></legend>
-                            <p style="margin-bottom: 45px;">
-                                We restyled the Bootstrap tooltip.
-                            </p>
-                            <button type="button" class="btn btn-default btn-tooltip" data-toggle="tooltip" data-placement="top" title="Tooltip on top" data-trigger="manual">Button with Tooltip</button>
-                            <div class="area-line">
-                                <a data-target="#tooltipMarkup" href="javascript: void(0);" data-toggle="collapse">See Markup and Javascript</a>
-                                <div id="tooltipMarkup" class="collapse">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tim-row bordec">
-                            <h2> Post 2</h2>
-                            <legend></legend>
-                            <p style="margin-bottom: 45px;">
-                                We restyled the Bootstrap tooltip.
-                            </p>
-                            <button type="button" class="btn btn-default btn-tooltip" data-toggle="tooltip" data-placement="top" title="Tooltip on top" data-trigger="manual">Button with Tooltip</button>
-                            <div class="area-line">
-                                <a data-target="#tooltipMarkup" href="javascript: void(0);" data-toggle="collapse">See Markup and Javascript</a>
-                                <div id="tooltipMarkup" class="collapse">
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                    <!-- end container -->
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<@page_body/>
 
 <!--footer -->
 
