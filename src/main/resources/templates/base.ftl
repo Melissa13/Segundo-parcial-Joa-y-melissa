@@ -34,17 +34,21 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Social Diary</a>
+                    <a class="navbar-brand" href="/inicio">Social Diary</a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav pull-right">
                         <!--                                       primary dropdown -->
-                        <li>
-                            <a href="/prueba" class="btn btn-fill btn-primary">Gestión</a>
-                            </a>
-                        </li>
+                        <#if userl??>
+                            <#if userl.isAdministrador() >
+                            <li>
+                                <a href="/prueba" class="btn btn-fill btn-primary">Gestión</a>
+                                </a>
+                            </li>
+                            </#if>
+                        </#if>
 
                         <li class="dropdown">
                             <button href="#" class="dropdown-toggle btn btn-fill btn-primary" data-toggle="dropdown">Primary 2<b class="caret"></b></button>
@@ -82,7 +86,7 @@
                             <button href="#" class="dropdown-toggle espacio" data-toggle="dropdown">
                                 <div class="logo-container">
                                     <div class="logo">
-                                        <img src="/img/hechicera.png" alt="Creative Tim Logo">
+                                        <img src="../assets/img/default-avatar.png" alt="Creative Tim Logo">
                                     </div>
                                     <div class="brand">
                                         ${userl.username}
@@ -93,10 +97,10 @@
                             <ul class="dropdown-menu dropdown-primary dropdown-menu-right">
                                 <li class="dropdown-header">Dropdown header</li>
                                 <li><a href="/perfil">Perfil</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something else here</a></li>
+                                <li><a href="#">Album</a></li>
+                                <li><a href="#">Amigos</a></li>
                                 <li class="divider"></li>
-                                <li><a href="#">Separated link</a></li>
+                                <li><a href="#">Editar Perfil</a></li>
                                 <li class="divider"></li>
                                 <li><a href="/logout"><i class="fa fa-sign-in"></i>Log out</a></li>
                             </ul>

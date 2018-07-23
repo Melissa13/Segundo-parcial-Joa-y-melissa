@@ -44,10 +44,25 @@ public class main {
         }
         else {System.out.println("no esta");}
 
+        //prueba amigos
+        /*
+        User use=UserServices.getInstancia().find("User1");
+        User use2=UserServices.getInstancia().find("Admin");
+        Set<User> esto=new HashSet<>();
+        Set<User> esto2=new HashSet<>();
+        esto.add(use);
+        esto2.add(use2);
+        use.setFriends(esto2);
+        use2.setFriends(esto);
+        UserServices.getInstancia().editar(use);
+        UserServices.getInstancia().editar(use2);*/
+
+
+
         //prueba usuarios
         List<User> pu=UserServices.getInstancia().findAll();
         for (User u: pu){
-            System.out.println("Username:"+u.getUsername()+" Pass:"+u.getPassword()+" name:"+u.getNombre()+" administrador:"+u.isAdministrador()+" Datebirth:"+u.getDate_birth()+" Placebirth:"+u.getPlace_birth());
+            System.out.println("Username:"+u.getUsername()+" Pass:"+u.getPassword()+" name:"+u.getNombre()+" administrador:"+u.isAdministrador()+" Datebirth:"+u.getDate_birth()+" Placebirth:"+u.getPlace_birth()+" Amigos:"+u.getFriends().size());
         }
         /*String str_date = "22/07/2018";
         try {
@@ -70,8 +85,7 @@ public class main {
 
 
         //fecha prueba
-        Date today = Calendar.getInstance().getTime();
-        System.out.println(today);
+        //Date today = Calendar.getInstance().getTime();
 
 
         manejadorFremarker();
@@ -170,10 +184,26 @@ public class main {
                 user= request.session(true).attribute("user");
             }
 
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            String fecha="";
+            String edad="";
+            if(user.getDate_birth() != null) {
+                fecha = dateFormat.format(user.getDate_birth());
+
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(user.getDate_birth());
+                int year = cal.get(Calendar.YEAR);
+                cal.setTime(Calendar.getInstance().getTime());
+                int year_now = cal.get(Calendar.YEAR);
+                edad = String.valueOf(year_now - year);
+            }
+
             Map<String, Object> mapa = new HashMap<>();
             mapa.put("userl",user);
+            mapa.put("fecha",fecha);
+            mapa.put("edad",edad);
 
-            return new ModelAndView(mapa, "baseperfil.ftl");
+            return new ModelAndView(mapa, "perfil.ftl");
         }, motor);
 
         get("/registrar", (request, response) -> {
@@ -252,6 +282,22 @@ public class main {
         });
 
         before("/inicio",(request, response) -> {
+            User user =null;
+            String cook=decrypt(request.cookie("test"));
+            System.out.println("El cookie: "+request.cookie("test"));
+            if(cook != null && !cook.isEmpty()){
+            }
+            else{
+                user= request.session(true).attribute("user");
+                if(user == null){
+                    response.redirect("/");
+                }
+
+            }
+
+        });
+
+        before("/perfil",(request, response) -> {
             User user =null;
             String cook=decrypt(request.cookie("test"));
             System.out.println("El cookie: "+request.cookie("test"));

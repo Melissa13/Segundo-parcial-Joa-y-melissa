@@ -143,3 +143,16 @@
     margin-left: 40px;
     width: 680px;
 }
+
+.magic-text{
+    margin-left: 75px;
+    margin-top: 15px;
+    float: left;
+    width: 500px;
+}
+.magic-textb{
+    margin-left: 50px;
+    margin-top: 15px;
+    float: left;
+    width: 500px;
+}

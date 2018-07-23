@@ -4,7 +4,7 @@
     <link rel="icon" type="image/png" href="/assets/paper_img/favicon.ico">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-    <title>Inicio</title>
+    <@page_head/>
 
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
@@ -22,9 +22,10 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
 
 </head>
-<body class="profile-page sidebar-collapse">
+<body class="profile-page">
 <!--barra de navegacion navbar -->
-<nav class="navbar bg-primary fixed-top navbar-transparent " color-on-scroll="400">
+<div id="navbar-dropdown">
+<nav class="navbar navbar-ct-primary bg-primary fixed-top navbar-transparent " color-on-scroll="400">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -34,27 +35,21 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Social Diary</a>
+            <a class="navbar-brand" href="/inicio">Social Diary</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav pull-right">
                 <!--                                       primary dropdown -->
-                <li class="dropdown">
-                    <button href="#" class="dropdown-toggle btn btn-fill btn-primary" data-toggle="dropdown">Primary <b class="caret"></b></button>
-                    <!--                                  You can add classes for different colours on the next element -->
-                    <ul class="dropdown-menu dropdown-primary dropdown-menu-right">
-                        <li class="dropdown-header">Dropdown header</li>
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">One more separated link</a></li>
-                    </ul>
-                </li>
+                <#if userl??>
+                    <#if userl.isAdministrador() >
+                            <li>
+                                <a href="/prueba" class="btn btn-fill btn-primary">Gestión</a>
+                                </a>
+                            </li>
+                    </#if>
+                </#if>
 
                 <li class="dropdown">
                     <button href="#" class="dropdown-toggle btn btn-fill btn-primary" data-toggle="dropdown">Primary 2<b class="caret"></b></button>
@@ -91,23 +86,25 @@
                     <button href="#" class="dropdown-toggle espacio" data-toggle="dropdown">
                         <div class="logo-container">
                             <div class="logo">
-                                <img src="/img/hechicera.png" alt="Creative Tim Logo">
+                                <img src="../assets/img/default-avatar.png" alt="Creative Tim Logo">
                             </div>
                             <div class="brand">
-                                Melissa
+                                <#if userl??>
+                                ${userl.username}
+                                </#if>
                                 <b class="caret"></b>
                             </div>
                         </div>
                     </button>
                     <ul class="dropdown-menu dropdown-primary dropdown-menu-right">
                         <li class="dropdown-header">Dropdown header</li>
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
+                        <li><a href="/perfil">Perfil</a></li>
+                        <li><a href="#">Album</a></li>
+                        <li><a href="#">Amigos</a></li>
                         <li class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
+                        <li><a href="#">Editar Perfil</a></li>
                         <li class="divider"></li>
-                        <li><a href="#">One more separated link</a></li>
+                        <li><a href="/logout"><i class="fa fa-sign-in"></i>Log out</a></li>
                     </ul>
                 </li>
 
@@ -116,79 +113,12 @@
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
+</div>
 <!-- End Navbar -->
 
 
 <!-- Contenido-->
-<div class="wrapper">
-    <div class="page-header page-header-small" filter-color="blue">
-        <div class="page-header-image" data-parallax="true" style="background-image: url('../assets/img/bg5.jpg');">
-        </div>
-        <div class="container">
-            <div class="content-center">
-                <div class="photo-container">
-                    <img src="../assets/img/ryan.jpg" alt="">
-                </div>
-                <h3 class="title">Ryan Scheinder</h3>
-                <p class="category">Photographer</p>
-                <div class="content">
-                    <div class="social-description">
-                        <h2>26</h2>
-                        <p>Comments</p>
-                    </div>
-                    <div class="social-description">
-                        <h2>26</h2>
-                        <p>Comments</p>
-                    </div>
-                    <div class="social-description">
-                        <h2>48</h2>
-                        <p>Bookmarks</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="section">
-        <div class="button-container perfil-bar" >
-            <a href="#button" class="btn btn-fill btn-primary espacio btn-lg" style="margin: 7px">Follow</a>
-            <a href="#button" class="btn btn-fill btn-primary espacio btn-lg redondo btn-tooltip" data-toggle="tooltip" data-placement="top" title="Follow me on Twitter">
-                <i class="fa fa-twitter"></i>
-            </a>
-            <a href="#button" class="btn btn-fill btn-primary espacio btn-lg redondo btn-tooltip" data-toggle="tooltip" data-placement="top" title="Follow me on Instagram">
-                <i class="fa fa-instagram"></i>
-            </a>
-        </div>
-        <div class="container">
-            <h3 class="title">About me</h3>
-            <h5 class="description">An artist of considerable range, Ryan — the name taken by Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs and records all of his own music, giving it a warm, intimate feel with a solid groove structure. An artist of considerable range.</h5>
-            <div class="row">
-                <h4 class="title text-center">My Portfolio</h4>
-                <!-- Tab panes -->
-                <div class="nav-tabs-navigation tab-color-title">
-                    <div class="nav-tabs-wrapper">
-                        <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
-                            <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
-                            <li><a href="#profile" data-toggle="tab">Profile</a></li>
-                            <li><a href="#messages" data-toggle="tab">Messages</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div id="my-tab-content" class="tab-content text-center tab-color">
-                    <div class="tab-pane active" id="home">
-                        <p>Here is information about home.</p>
-                    </div>
-                    <div class="tab-pane" id="profile">
-                        <p>Here is your profile.</p>
-                        <p>Here is your profile.</p>
-                    </div>
-                    <div class="tab-pane" id="messages">
-                        <p>Here are your messages.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<@page_body/>
 
 <!--footer -->
 
