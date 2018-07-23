@@ -452,12 +452,35 @@ public class main {
 
         });
 
+        before("/perfil/*",(request, response) -> {
+            User user =null;
+            String cook=decrypt(request.cookie("test"));
+            System.out.println("El cookie: "+request.cookie("test"));
+            if(cook != null && !cook.isEmpty()){
+            }
+            else{
+                user= request.session(true).attribute("user");
+                if(user == null){
+                    response.redirect("/");
+                }
+
+            }
+
+        });
+
+
 
 
         get("/prueba", (request, response) -> {
 
             Map<String, Object> mapa = new HashMap<>();
             return new ModelAndView(mapa, "ayuda.ftl");
+        }, motor);
+
+        get("/prueba2", (request, response) -> {
+
+            Map<String, Object> mapa = new HashMap<>();
+            return new ModelAndView(mapa, "gestion_users.ftl");
         }, motor);
 
 

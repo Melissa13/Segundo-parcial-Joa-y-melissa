@@ -8,13 +8,20 @@
 <div class="main">
     <div class="section section-nude">
         <div class="container">
-            <div class="fondo fixed-bar">
-                <ul>
-                    <li><a href="#buttons-row">Ver todo</a></li>
-                    <li><a href="#checkbox-row">Ver mis Post</a></li>
-                    <li><a href="#dropdown-row">Posts de mis amigos</a></li>
-
-                </ul>
+            <div class="fixed-bar">
+                <center>
+                    <a href="/prueba" class="btn btn-primary btn-lg">
+                        <i class="fa fa-plus"></i> Agregar Post
+                    </a>
+                </center>
+                <br/>
+                <div class="fondo">
+                    <ul>
+                        <li><a href="#buttons-row">Ver todo</a></li>
+                        <li><a href="#checkbox-row">Ver mis Post</a></li>
+                        <li><a href="#dropdown-row">Posts de mis amigos</a></li>
+                    </ul>
+                </div>
             </div>
             <div class="row">
                 <div class="leftcolumn">
@@ -22,17 +29,10 @@
                 </div>
                 <div class="rightcolumn">
                     <div class="tim-container">
-                        <div class="tim-row bordec">
-                            <center>
-                            <a href="/prueba" class="btn btn-primary btn-lg">
-                            <i class="fa fa-plus"></i> Agregar Post
-                            </a>
-                            </center>
-                        </div>
 
-                        <div class="tim-row">
+                        <div class="tim-row bordec-transparent">
                             <div class="area-line">
-                                <h2>Ultimos Posts</h2>
+                                <h3>Ultimos Posts</h3>
                             </div>
                         </div>
 

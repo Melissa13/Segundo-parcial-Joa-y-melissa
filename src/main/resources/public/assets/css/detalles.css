@@ -15,6 +15,12 @@
     margin-bottom: 15px;
 }
 
+.bordec-transparent {
+    padding: 10px 18px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
 .fixed-top {
     position: fixed;
     top: 0;
@@ -24,7 +30,6 @@
 }
 
 .fixed-bar{
-    padding-top: 90px;
     position: fixed;
     left: 170px;
     top: 170px;
@@ -32,6 +37,7 @@
 }
 
 .fondo{
+    margin-top: 50px;
     border-radius: 5px;
     background-color:white;
     padding: 10px 18px;
