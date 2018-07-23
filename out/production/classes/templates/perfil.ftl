@@ -95,7 +95,7 @@
                         </div>
                         <br/>
                     </div>
-                    <div class="tab-pane" id="Actividad">
+                    <div class="tab-pane" id="actividad">
                         <p>Here are your messages.</p>
                     </div>
                 </div>

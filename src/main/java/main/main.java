@@ -323,8 +323,21 @@ public class main {
 
         get("/prueba2", (request, response) -> {
 
+            User user =null;
+            String cook=decrypt(request.cookie("test"));
+            //System.out.println("El cookie: "+request.cookie("test"));
+            if(cook != null && !cook.isEmpty()){
+                user=UserServices.getInstancia().find(cook);
+                request.session(true);
+                request.session().attribute("user", user);
+            }
+            else{
+                user= request.session(true).attribute("user");
+            }
+
             Map<String, Object> mapa = new HashMap<>();
-            return new ModelAndView(mapa, "registro.ftl");
+            mapa.put("userl",user);
+            return new ModelAndView(mapa, "editarperfil.ftl");
         }, motor);
 
 

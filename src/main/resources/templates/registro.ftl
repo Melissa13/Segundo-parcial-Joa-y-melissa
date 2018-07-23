@@ -7,7 +7,7 @@
 <#macro page_body>
     <div class="container">
         <div class="row">
-                <div class="registro-card">
+                <div class="registro-card re-color">
                     <h3 class="title">Registro de usuario</h3>
                     <form method="post" action="/registrar">
                         <div class="row">

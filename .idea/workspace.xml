@@ -2,15 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f3faa379-4f63-4a91-86de-c0b681612e85" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/perfil.ftl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/editarperfil.ftl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/classes/main/main.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/templates/base.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/templates/base.ftl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/templates/baseperfil.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/templates/baseperfil.ftl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/templates/perfil.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/templates/perfil.ftl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/main/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/public/assets/css/detalles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/public/assets/css/detalles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/base.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/base.ftl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/baseperfil.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/baseperfil.ftl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/baselogin.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/baselogin.ftl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/perfil.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/perfil.ftl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/registro.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/registro.ftl" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -64,11 +64,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="main.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/main/main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="60" column="48" selection-start-line="60" selection-start-column="48" selection-end-line="60" selection-end-column="48" />
+            <state relative-caret-position="300">
+              <caret line="338" column="35" selection-start-line="338" selection-start-column="35" selection-end-line="338" selection-end-column="35" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -79,8 +79,8 @@
       <file leaf-file-name="detalles.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/public/assets/css/detalles.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="369">
-              <caret line="156" column="17" selection-start-line="156" selection-start-column="17" selection-end-line="156" selection-end-column="17" />
+            <state relative-caret-position="-484">
+              <caret line="103" column="32" selection-start-line="103" selection-start-column="32" selection-end-line="103" selection-end-column="32" />
             </state>
           </provider>
         </entry>
@@ -88,17 +88,39 @@
       <file leaf-file-name="perfil.ftl" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/templates/perfil.ftl">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="18" column="53" selection-start-line="18" selection-start-column="53" selection-end-line="18" selection-end-column="53" />
+            <state relative-caret-position="238">
+              <caret line="97" column="38" selection-start-line="97" selection-start-column="38" selection-end-line="97" selection-end-column="38" />
+              <folding>
+                <element signature="e#2936#4053#0#HTML" />
+                <element signature="e#4074#4906#0#HTML" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="loginsucess.ftl" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/templates/loginsucess.ftl">
+      <file leaf-file-name="editarperfil.ftl" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/templates/editarperfil.ftl">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="26" column="64" selection-start-line="26" selection-start-column="64" selection-end-line="26" selection-end-column="64" />
+            <state relative-caret-position="385">
+              <caret line="94" column="100" selection-start-line="94" selection-start-column="100" selection-end-line="94" selection-end-column="100" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="registro.ftl" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/templates/registro.ftl">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="9" column="50" selection-start-line="9" selection-start-column="50" selection-end-line="9" selection-end-column="50" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="baselogin.ftl" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/templates/baselogin.ftl">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="288">
+              <caret line="35" column="43" selection-start-line="35" selection-start-column="43" selection-end-line="35" selection-end-column="43" />
             </state>
           </provider>
         </entry>
@@ -119,11 +141,8 @@
       <file leaf-file-name="inicio.ftl" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/templates/inicio.ftl">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret selection-end-line="99" selection-end-column="9" />
-              <folding>
-                <element signature="n#div#0;n#!!top" />
-              </folding>
+            <state relative-caret-position="254">
+              <caret line="40" column="32" lean-forward="true" selection-start-line="38" selection-start-column="28" selection-end-line="40" selection-end-column="32" />
             </state>
           </provider>
         </entry>
@@ -144,8 +163,8 @@
       <file leaf-file-name="User.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Clases/User.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="138">
-              <caret line="16" column="30" selection-start-line="16" selection-start-column="19" selection-end-line="16" selection-end-column="30" />
+            <state relative-caret-position="193">
+              <caret line="91" column="30" selection-start-line="91" selection-start-column="18" selection-end-line="91" selection-end-column="30" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#3753#3754#0" expanded="true" />
@@ -528,16 +547,17 @@
         <option value="$PROJECT_DIR$/src/main/java/Clases/User.java" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/inicio.ftl" />
         <option value="$PROJECT_DIR$/src/main/resources/public/assets/js/bootstrap-datepicker.js" />
-        <option value="$PROJECT_DIR$/src/main/resources/templates/registro.ftl" />
-        <option value="$PROJECT_DIR$/src/main/resources/templates/baselogin.ftl" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/login.ftl" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/loginerror.ftl" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/loginsucess.ftl" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/base.ftl" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/baseperfil.ftl" />
-        <option value="$PROJECT_DIR$/src/main/resources/public/assets/css/detalles.css" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/perfil.ftl" />
         <option value="$PROJECT_DIR$/src/main/java/main/main.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/registro.ftl" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/baselogin.ftl" />
+        <option value="$PROJECT_DIR$/src/main/resources/public/assets/css/detalles.css" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/editarperfil.ftl" />
       </list>
     </option>
   </component>
@@ -616,25 +636,6 @@
               <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
               <item name="public" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Segundo_parcial" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Segundo-parcial-Joa-y-melissa" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="public" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Segundo_parcial" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Segundo-parcial-Joa-y-melissa" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="public" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
-              <item name="css" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Segundo_parcial" type="b2602c69:ProjectViewProjectNode" />
@@ -744,16 +745,15 @@
       <workItem from="1532028189984" duration="660000" />
       <workItem from="1532029561568" duration="1597000" />
       <workItem from="1532038649701" duration="47192000" />
-      <workItem from="1532260701379" duration="28379000" />
+      <workItem from="1532260701379" duration="30853000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="78537000" />
+    <option name="totallyTimeSpent" value="81011000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
@@ -772,7 +772,7 @@
       <window_info id="Image Layers" order="2" />
       <window_info anchor="bottom" id="Java Enterprise" order="8" />
       <window_info anchor="right" id="Capture Analysis" order="3" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.33333334" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.33333334" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Persistence" order="3" sideWeight="0.5042553" side_tool="true" weight="0.25637585" />
@@ -796,13 +796,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/login.ftl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="27" selection-end-line="27" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/public/assets/css/complemento.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="765">
@@ -1095,26 +1088,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/registro.ftl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="908">
-          <caret line="59" column="130" selection-start-line="59" selection-start-column="123" selection-end-line="59" selection-end-column="130" />
-          <folding>
-            <element signature="e#1012#1051#0#HTML" expanded="true" />
-            <element signature="e#1967#2004#0#HTML" expanded="true" />
-            <element signature="e#2533#2572#0#HTML" expanded="true" />
-            <element signature="e#3026#3052#0#HTML" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/baselogin.ftl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="42" column="29" selection-start-line="42" selection-start-column="29" selection-end-line="42" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/templates/login.ftl">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="222">
@@ -1129,12 +1102,55 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/inicio.ftl">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/loginsucess.ftl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="26" column="64" selection-start-line="26" selection-start-column="64" selection-end-line="26" selection-end-column="64" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Clases/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="193">
+          <caret line="91" column="30" selection-start-line="91" selection-start-column="18" selection-end-line="91" selection-end-column="30" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#3753#3754#0" expanded="true" />
+            <element signature="e#3787#3788#0" expanded="true" />
+            <element signature="e#3841#3842#0" expanded="true" />
+            <element signature="e#3887#3888#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/baseperfil.ftl">
       <provider selected="true" editor-type-id="text-editor">
         <state>
-          <caret selection-end-line="99" selection-end-column="9" />
+          <caret column="16" lean-forward="true" selection-start-column="16" selection-end-column="16" />
           <folding>
-            <element signature="n#div#0;n#!!top" />
+            <element signature="n#head#0;n#html#0;n#!!top" />
+            <element signature="n#footer#0;n#body#0;n#html#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/perfil.ftl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="97" column="38" selection-start-line="97" selection-start-column="38" selection-end-line="97" selection-end-column="38" />
+          <folding>
+            <element signature="e#2936#4053#0#HTML" />
+            <element signature="e#4074#4906#0#HTML" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/main/main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="338" column="35" selection-start-line="338" selection-start-column="35" selection-end-line="338" selection-end-column="35" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1150,59 +1166,38 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/loginsucess.ftl">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/inicio.ftl">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="26" column="64" selection-start-line="26" selection-start-column="64" selection-end-line="26" selection-end-column="64" />
+        <state relative-caret-position="254">
+          <caret line="40" column="32" lean-forward="true" selection-start-line="38" selection-start-column="28" selection-end-line="40" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/registro.ftl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="50" selection-start-line="9" selection-start-column="50" selection-end-line="9" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/baselogin.ftl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="35" column="43" selection-start-line="35" selection-start-column="43" selection-end-line="35" selection-end-column="43" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/public/assets/css/detalles.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="369">
-          <caret line="156" column="17" selection-start-line="156" selection-start-column="17" selection-end-line="156" selection-end-column="17" />
+        <state relative-caret-position="-484">
+          <caret line="103" column="32" selection-start-line="103" selection-start-column="32" selection-end-line="103" selection-end-column="32" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/baseperfil.ftl">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/editarperfil.ftl">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="16" lean-forward="true" selection-start-column="16" selection-end-column="16" />
-          <folding>
-            <element signature="n#head#0;n#html#0;n#!!top" />
-            <element signature="n#footer#0;n#body#0;n#html#0;n#!!top" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Clases/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="16" column="30" selection-start-line="16" selection-start-column="19" selection-end-line="16" selection-end-column="30" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#3753#3754#0" expanded="true" />
-            <element signature="e#3787#3788#0" expanded="true" />
-            <element signature="e#3841#3842#0" expanded="true" />
-            <element signature="e#3887#3888#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/perfil.ftl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="18" column="53" selection-start-line="18" selection-start-column="53" selection-end-line="18" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/main/main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="60" column="48" selection-start-line="60" selection-start-column="48" selection-end-line="60" selection-end-column="48" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="385">
+          <caret line="94" column="100" selection-start-line="94" selection-start-column="100" selection-end-line="94" selection-end-column="100" />
         </state>
       </provider>
     </entry>

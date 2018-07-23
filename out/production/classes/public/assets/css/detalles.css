@@ -85,7 +85,6 @@
 
 /*registro*/
 .registro-card {
-    background-color: #61e7fe;
     border-radius: 8px;
     color: #fff;
     max-width: 800px;
@@ -95,6 +94,14 @@
     min-height: 400px;
     padding: 30px;
     position: relative;
+}
+
+.re-color{
+    background-color: #61e7fe;
+}
+
+.re-colo2{
+    background-color: cadetblue;
 }
 
 .registro-card label {

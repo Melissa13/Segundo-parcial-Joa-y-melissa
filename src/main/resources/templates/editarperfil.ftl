@@ -1,15 +1,47 @@
-<#include "baselogin.ftl">
+<#include "baseperfil.ftl">
 
 <#macro page_head>
-<title>Registro</title>
+<title>Perfil-Editar</title>
 </#macro>
 
 <#macro page_body>
-    <div class="container">
-        <div class="row">
-                <div class="registro-card re-color">
-                    <h3 class="title">Registro de usuario</h3>
-                    <form method="post" action="/registrar">
+    <#if userl??>
+<div class="wrapper">
+    <div class="page-header page-header-small" filter-color="blue">
+        <div class="page-header-image" data-parallax="true" style="background-image: url('../assets/img/bg5.jpg');">
+        </div>
+        <div class="container">
+            <div class="content-center">
+                <div class="photo-container">
+                    <img src="../assets/img/default-avatar.png" alt="">
+                </div>
+                <h3 class="title">${userl.username}</h3>
+                <p class="category"><#if userl.nombre??>(${userl.nombre})</#if></p>
+                <div class="content">
+                    <h2 class="title">Editar usuario</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section">
+        <div class="button-container perfil-bar" >
+            <a href="#button" class="btn btn-fill btn-primary espacio btn-lg" style="margin: 7px">Amigos</a>
+            <a href="#button" class="btn btn-fill btn-primary espacio btn-lg redondo btn-tooltip" data-toggle="tooltip" data-placement="top" title="Follow me on Twitter">
+                <i class="fa fa-twitter"></i>
+            </a>
+            <a href="#button" class="btn btn-fill btn-primary espacio btn-lg redondo btn-tooltip" data-toggle="tooltip" data-placement="top" title="Follow me on Instagram">
+                <i class="fa fa-instagram"></i>
+            </a>
+        </div>
+        <div class="container">
+            <br/>
+            <a href="/perfil" class="btn btn-primary btn-lg">
+                <i class="fa fa-arrow-left"></i> Volver
+            </a>
+            <div class="row">
+                <div class="registro-card re-colo2">
+                    <h3 class="title">Editar datos del perfil</h3>
+                    <form method="post" action="/editarperfil">
                         <div class="row">
                             <label class="registro-label">Username</label>
                             <label class="registro-labelb">Password</label>
@@ -60,9 +92,13 @@
                             <input type="text" class="form-control registro-formc" placeholder="Estudios realizados" name="studies">
                         </div>
 
-                        <button class="btn btn-default btn-block" type="submit"><i class="fa fa-user"></i>Registrarse</button>
+                        <button class="btn btn-default btn-block" type="submit"><i class="fa fa-save"></i>Guardar cambios</button>
                     </form>
                 </div>
+            </div>
         </div>
     </div>
+</div>
+
+    </#if>
 </#macro>
