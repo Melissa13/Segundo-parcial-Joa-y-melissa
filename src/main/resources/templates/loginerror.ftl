@@ -24,7 +24,7 @@
                         <button class="btn btn-default btn-block" type="submit"><i class="fa fa-sign-in"></i>Log in</button>
                     </form>
                     <div class="forgot">
-                        Aun no tienes cuenta?<a href="#" class="btn btn-simple btn-default" style="margin-top: -1px">Registrate aqui</a>
+                        Aun no tienes cuenta?<a href="/registrar" class="btn btn-simple btn-default" style="margin-top: -1px">Registrate aqui</a>
                     </div>
                 </div>
             </div>

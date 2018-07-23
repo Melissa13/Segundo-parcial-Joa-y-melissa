@@ -8,9 +8,9 @@
     <div class="container">
         <div class="row">
             <!-- notifications -->
-                <div class="alert alert-danger alerta">
-                        <b>Error: </b> Nombre de Usuario o contraseña no concuerdan, intente de nuevo.
-                </div><!--  end notifications -->
+            <div class="alert alert-success alerta">
+                <b>Exito: </b> usuario creado satisfactoriamente, ingrese los datos para iniciar secion en su nueva cuenta.
+            </div><!--  end notifications -->
 
             <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1 ">
                 <div class="register-card">

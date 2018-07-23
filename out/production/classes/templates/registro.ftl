@@ -9,14 +9,14 @@
         <div class="row">
                 <div class="registro-card">
                     <h3 class="title">Registro de usuario</h3>
-                    <form method="post" action="/login">
+                    <form method="post" action="/registrar">
                         <div class="row">
                             <label class="registro-label">Username</label>
                             <label class="registro-labelb">Password</label>
                         </div>
                         <div class="row">
-                            <input type="text" class="form-control registro-form" placeholder="Username" name="username">
-                            <input type="text" class="form-control registro-formb" placeholder="Password" name="password">
+                            <input type="text" class="form-control registro-form" placeholder="Username" name="username" required>
+                            <input type="text" class="form-control registro-formb" placeholder="Password" name="password" required>
                         </div>
 
                         <div class="row">
@@ -24,7 +24,7 @@
                             <label style="float: left; margin-left: 313px">Fecha de nacimiento</label>
                         </div>
                         <div class="row">
-                            <input type="text" class="form-control registro-form" placeholder="Nombre" name="came">
+                            <input type="text" class="form-control registro-form" placeholder="Nombre" name="name">
                             <input class="datepicker form-control registro-formb" type="text" name="date"/>
                         </div>
 
@@ -32,7 +32,7 @@
                             <label class="registro-label">Descripcion</label>
                         </div>
                         <div class="row">
-                            <textarea class="form-control registro-text" placeholder="Escriba detalles sobre usted" rows="5"></textarea>
+                            <textarea class="form-control registro-text" placeholder="Escriba detalles sobre usted" rows="5" name="description"></textarea>
                         </div>
 
                         <div class="row">

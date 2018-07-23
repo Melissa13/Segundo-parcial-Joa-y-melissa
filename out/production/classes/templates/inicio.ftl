@@ -36,8 +36,8 @@
                     <div class="tim-container">
                         <div class="tim-row bordec">
                             <center>
-                            <a href="/prueba">
-                            <button class="btn btn-primary btn-lg"><i class="fa fa-plus"></i> Agregar Post</button>
+                            <a href="/prueba" class="btn btn-primary btn-lg">
+                            <i class="fa fa-plus"></i> Agregar Post
                             </a>
                             </center>
                         </div>

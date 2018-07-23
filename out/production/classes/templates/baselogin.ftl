@@ -40,7 +40,7 @@
         <div class="collapse navbar-collapse" id="navigation-example-2">
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="#" class="btn btn-simple">Registrarse</a>
+                    <a href="/registrar" class="btn btn-simple">Registrarse</a>
                 </li>
                 <li>
                     <a href="/" class="btn btn-simple">Log-in</a>

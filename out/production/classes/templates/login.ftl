@@ -12,14 +12,14 @@
                     <h3 class="title">Welcome</h3>
                     <form class="register-form" method="post" action="/login">
                         <label>Username</label>
-                        <input type="text" class="form-control" placeholder="Username" name="username">
+                        <input type="text" class="form-control" placeholder="Username" name="username" required>
 
                         <label>Password</label>
-                        <input type="password" class="form-control" placeholder="Password" name="pass">
+                        <input type="password" class="form-control" placeholder="Password" name="pass" required>
                         <button class="btn btn-default btn-block" type="submit"><i class="fa fa-sign-in"></i>Log in</button>
                     </form>
                     <div class="forgot">
-                        Aun no tienes cuenta?<a href="#" class="btn btn-simple btn-default" style="margin-top: -1px">Registrate aqui</a>
+                        Aun no tienes cuenta?<a href="/registrar" class="btn btn-simple btn-default" style="margin-top: -1px">Registrate aqui</a>
                     </div>
                 </div>
             </div>
