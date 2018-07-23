@@ -226,28 +226,46 @@ public class main {
             String estudios =request.queryParams("studies");
 
             Date date=null;
-            try {
-                DateFormat formatter;
-                formatter = new SimpleDateFormat("dd/MM/yyyy");
-                date = formatter.parse(nacimiento);
-                System.out.println(date);
-            } catch (java.text.ParseException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+            if(nacimiento != null && !nacimiento.isEmpty()) {
+                try {
+                    DateFormat formatter;
+                    formatter = new SimpleDateFormat("dd/MM/yyyy");
+                    date = formatter.parse(nacimiento);
+                    System.out.println(date);
+                } catch (java.text.ParseException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
             }
 
             User insertar = new User();
             insertar.setUsername(username);
-            insertar.setNombre(nombre);
+            if(nombre != null && !nombre.isEmpty()) {
+                insertar.setNombre(nombre);
+            }
             insertar.setPassword(pass);
             insertar.setAdministrador(false);
-            insertar.setDate_birth(date);
-            insertar.setActual_place(lugaractual);
-            insertar.setDescripcion(descripcion);
-            insertar.setPlace_birth(lugarnacimiento);
-            insertar.setJob(trabajo);
-            insertar.setStudies(estudios);
-            insertar.setWorkplace(lugartrabajo);
+            if(nacimiento != null && !nacimiento.isEmpty()) {
+                insertar.setDate_birth(date);
+            }
+            if(lugaractual != null && !lugaractual.isEmpty()) {
+                insertar.setActual_place(lugaractual);
+            }
+            if(descripcion != null && !descripcion.isEmpty()) {
+                insertar.setDescripcion(descripcion);
+            }
+            if(lugarnacimiento != null && !lugarnacimiento.isEmpty()) {
+                insertar.setPlace_birth(lugarnacimiento);
+            }
+            if(trabajo!= null && !trabajo.isEmpty()) {
+                insertar.setJob(trabajo);
+            }
+            if(estudios != null && !estudios.isEmpty()) {
+                insertar.setStudies(estudios);
+            }
+            if(lugartrabajo != null && !lugartrabajo.isEmpty()) {
+                insertar.setWorkplace(lugartrabajo);
+            }
             UserServices.getInstancia().crear(insertar);
 
             response.redirect("/loginsucess");
@@ -259,6 +277,112 @@ public class main {
             Map<String, Object> mapa = new HashMap<>();
             return new ModelAndView(mapa, "loginsucess.ftl");
         }, motor);
+
+        get("/perfil/editar", (request, response) -> {
+
+            User user =null;
+            String cook=decrypt(request.cookie("test"));
+            //System.out.println("El cookie: "+request.cookie("test"));
+            if(cook != null && !cook.isEmpty()){
+                user=UserServices.getInstancia().find(cook);
+                request.session(true);
+                request.session().attribute("user", user);
+            }
+            else{
+                user= request.session(true).attribute("user");
+            }
+
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            String fecha="";
+            String edad="";
+            if(user.getDate_birth() != null) {
+                fecha = dateFormat.format(user.getDate_birth());
+
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(user.getDate_birth());
+                int year = cal.get(Calendar.YEAR);
+                cal.setTime(Calendar.getInstance().getTime());
+                int year_now = cal.get(Calendar.YEAR);
+                edad = String.valueOf(year_now - year);
+            }
+
+            Map<String, Object> mapa = new HashMap<>();
+            mapa.put("userl",user);
+            mapa.put("fecha",fecha);
+            mapa.put("edad",edad);
+
+            return new ModelAndView(mapa, "editarperfil.ftl");
+        }, motor);
+
+        post("/perfil/editar", (request, response) -> {
+            User user =null;
+            String cook=decrypt(request.cookie("test"));
+            //System.out.println("El cookie: "+request.cookie("test"));
+            if(cook != null && !cook.isEmpty()){
+                user=UserServices.getInstancia().find(cook);
+                request.session(true);
+                request.session().attribute("user", user);
+            }
+            else{
+                user= request.session(true).attribute("user");
+            }
+
+            String username =request.queryParams("username") != null ? request.queryParams("username") : "unknown";
+            String pass =request.queryParams("password") != null ? request.queryParams("password") : "unknown";
+            String nombre =request.queryParams("name");
+            String nacimiento =request.queryParams("date");
+            String descripcion =request.queryParams("description");
+            String lugarnacimiento =request.queryParams("place_birth");
+            String lugaractual =request.queryParams("actual_place");
+            String trabajo =request.queryParams("job");
+            String lugartrabajo =request.queryParams("workplace");
+            String estudios =request.queryParams("studies");
+
+            Date date=null;
+            if(nacimiento != null && !nacimiento.isEmpty()) {
+                try {
+                    DateFormat formatter;
+                    formatter = new SimpleDateFormat("dd/MM/yyyy");
+                    date = formatter.parse(nacimiento);
+                    System.out.println(date);
+                } catch (java.text.ParseException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+
+            if(nombre != null && !nombre.isEmpty()) {
+                user.setNombre(nombre);
+            }
+            else {user.setNombre(null);}
+            user.setPassword(pass);
+            user.setAdministrador(false);
+            if(nacimiento != null && !nacimiento.isEmpty()) {
+                user.setDate_birth(date);
+            }
+            if(lugaractual != null && !lugaractual.isEmpty()) {
+                user.setActual_place(lugaractual);
+            }
+            if(descripcion != null && !descripcion.isEmpty()) {
+                user.setDescripcion(descripcion);
+            }
+            if(lugarnacimiento != null && !lugarnacimiento.isEmpty()) {
+                user.setPlace_birth(lugarnacimiento);
+            }
+            if(trabajo!= null && !trabajo.isEmpty()) {
+                user.setJob(trabajo);
+            }
+            if(estudios != null && !estudios.isEmpty()) {
+                user.setStudies(estudios);
+            }
+            if(lugartrabajo != null && !lugartrabajo.isEmpty()) {
+                user.setWorkplace(lugartrabajo);
+            }
+            UserServices.getInstancia().editar(user);
+
+            response.redirect("/perfil");
+            return "";
+        });
 
         //condiciones before
         before("/",(request, response) -> {
@@ -319,25 +443,6 @@ public class main {
 
             Map<String, Object> mapa = new HashMap<>();
             return new ModelAndView(mapa, "ayuda.ftl");
-        }, motor);
-
-        get("/prueba2", (request, response) -> {
-
-            User user =null;
-            String cook=decrypt(request.cookie("test"));
-            //System.out.println("El cookie: "+request.cookie("test"));
-            if(cook != null && !cook.isEmpty()){
-                user=UserServices.getInstancia().find(cook);
-                request.session(true);
-                request.session().attribute("user", user);
-            }
-            else{
-                user= request.session(true).attribute("user");
-            }
-
-            Map<String, Object> mapa = new HashMap<>();
-            mapa.put("userl",user);
-            return new ModelAndView(mapa, "editarperfil.ftl");
         }, motor);
 
 

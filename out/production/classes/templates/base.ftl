@@ -100,7 +100,7 @@
                                 <li><a href="#">Album</a></li>
                                 <li><a href="#">Amigos</a></li>
                                 <li class="divider"></li>
-                                <li><a href="#">Editar Perfil</a></li>
+                                <li><a href="/perfil/editar">Editar Perfil</a></li>
                                 <li class="divider"></li>
                                 <li><a href="/logout"><i class="fa fa-sign-in"></i>Log out</a></li>
                             </ul>

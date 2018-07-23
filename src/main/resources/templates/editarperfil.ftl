@@ -41,14 +41,14 @@
             <div class="row">
                 <div class="registro-card re-colo2">
                     <h3 class="title">Editar datos del perfil</h3>
-                    <form method="post" action="/editarperfil">
+                    <form method="post" action="/perfil/editar">
                         <div class="row">
                             <label class="registro-label">Username</label>
                             <label class="registro-labelb">Password</label>
                         </div>
                         <div class="row">
-                            <input type="text" class="form-control registro-form" placeholder="Username" name="username" required>
-                            <input type="text" class="form-control registro-formb" placeholder="Password" name="password" required>
+                            <input type="text" class="form-control registro-form" placeholder="Username" name="username" value="${userl.username}" disabled>
+                            <input type="text" class="form-control registro-formb" placeholder="Password" name="password" value="${userl.getPassword()}" required>
                         </div>
 
                         <div class="row">
@@ -56,15 +56,15 @@
                             <label style="float: left; margin-left: 313px">Fecha de nacimiento</label>
                         </div>
                         <div class="row">
-                            <input type="text" class="form-control registro-form" placeholder="Nombre" name="name">
-                            <input class="datepicker form-control registro-formb" type="text" name="date"/>
+                            <input type="text" class="form-control registro-form" placeholder="Nombre" name="name" <#if userl.nombre??>value="${userl.nombre}"</#if>>
+                            <input class="datepicker form-control registro-formb" type="text" name="date" <#if userl.date_birth??>value="${fecha}"</#if>/>
                         </div>
 
                         <div class="row">
                             <label class="registro-label">Descripcion</label>
                         </div>
                         <div class="row">
-                            <textarea class="form-control registro-text" placeholder="Escriba detalles sobre usted" rows="5" name="description"></textarea>
+                            <textarea class="form-control registro-text" placeholder="Escriba detalles sobre usted" rows="5" name="description" ><#if userl.descripcion??>${userl.getDescripcion()}</#if></textarea>
                         </div>
 
                         <div class="row">
@@ -72,8 +72,8 @@
                             <label style="float: left; margin-left: 218px">Locacion actual</label>
                         </div>
                         <div class="row">
-                            <input type="text" class="form-control registro-form" placeholder="Lugar de nacimiento" name="place_birth">
-                            <input type="text" class="form-control registro-formb" placeholder="Locacion actual" name="actual_place">
+                            <input type="text" class="form-control registro-form" placeholder="Lugar de nacimiento" name="place_birth" <#if userl.place_birth??>value="${userl.place_birth}"</#if>>
+                            <input type="text" class="form-control registro-formb" placeholder="Locacion actual" name="actual_place" <#if userl.actual_place??>value="${userl.actual_place}"</#if>>
                         </div>
 
                         <div class="row">
@@ -81,15 +81,15 @@
                             <label style="float: left; margin-left: 322px">Lugar de trabajo</label>
                         </div>
                         <div class="row">
-                            <input type="text" class="form-control registro-form" placeholder="Trabajo" name="job">
-                            <input type="text" class="form-control registro-formb" placeholder="Lugar de trabajo" name="workplace">
+                            <input type="text" class="form-control registro-form" placeholder="Trabajo" name="job" <#if userl.job??>value="${userl.job}"</#if>>
+                            <input type="text" class="form-control registro-formb" placeholder="Lugar de trabajo" name="workplace" <#if userl.workplace??>value="${userl.workplace}"</#if>>
                         </div>
 
                         <div class="row">
                             <label class="registro-label" style="text-align: center">Estudios</label>
                         </div>
                         <div class="row">
-                            <input type="text" class="form-control registro-formc" placeholder="Estudios realizados" name="studies">
+                            <input type="text" class="form-control registro-formc" placeholder="Estudios realizados" name="studies" <#if userl.getStudies()??>value="${userl.getStudies()}"</#if>>
                         </div>
 
                         <button class="btn btn-default btn-block" type="submit"><i class="fa fa-save"></i>Guardar cambios</button>
