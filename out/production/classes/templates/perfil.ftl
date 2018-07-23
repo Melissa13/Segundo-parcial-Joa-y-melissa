@@ -4,50 +4,34 @@
 <title>Perfil</title>
 </#macro>
 
-<#macro page_body>
-    <#if userl??>
-<div class="wrapper">
-    <div class="page-header page-header-small" filter-color="blue">
-        <div class="page-header-image" data-parallax="true" style="background-image: url('../assets/img/bg5.jpg');">
+<#macro page_body_first>
+<div class="content-center">
+    <div class="photo-container">
+        <img src="../assets/img/default-avatar.png" alt="">
+    </div>
+    <h3 class="title">${userl.username}</h3>
+    <p class="category"><#if userl.nombre??>(${userl.nombre})</#if></p>
+    <div class="content">
+        <div class="social-description">
+            <h2>
+                ${userl.getFriends()?size}
+            </h2>
+            <p>Amigos</p>
         </div>
-        <div class="container">
-            <div class="content-center">
-                <div class="photo-container">
-                    <img src="../assets/img/default-avatar.png" alt="">
-                </div>
-                <h3 class="title">${userl.username}</h3>
-                <p class="category"><#if userl.nombre??>(${userl.nombre})</#if></p>
-                <div class="content">
-                    <div class="social-description">
-                        <h2>
-                            ${userl.getFriends()?size}
-                        </h2>
-                        <p>Amigos</p>
-                    </div>
-                    <div class="social-description">
-                        <h2>0</h2>
-                        <p>Posts</p>
-                    </div>
-                    <div class="social-description">
-                        <h2>${userl.getAlbun()?size}</h2>
-                        <p>Fotos</p>
-                    </div>
-                </div>
-            </div>
+        <div class="social-description">
+            <h2>0</h2>
+            <p>Posts</p>
+        </div>
+        <div class="social-description">
+            <h2>${userl.getAlbun()?size}</h2>
+            <p>Fotos</p>
         </div>
     </div>
-    <div class="section">
-        <div class="button-container perfil-bar" >
-            <a href="#button" class="btn btn-fill btn-primary espacio btn-lg" style="margin: 7px">Amigos</a>
-            <a href="#button" class="btn btn-fill btn-primary espacio btn-lg redondo btn-tooltip" data-toggle="tooltip" data-placement="top" title="Follow me on Twitter">
-                <i class="fa fa-twitter"></i>
-            </a>
-            <a href="#button" class="btn btn-fill btn-primary espacio btn-lg redondo btn-tooltip" data-toggle="tooltip" data-placement="top" title="Follow me on Instagram">
-                <i class="fa fa-instagram"></i>
-            </a>
-        </div>
-        <div class="container">
-            <h3 class="title">Sobre mi</h3>
+</div>
+</#macro>
+
+<#macro page_body_second>
+<h3 class="title">Sobre mi</h3>
             <h5 class="description"><#if userl.descripcion??>${userl.getDescripcion()}<#else >Informacion faltante</#if></h5>
             <div class="row">
                 <h4 class="title text-center">Detalles</h4>
@@ -100,9 +84,4 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
-
-    </#if>
 </#macro>

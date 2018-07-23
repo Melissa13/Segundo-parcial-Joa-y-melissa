@@ -355,29 +355,44 @@ public class main {
                 user.setNombre(nombre);
             }
             else {user.setNombre(null);}
+
             user.setPassword(pass);
             user.setAdministrador(false);
             if(nacimiento != null && !nacimiento.isEmpty()) {
                 user.setDate_birth(date);
             }
+            else {user.setDate_birth(null);}
+
             if(lugaractual != null && !lugaractual.isEmpty()) {
                 user.setActual_place(lugaractual);
             }
+            else {user.setActual_place(null);}
+
             if(descripcion != null && !descripcion.isEmpty()) {
                 user.setDescripcion(descripcion);
             }
+            else {user.setDescripcion(null);}
+
             if(lugarnacimiento != null && !lugarnacimiento.isEmpty()) {
                 user.setPlace_birth(lugarnacimiento);
             }
+            else {user.setPlace_birth(null);}
+
             if(trabajo!= null && !trabajo.isEmpty()) {
                 user.setJob(trabajo);
             }
+            else {user.setJob(null);}
+
             if(estudios != null && !estudios.isEmpty()) {
                 user.setStudies(estudios);
             }
+            else {user.setStudies(null);}
+
             if(lugartrabajo != null && !lugartrabajo.isEmpty()) {
                 user.setWorkplace(lugartrabajo);
             }
+            else {user.setWorkplace(null);}
+
             UserServices.getInstancia().editar(user);
 
             response.redirect("/perfil");

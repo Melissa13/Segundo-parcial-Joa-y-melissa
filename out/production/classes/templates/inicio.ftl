@@ -10,21 +10,9 @@
         <div class="container">
             <div class="fondo fixed-bar">
                 <ul>
-                    <li><a href="#buttons-row">Buttons</a></li>
-                    <li><a href="#checkbox-row">Checkbox/Radio</a></li>
-                    <li><a href="#dropdown-row">Dropdown</a></li>
-                    <li><a href="#inputs-row">Inputs</a></li>
-                    <li><a href="#textarea-row">Textarea</a></li>
-                    <li><a href="#navbar-row">Navigation</a></li>
-                    <li><a href="#subscription-row">Footers</a></li>
-                    <li><a href="#pagination-row">Pagination</a></li>
-                    <li><a href="#progressbar-row">Progress Bars</a></li>
-                    <li><a href="#sliders-row">Sliders</a></li>
-                    <li><a href="#labels-row">Labels</a></li>
-                    <li><a href="#datepicker-row">Datepicker</a></li>
-                    <li><a href="#modal-row">Modals</a></li>
-                    <li><a href="#tooltip-row">Tooltips/Popovers</a></li>
-                    <li><a href="#notification-row">Notification</a></li>
+                    <li><a href="#buttons-row">Ver todo</a></li>
+                    <li><a href="#checkbox-row">Ver mis Post</a></li>
+                    <li><a href="#dropdown-row">Posts de mis amigos</a></li>
 
                 </ul>
             </div>

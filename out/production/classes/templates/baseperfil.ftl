@@ -118,7 +118,36 @@
 
 
 <!-- Contenido-->
-<@page_body/>
+    <#if userl??>
+<div class="wrapper">
+    <div class="page-header page-header-small" filter-color="blue">
+        <div class="page-header-image" data-parallax="true" style="background-image: url('../assets/img/bg5.jpg');">
+        </div>
+        <div class="container">
+
+            <@page_body_first/>
+
+        </div>
+    </div>
+    <div class="section">
+        <div class="button-container perfil-bar" >
+            <a href="#button" class="btn btn-fill btn-primary espacio btn-lg" style="margin: 7px">Amigos</a>
+            <a href="#button" class="btn btn-fill btn-primary espacio btn-lg redondo btn-tooltip" data-toggle="tooltip" data-placement="top" title="Follow me on Twitter">
+                <i class="fa fa-twitter"></i>
+            </a>
+            <a href="#button" class="btn btn-fill btn-primary espacio btn-lg redondo btn-tooltip" data-toggle="tooltip" data-placement="top" title="Follow me on Instagram">
+                <i class="fa fa-instagram"></i>
+            </a>
+        </div>
+        <div class="container">
+
+            <@page_body_second/>
+
+        </div>
+    </div>
+</div>
+
+    </#if>
 
 <!--footer -->
 
