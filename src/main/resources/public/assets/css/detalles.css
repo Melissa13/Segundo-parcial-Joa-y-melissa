@@ -169,3 +169,21 @@
     float: left;
     width: 500px;
 }
+
+/* Configuracion de las tablas */
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 70%;
+    border: 3px solid cornflowerblue;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+th, td {
+    text-align: left;
+    padding: 16px;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2
+}

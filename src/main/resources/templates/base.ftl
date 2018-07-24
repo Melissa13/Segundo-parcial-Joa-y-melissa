@@ -86,7 +86,7 @@
                             <button href="#" class="dropdown-toggle espacio" data-toggle="dropdown">
                                 <div class="logo-container">
                                     <div class="logo">
-                                        <img src="../assets/img/default-avatar.png" alt="Creative Tim Logo">
+                                        <img src="/assets/img/default-avatar.png" alt="Creative Tim Logo">
                                     </div>
                                     <div class="brand">
                                         ${userl.username}

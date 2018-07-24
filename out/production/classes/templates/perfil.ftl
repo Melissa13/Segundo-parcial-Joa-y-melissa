@@ -7,7 +7,7 @@
 <#macro page_body_first>
 <div class="content-center">
     <div class="photo-container">
-        <img src="../assets/img/default-avatar.png" alt="">
+        <img src="/assets/img/default-avatar.png" alt="">
     </div>
     <h3 class="title">${userl.username}</h3>
     <p class="category"><#if userl.nombre??>(${userl.nombre})</#if></p>

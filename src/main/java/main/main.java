@@ -19,6 +19,8 @@ import spark.*;
 import static spark.Spark.*;
 import spark.Session;
 import org.jasypt.util.text.BasicTextEncryptor;
+
+import javax.jws.soap.SOAPBinding;
 //import static spark.Spark.staticFiles;
 
 public class main {
@@ -27,7 +29,6 @@ public class main {
 
         //Iniciando el servicio
         BootStrapService.getInstancia().init();
-
         //pruebas
         //Insertando administrador por defecto
         User insertar = new User();
@@ -357,7 +358,6 @@ public class main {
             else {user.setNombre(null);}
 
             user.setPassword(pass);
-            user.setAdministrador(false);
             if(nacimiento != null && !nacimiento.isEmpty()) {
                 user.setDate_birth(date);
             }
@@ -399,6 +399,65 @@ public class main {
             return "";
         });
 
+        get("/gestion", (request, response) -> {
+
+            User user =null;
+            String cook=decrypt(request.cookie("test"));
+            //System.out.println("El cookie: "+request.cookie("test"));
+            if(cook != null && !cook.isEmpty()){
+                user=UserServices.getInstancia().find(cook);
+                request.session(true);
+                request.session().attribute("user", user);
+            }
+            else{
+                user= request.session(true).attribute("user");
+            }
+
+            List<User> lista= UserServices.getInstancia().findAll();
+
+            Map<String, Object> mapa = new HashMap<>();
+            mapa.put("userl",user);
+            mapa.put("lista", lista);
+            return new ModelAndView(mapa, "gestion_users.ftl");
+        }, motor);
+
+        get("/gestion/delete/:user",(request, response) -> {
+            User user =null;
+            String cook=decrypt(request.cookie("test"));
+            //System.out.println("El cookie: "+request.cookie("test"));
+            if(cook != null && !cook.isEmpty()){
+                user=UserServices.getInstancia().find(cook);
+                request.session(true);
+                request.session().attribute("user", user);
+            }
+            else{
+                user= request.session(true).attribute("user");
+            }
+
+            Map<String,Object> mapa = new HashMap<>();
+            mapa.put("userl",user);
+            return new ModelAndView(mapa,"perfil.ftl");
+        },motor);
+
+
+        get("/gestion/invalid", (request, response) -> {
+            User user =null;
+            String cook=decrypt(request.cookie("test"));
+            //System.out.println("El cookie: "+request.cookie("test"));
+            if(cook != null && !cook.isEmpty()){
+                user=UserServices.getInstancia().find(cook);
+                request.session(true);
+                request.session().attribute("user", user);
+            }
+            else{
+                user= request.session(true).attribute("user");
+            }
+
+            Map<String,Object> mapa = new HashMap<>();
+            mapa.put("userl",user);
+            return new ModelAndView(mapa,"gestion_error.ftl");
+        },motor);
+
         //condiciones before
         before("/",(request, response) -> {
             User user =null;
@@ -431,9 +490,7 @@ public class main {
                 if(user == null){
                     response.redirect("/");
                 }
-
             }
-
         });
 
         before("/perfil",(request, response) -> {
@@ -468,6 +525,26 @@ public class main {
 
         });
 
+        before("/gestion/delete/:user",(request, response) -> {
+            User user =null;
+            String cook=decrypt(request.cookie("test"));
+            System.out.println("El cookie: "+request.cookie("test"));
+            if(cook != null && !cook.isEmpty()){
+            }
+            else{
+                user= request.session(true).attribute("user");
+                if(user == null){
+                    response.redirect("/");
+                }
+
+            }
+
+            String username = request.params("user");
+            if(username.equals("Admin")){
+                response.redirect("/gestion/invalid");
+            }
+        });
+
 
 
 
@@ -476,13 +553,6 @@ public class main {
             Map<String, Object> mapa = new HashMap<>();
             return new ModelAndView(mapa, "ayuda.ftl");
         }, motor);
-
-        get("/prueba2", (request, response) -> {
-
-            Map<String, Object> mapa = new HashMap<>();
-            return new ModelAndView(mapa, "gestion_users.ftl");
-        }, motor);
-
 
     }
 
