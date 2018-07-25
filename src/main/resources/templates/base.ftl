@@ -44,7 +44,7 @@
                         <#if userl??>
                             <#if userl.isAdministrador() >
                             <li>
-                                <a href="/prueba" class="btn btn-fill btn-primary">Gestión</a>
+                                <a href="/gestion" class="btn btn-fill btn-primary">Gestión</a>
                                 </a>
                             </li>
                             </#if>

@@ -30,6 +30,9 @@ public class main {
         //Iniciando el servicio
         BootStrapService.getInstancia().init();
         //pruebas
+        //User s=UserServices.getInstancia().find("Admin");
+        //s.setAdministrador(true);
+        //UserServices.getInstancia().editar(s);
         //Insertando administrador por defecto
         User insertar = new User();
         insertar.setUsername("Admin");
@@ -401,6 +404,7 @@ public class main {
 
         get("/gestion", (request, response) -> {
 
+            System.out.println("entra a gestion");
             User user =null;
             String cook=decrypt(request.cookie("test"));
             //System.out.println("El cookie: "+request.cookie("test"));
@@ -434,6 +438,7 @@ public class main {
                 user= request.session(true).attribute("user");
             }
 
+            System.out.println("aqui no deberia entrar");
             String username = request.params("user");
             User usuario=UserServices.getInstancia().find(username);
             if(usuario.isAdministrador()){
@@ -462,10 +467,13 @@ public class main {
             else{
                 user= request.session(true).attribute("user");
             }
+            String username = request.params("user");
+            User usuario=UserServices.getInstancia().find(username);
+            UserServices.getInstancia().eliminar(username);
 
             Map<String,Object> mapa = new HashMap<>();
             mapa.put("userl",user);
-            return new ModelAndView(mapa,"perfil.ftl");
+            return new ModelAndView(mapa,"ayuda.ftl");
         },motor);
 
         get("/gestion/invalid", (request, response) -> {
@@ -496,11 +504,13 @@ public class main {
                 request.session(true);
                 request.session().attribute("user", user);
                 response.redirect("/inicio");
+                halt(404,"Ya esta logueado");
             }
             else{
                 user= request.session(true).attribute("user");
                 if(user!= null){
                     response.redirect("/inicio");
+                    halt(404,"Ya esta logueado");
                 }
 
             }
@@ -517,6 +527,7 @@ public class main {
                 user= request.session(true).attribute("user");
                 if(user == null){
                     response.redirect("/");
+                    halt(404,"No tiene permiso");
                 }
             }
         });
@@ -531,6 +542,7 @@ public class main {
                 user= request.session(true).attribute("user");
                 if(user == null){
                     response.redirect("/");
+                    halt(404,"No tiene permiso");
                 }
 
             }
@@ -547,10 +559,61 @@ public class main {
                 user= request.session(true).attribute("user");
                 if(user == null){
                     response.redirect("/");
+                    halt(404,"No tiene permiso");
                 }
 
             }
 
+        });
+
+        before("/gestion",(request, response) -> {
+            User user =null;
+            String cook=decrypt(request.cookie("test"));
+            System.out.println("El cookie: "+request.cookie("test"));
+            if(cook != null && !cook.isEmpty()){
+                user=UserServices.getInstancia().find(cook);
+                if(!user.isAdministrador()){
+                    response.redirect("/inicio");
+                    halt(404,"vete");
+                }
+            }
+            else{
+                user= request.session(true).attribute("user");
+                if(user == null){
+                    response.redirect("/");
+                    halt(404,"vete");
+                }
+                else if(!user.isAdministrador()){
+                    response.redirect("/inicio");
+                    halt(404,"vete");
+                }
+            }
+
+            System.out.println("verigicar gestion");
+        });
+
+        before("/gestion/*",(request, response) -> {
+            User user =null;
+            String cook=decrypt(request.cookie("test"));
+            System.out.println("El cookie: "+request.cookie("test"));
+            if(cook != null && !cook.isEmpty()){
+                user=UserServices.getInstancia().find(cook);
+                if(!user.isAdministrador()){
+                    response.redirect("/inicio");
+                    halt(404,"No tiene permiso");
+                }
+            }
+            else{
+                user= request.session(true).attribute("user");
+                if(user == null){
+                    response.redirect("/");
+                    halt(404,"No tiene permiso");
+                }
+                else if(!user.isAdministrador()){
+                    response.redirect("/inicio");
+                    halt(404,"No tiene permiso");
+                }
+            }
         });
 
         before("/gestion/delete/:user",(request, response) -> {
@@ -563,6 +626,7 @@ public class main {
                 user= request.session(true).attribute("user");
                 if(user == null){
                     response.redirect("/");
+                    halt(404,"No tiene permiso");
                 }
 
             }
@@ -570,6 +634,31 @@ public class main {
             String username = request.params("user");
             if(username.equals("Admin")){
                 response.redirect("/gestion/invalid");
+                halt(404,"No tiene permiso");
+            }
+        });
+
+        before("/gestion/promove/:user",(request, response) -> {
+            User user =null;
+            String cook=decrypt(request.cookie("test"));
+            System.out.println("El cookie: "+request.cookie("test"));
+            if(cook != null && !cook.isEmpty()){
+            }
+            else{
+                user= request.session(true).attribute("user");
+                if(user == null){
+                    response.redirect("/");
+                    halt(404,"No tiene permiso");
+                }
+
+            }
+
+            System.out.println("entra aqui");
+
+            String username = request.params("user");
+            if(username.equals("Admin")){
+                response.redirect("/gestion/invalid");
+                halt(404,"No tiene permiso");
             }
         });
 
