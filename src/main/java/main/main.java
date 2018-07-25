@@ -421,6 +421,35 @@ public class main {
             return new ModelAndView(mapa, "gestion_users.ftl");
         }, motor);
 
+        get("/gestion/promove/:user",(request, response) -> {
+            User user =null;
+            String cook=decrypt(request.cookie("test"));
+            //System.out.println("El cookie: "+request.cookie("test"));
+            if(cook != null && !cook.isEmpty()){
+                user=UserServices.getInstancia().find(cook);
+                request.session(true);
+                request.session().attribute("user", user);
+            }
+            else{
+                user= request.session(true).attribute("user");
+            }
+
+            String username = request.params("user");
+            User usuario=UserServices.getInstancia().find(username);
+            if(usuario.isAdministrador()){
+                usuario.setAdministrador(false);
+
+            }else {
+                usuario.setAdministrador(true);
+            }
+            UserServices.getInstancia().editar(usuario);
+
+            Map<String,Object> mapa = new HashMap<>();
+            mapa.put("userl",user);
+            mapa.put("eluser",usuario);
+            return new ModelAndView(mapa,"gestion_promote.ftl");
+        },motor);
+
         get("/gestion/delete/:user",(request, response) -> {
             User user =null;
             String cook=decrypt(request.cookie("test"));
@@ -438,7 +467,6 @@ public class main {
             mapa.put("userl",user);
             return new ModelAndView(mapa,"perfil.ftl");
         },motor);
-
 
         get("/gestion/invalid", (request, response) -> {
             User user =null;

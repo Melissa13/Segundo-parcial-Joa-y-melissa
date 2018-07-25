@@ -2,17 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f3faa379-4f63-4a91-86de-c0b681612e85" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/gestion_error.ftl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/gestion_promote.ftl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/main/main.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/public/assets/css/detalles.css" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/public/assets/css/detalles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/templates/gestion_users.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/templates/gestion_users.ftl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/main/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/public/assets/css/detalles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/public/assets/css/detalles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/base.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/base.ftl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/baseperfil.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/baseperfil.ftl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/gestion_users.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/gestion_users.ftl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/perfil.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/perfil.ftl" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -66,11 +58,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="main.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/main/main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="284">
-              <caret line="438" column="48" selection-start-line="438" selection-start-column="48" selection-end-line="438" selection-end-column="48" />
+            <state relative-caret-position="156">
+              <caret line="400" lean-forward="true" selection-start-line="400" selection-end-line="400" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#main#0;class#main#0" />
@@ -86,6 +78,7 @@
                 <element signature="e#10009#11342#0" />
                 <element signature="e#11384#14669#0" />
                 <element signature="e#14697#14852#0" />
+                <element signature="e#15512#16176#0" />
                 <element signature="e#15508#15666#0" />
                 <element signature="e#14721#15377#0" />
                 <element signature="e#15406#15852#0" />
@@ -99,23 +92,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="gestion_users.ftl" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/templates/gestion_users.ftl">
+      <file leaf-file-name="gestion_promote.ftl" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/templates/gestion_promote.ftl">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="186">
-              <caret line="39" column="49" lean-forward="true" selection-start-line="39" selection-start-column="49" selection-end-line="39" selection-end-column="49" />
-              <folding>
-                <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-              </folding>
+            <state relative-caret-position="297">
+              <caret line="26" column="37" selection-start-line="26" selection-start-column="37" selection-end-line="26" selection-end-column="37" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="gestion_error.ftl" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/templates/gestion_error.ftl">
+      <file leaf-file-name="gestion_users.ftl" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/templates/gestion_users.ftl">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="211">
-              <caret line="19" column="47" selection-start-line="19" selection-start-column="47" selection-end-line="19" selection-end-column="47" />
+            <state relative-caret-position="260">
+              <caret line="43" column="40" lean-forward="true" selection-start-line="43" selection-start-column="40" selection-end-line="43" selection-end-column="40" />
+              <folding>
+                <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -499,11 +492,12 @@
         <option value="$PROJECT_DIR$/src/main/resources/templates/inicio.ftl" />
         <option value="$PROJECT_DIR$/src/main/resources/public/assets/css/detalles.css" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/gestion_users.ftl" />
-        <option value="$PROJECT_DIR$/src/main/resources/templates/gestion_error.ftl" />
-        <option value="$PROJECT_DIR$/src/main/java/main/main.java" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/perfil.ftl" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/baseperfil.ftl" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/base.ftl" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/gestion_error.ftl" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/gestion_promote.ftl" />
+        <option value="$PROJECT_DIR$/src/main/java/main/main.java" />
       </list>
     </option>
   </component>
@@ -693,12 +687,12 @@
       <workItem from="1532038649701" duration="47192000" />
       <workItem from="1532260701379" duration="30853000" />
       <workItem from="1532342027458" duration="9815000" />
-      <workItem from="1532463906200" duration="7540000" />
+      <workItem from="1532463906200" duration="9456000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="98366000" />
+    <option name="totallyTimeSpent" value="100282000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="762" y="0" width="781" height="830" extended-state="0" />
@@ -722,10 +716,10 @@
       <window_info anchor="bottom" id="Java Enterprise" order="13" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
       <window_info anchor="bottom" id="Version Control" order="11" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.3371758" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3371758" />
       <window_info anchor="bottom" id="Terminal" order="8" />
       <window_info id="Persistence" order="7" sideWeight="0.5042553" side_tool="true" weight="0.25637585" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49574468" visible="true" weight="0.25381416" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49574468" visible="true" weight="0.25381416" />
       <window_info anchor="right" id="Gradle" order="6" weight="0.3295302" />
       <window_info anchor="right" id="Theme Preview" order="8" />
       <window_info id="Favorites" order="4" side_tool="true" />
@@ -745,13 +739,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/Clases/Comment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="15" column="40" selection-start-line="15" selection-start-column="40" selection-end-line="15" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
@@ -813,6 +800,7 @@
             <element signature="e#10009#11342#0" />
             <element signature="e#11384#14669#0" />
             <element signature="e#14697#14852#0" />
+            <element signature="e#15512#16176#0" />
             <element signature="e#15508#15666#0" />
             <element signature="e#14721#15377#0" />
             <element signature="e#15406#15852#0" />
@@ -851,6 +839,7 @@
             <element signature="e#10009#11342#0" />
             <element signature="e#11384#14669#0" />
             <element signature="e#14697#14852#0" />
+            <element signature="e#15512#16176#0" />
             <element signature="e#15508#15666#0" />
             <element signature="e#14721#15377#0" />
             <element signature="e#15406#15852#0" />
@@ -1028,13 +1017,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/loginsucess.ftl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="26" column="64" selection-start-line="26" selection-start-column="64" selection-end-line="26" selection-end-column="64" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/templates/baselogin.ftl">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="595">
@@ -1136,37 +1118,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/main/main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="284">
-          <caret line="438" column="48" selection-start-line="438" selection-start-column="48" selection-end-line="438" selection-end-column="48" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#main#0;class#main#0" />
-            <element signature="e#3365#3512#0" />
-            <element signature="e#3550#3702#0" />
-            <element signature="e#3742#4672#0" />
-            <element signature="e#4705#4927#0" />
-            <element signature="e#4954#5612#0" />
-            <element signature="e#5646#6973#0" />
-            <element signature="e#7010#7160#0" />
-            <element signature="e#7198#9783#0" />
-            <element signature="e#9815#9968#0" />
-            <element signature="e#10009#11342#0" />
-            <element signature="e#11384#14669#0" />
-            <element signature="e#14697#14852#0" />
-            <element signature="e#15508#15666#0" />
-            <element signature="e#14721#15377#0" />
-            <element signature="e#15406#15852#0" />
-            <element signature="e#15881#16327#0" />
-            <element signature="e#16358#16804#0" />
-            <element signature="e#17630#18076#0" />
-            <element signature="method#encrypt#0;class#main#0" />
-            <element signature="method#decrypt#0;class#main#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/templates/baseperfil.ftl">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="113">
@@ -1194,20 +1145,66 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/loginsucess.ftl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="26" column="64" selection-start-line="26" selection-start-column="64" selection-end-line="26" selection-end-column="64" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/gestion_error.ftl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="236">
+          <caret line="30" column="16" selection-start-line="30" selection-start-column="16" selection-end-line="34" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/templates/gestion_users.ftl">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="186">
-          <caret line="39" column="49" lean-forward="true" selection-start-line="39" selection-start-column="49" selection-end-line="39" selection-end-column="49" />
+        <state relative-caret-position="260">
+          <caret line="43" column="40" lean-forward="true" selection-start-line="43" selection-start-column="40" selection-end-line="43" selection-end-column="40" />
           <folding>
             <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/gestion_error.ftl">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/gestion_promote.ftl">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="211">
-          <caret line="19" column="47" selection-start-line="19" selection-start-column="47" selection-end-line="19" selection-end-column="47" />
+        <state relative-caret-position="297">
+          <caret line="26" column="37" selection-start-line="26" selection-start-column="37" selection-end-line="26" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/main/main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="156">
+          <caret line="400" lean-forward="true" selection-start-line="400" selection-end-line="400" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#main#0;class#main#0" />
+            <element signature="e#3365#3512#0" />
+            <element signature="e#3550#3702#0" />
+            <element signature="e#3742#4672#0" />
+            <element signature="e#4705#4927#0" />
+            <element signature="e#4954#5612#0" />
+            <element signature="e#5646#6973#0" />
+            <element signature="e#7010#7160#0" />
+            <element signature="e#7198#9783#0" />
+            <element signature="e#9815#9968#0" />
+            <element signature="e#10009#11342#0" />
+            <element signature="e#11384#14669#0" />
+            <element signature="e#14697#14852#0" />
+            <element signature="e#15512#16176#0" />
+            <element signature="e#15508#15666#0" />
+            <element signature="e#14721#15377#0" />
+            <element signature="e#15406#15852#0" />
+            <element signature="e#15881#16327#0" />
+            <element signature="e#16358#16804#0" />
+            <element signature="e#17630#18076#0" />
+            <element signature="method#encrypt#0;class#main#0" />
+            <element signature="method#decrypt#0;class#main#0" />
+          </folding>
         </state>
       </provider>
     </entry>
