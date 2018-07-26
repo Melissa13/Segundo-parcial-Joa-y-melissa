@@ -9,12 +9,10 @@ public class Tag implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "TAG_ID")
     private long id;
     private String tag;
 
-    public Tag(long tag_id, String tag) {
-        this.id = tag_id;
+    public Tag(String tag) {
         this.tag = tag;
     }
 

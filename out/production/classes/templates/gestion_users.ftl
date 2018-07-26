@@ -1,7 +1,7 @@
 <#include "base.ftl">
 
 <#macro page_head>
-<title>Inicio</title>
+<title>Gestion- Usuarios</title>
 </#macro>
 
 <#macro page_body>

@@ -13,13 +13,13 @@ public class Post implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String Title;
-    private String Body;
+    private String Title; //listo
+    private String Body;  //listo
     @OneToOne()
-    private image Image;
+    private image Image;  //listo
     @OneToOne()
-    private User Authorp;
-    private Date DateTime;
+    private User Authorp;  //listo
+    private Date DateTime; //listo
     @OneToMany(mappedBy = "post", fetch = FetchType.EAGER)
     private Set<Comment> comments;
     @ManyToMany(fetch = FetchType.EAGER)
@@ -27,9 +27,9 @@ public class Post implements Serializable{
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<User> UserTags;
     @ManyToMany(fetch = FetchType.EAGER)
-    private Set<User> likes;
+    private Set<Likes> likes;
 
-    public Post(String title, String body, image image, User authorp, Date dateTime, Set<Comment> comments, Set<Tag> tags, Set<User> userTags, Set<User> likes) {
+    public Post(String title, String body, image image, User authorp, Date dateTime, Set<Comment> comments, Set<Tag> tags, Set<User> userTags, Set<Likes> likes) {
         Title = title;
         Body = body;
         Image = image;
@@ -116,11 +116,11 @@ public class Post implements Serializable{
         UserTags = userTags;
     }
 
-    public Set<User> getLikes() {
+    public Set<Likes> getLikes() {
         return likes;
     }
 
-    public void setLikes(Set<User> likes) {
+    public void setLikes(Set<Likes> likes) {
         this.likes = likes;
     }
 }

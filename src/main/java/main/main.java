@@ -20,6 +20,10 @@ import static spark.Spark.*;
 import spark.Session;
 import org.jasypt.util.text.BasicTextEncryptor;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+
 import javax.jws.soap.SOAPBinding;
 //import static spark.Spark.staticFiles;
 
@@ -68,24 +72,26 @@ public class main {
         for (User u: pu){
             System.out.println("Username:"+u.getUsername()+" Pass:"+u.getPassword()+" name:"+u.getNombre()+" administrador:"+u.isAdministrador()+" Datebirth:"+u.getDate_birth()+" Placebirth:"+u.getPlace_birth()+" Amigos:"+u.getFriends().size());
         }
-        /*String str_date = "22/07/2018";
-        try {
-            DateFormat formatter;
-            Date date;
-            formatter = new SimpleDateFormat("dd/MM/yyyy");
-            date = formatter.parse(str_date);
-            System.out.println(date);
-            User insertar = new User();
-            insertar.setUsername("User1");
-            insertar.setNombre("Shanika");
-            insertar.setPassword("1234");
-            insertar.setAdministrador(false);
-            insertar.setDate_birth(date);
-            UserServices.getInstancia().crear(insertar);
-        } catch (java.text.ParseException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }*/
+
+        //prueba post
+        User m=UserServices.getInstancia().find("Meli");
+        Set<User> esto=new HashSet<>();
+        esto.add(m);
+        Date today = Calendar.getInstance().getTime();
+        /*Post p1=new Post();
+        p1.setAuthorp(a);
+        p1.setBody("cuerpo del post");
+        p1.setDateTime(today);
+        p1.setTitle("post 1");
+        //p1.setUserTags(esto);
+        PostServices.getInstancia().crear(p1);*/
+
+
+        System.out.println("cantidad de post");
+        List<Post> p2=PostServices.getInstancia().findAll();
+        for (Post p: p2){
+            System.out.println("ID:"+p.getId()+" Title:"+p.getTitle()+" Body:"+p.getBody()+" fecha:"+p.getDateTime()+" Autor:"+p.getAuthorp().getUsername()+" Tags:"+p.getUserTags().size()+" Comentarios:"+p.getComments().size());
+        }
 
 
         //fecha prueba
@@ -493,6 +499,53 @@ public class main {
             mapa.put("userl",user);
             return new ModelAndView(mapa,"gestion_error.ftl");
         },motor);
+
+        get("/inicio/add", (request, response) -> {
+
+            User user =null;
+            String cook=decrypt(request.cookie("test"));
+            //System.out.println("El cookie: "+request.cookie("test"));
+            if(cook != null && !cook.isEmpty()){
+                user=UserServices.getInstancia().find(cook);
+                request.session(true);
+                request.session().attribute("user", user);
+            }
+            else{
+                user= request.session(true).attribute("user");
+            }
+
+
+            Map<String, Object> mapa = new HashMap<>();
+            mapa.put("userl",user);
+
+            return new ModelAndView(mapa, "post_crear.ftl");
+        }, motor);
+
+        post("/inicio/add", (request, response) -> {
+            User user =null;
+            String cook=decrypt(request.cookie("test"));
+            //System.out.println("El cookie: "+request.cookie("test"));
+            if(cook != null && !cook.isEmpty()){
+                user=UserServices.getInstancia().find(cook);
+                request.session(true);
+                request.session().attribute("user", user);
+            }
+            else{
+                user= request.session(true).attribute("user");
+            }
+
+
+            String nombre =request.queryParams("filecover");
+            System.out.println("archivo devuelto: "+nombre);
+
+            //long id=1;
+            //Post p1=PostServices.getInstancia().find(id);
+            //p1.setUserTags(esto);
+            //PostServices.getInstancia().editar(p1);
+
+            response.redirect("/inicio");
+            return "";
+        });
 
         //condiciones before
         before("/",(request, response) -> {
