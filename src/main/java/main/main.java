@@ -6,6 +6,7 @@ import freemarker.template.Configuration;
 import spark.ModelAndView;
 import spark.template.freemarker.FreeMarkerEngine;
 
+import java.io.*;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -22,9 +23,7 @@ import static spark.Spark.*;
 import spark.Session;
 import org.jasypt.util.text.BasicTextEncryptor;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
+import java.nio.file.*;
 
 import javax.jws.soap.SOAPBinding;
 //import static spark.Spark.staticFiles;
@@ -106,6 +105,7 @@ public class main {
     public static void manejadorFremarker()throws SQLException {
 
         staticFileLocation("/public");
+        staticFiles.externalLocation("upload");
 
         Configuration configuration= new Configuration(Configuration.VERSION_2_3_23);
         configuration.setClassForTemplateLoading(
@@ -719,6 +719,32 @@ public class main {
 
 
 
+        get("/testImage",(request, response) ->
+            "<form method='post' enctype='multipart/form-data'>" // note the enctype
+                    + "    <input type='file' name='uploaded_file' accept='.png'>" // make sure to call getPart using the same "name" in the post
+                    + "    <button>Upload picture</button>"
+                    + "</form>"
+        );
+
+        post("/testImage", (req, res) -> {
+
+            File uploadDir = new File("upload");
+            uploadDir.mkdir();
+
+
+            Path tempFile = Files.createTempFile(uploadDir.toPath(), "", "");
+
+            req.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement("/temp"));
+
+            try (InputStream input = req.raw().getPart("uploaded_file").getInputStream()) { // getPart needs to use same "name" as input field in form
+                Files.copy(input, tempFile, StandardCopyOption.REPLACE_EXISTING);
+            }
+
+            logInfo(req, tempFile);
+            return "<h1>You uploaded this image:<h1><img src='" + tempFile.getFileName() + "'>";
+
+        });
+
 
         get("/prueba", (request, response) -> {
 
@@ -726,6 +752,19 @@ public class main {
             return new ModelAndView(mapa, "ayuda.ftl");
         }, motor);
 
+    }
+
+    private static void logInfo(Request req, Path tempFile) throws IOException, ServletException {
+        System.out.println("Uploaded file '" + getFileName(req.raw().getPart("uploaded_file")) + "' saved as '" + tempFile.toAbsolutePath() + "'");
+    }
+
+    private static String getFileName(Part part) {
+        for (String cd : part.getHeader("content-disposition").split(";")) {
+            if (cd.trim().startsWith("filename")) {
+                return cd.substring(cd.indexOf('=') + 1).trim().replace("\"", "");
+            }
+        }
+        return null;
     }
 
     public static String encrypt(String secret){
