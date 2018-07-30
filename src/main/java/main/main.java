@@ -537,7 +537,7 @@ public class main {
             }
 
 
-            String nombre =request.queryParams("filecover");
+            String nombre = getFileName(request.raw().getPart("filecover"));//request.queryParams("filecover");
             System.out.println("archivo devuelto: "+nombre);
 
             //long id=1;
