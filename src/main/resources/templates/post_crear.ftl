@@ -17,6 +17,7 @@
                     </div>
 
                     <!-- post row -->
+
                     <div class="tim-row bordec" style="min-height: 300px">
                         <center><h4> Pruena de imagenes</h4></center>
                         <legend></legend>

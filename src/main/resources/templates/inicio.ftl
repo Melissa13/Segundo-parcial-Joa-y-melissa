@@ -10,9 +10,7 @@
         <div class="container">
             <div class="fixed-bar">
                 <center>
-                    <a href="/prueba" class="btn btn-primary btn-lg">
-                        <i class="fa fa-plus"></i> Agregar Post
-                    </a>
+                    <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i> Agregar Post</button>
                 </center>
                 <br/>
                 <div class="fondo">
@@ -44,7 +42,9 @@
                                     <h6> ${post.getAuthorp().username}, ${post.getDateTime()}</h6>
                                     <legend></legend>
                                     <center>
-                                        <img src='/${post.getImage()}' style="max-width: 600px; height: auto; alt="">
+                                        <#if post.getImage()??>
+                                            <img src='/${post.getImage()}' style="max-width: 600px; height: auto; alt="">
+                                        </#if>
                                     </center>
                                     <p style="margin-bottom: 45px; margin-top: 15px">
                                         ${post.getBody()}
@@ -70,34 +70,6 @@
                         </#if>
                         <!-- end row -->
 
-
-                        <div class="tim-row bordec">
-                            <h2> Post 1</h2>
-                            <legend></legend>
-                            <p style="margin-bottom: 45px;">
-                                We restyled the Bootstrap tooltip.
-                            </p>
-                            <button type="button" class="btn btn-default btn-tooltip" data-toggle="tooltip" data-placement="top" title="Tooltip on top" data-trigger="manual">Button with Tooltip</button>
-                            <div class="area-line">
-                                <a data-target="#tooltipMarkup" href="javascript: void(0);" data-toggle="collapse">See Markup and Javascript</a>
-                                <div id="tooltipMarkup" class="collapse">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tim-row bordec">
-                            <h2> Post 2</h2>
-                            <legend></legend>
-                            <p style="margin-bottom: 45px;">
-                                We restyled the Bootstrap tooltip.
-                            </p>
-                            <button type="button" class="btn btn-default btn-tooltip" data-toggle="tooltip" data-placement="top" title="Tooltip on top" data-trigger="manual">Button with Tooltip</button>
-                            <div class="area-line">
-                                <a data-target="#tooltipMarkup" href="javascript: void(0);" data-toggle="collapse">See Markup and Javascript</a>
-                                <div id="tooltipMarkup" class="collapse">
-                                </div>
-                            </div>
-                        </div>
-
                     </div>
                     <!-- end container -->
                 </div>
@@ -105,4 +77,46 @@
         </div>
     </div>
 </div>
+
+<!-- crear blog -->
+<!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+
+                <form action="/inicio/agregar" method="post" enctype="multipart/form-data">
+
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">Comparta sus recuerdos!</h4>
+                    </div>
+                    <div class="modal-body" style="background-color: #ccebff">
+
+                        <label >Titulo</label>
+                        <input type="text" class="form-control" placeholder="Titulo" name="title">
+                        <label >Imagen</label>
+                        <input type="file" name="uploaded_file" accept='.png, .jpg, .jpeg'/>
+                        <label >Cuerpo</label>
+                        <textarea class="form-control" placeholder="Escriba detalles sobre usted" rows="5" name="body" required></textarea>
+                        <label >Tags</label>
+                        <input type="text" class="form-control " placeholder="Tags" name="tag">
+                        <label >Etiqueta a tus amigos</label>
+                        <input type="text" class="form-control " placeholder="UserTags" name="taguser">
+
+                    </div>
+                    <div class="modal-footer">
+                        <div class="left-side">
+                            <button type="button" class="btn btn-default btn-simple" data-dismiss="modal"><b>Cancelar</b></button>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="right-side">
+                            <button type="submit" class="btn btn-success btn-simple"><b>Publicar</b></button>
+                        </div>
+                    </div>
+                </div>
+
+                </form>
+            </div>
+        </div>
+
 </#macro>

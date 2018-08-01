@@ -514,34 +514,7 @@ public class main {
             return new ModelAndView(mapa,"gestion_error.ftl");
         },motor);
 
-        get("/inicio/add", (request, response) -> {
-
-            User user =null;
-            String cook=decrypt(request.cookie("test"));
-            //System.out.println("El cookie: "+request.cookie("test"));
-            if(cook != null && !cook.isEmpty()){
-                user=UserServices.getInstancia().find(cook);
-                request.session(true);
-                request.session().attribute("user", user);
-            }
-            else{
-                user= request.session(true).attribute("user");
-            }
-
-            long id=1;
-            Post p1=PostServices.getInstancia().find(id);
-            Path prueba=Paths.get(p1.getImage());
-            p1.setImage(prueba.getFileName().toString());
-
-            Map<String, Object> mapa = new HashMap<>();
-            mapa.put("userl",user);
-            mapa.put("imagen", prueba);
-            mapa.put("img2",p1.getImage());
-
-            return new ModelAndView(mapa, "post_crear.ftl");
-        }, motor);
-
-        post("/inicio/add", (request, response) -> {
+        post("/inicio/agregar", (request, response) -> {
             User user =null;
             String cook=decrypt(request.cookie("test"));
             //System.out.println("El cookie: "+request.cookie("test"));
@@ -559,16 +532,12 @@ public class main {
 
             //recibir archivo
             Path tempFile = Files.createTempFile(uploadDir.toPath(), "", "");
-
             request.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement("/temp"));
-
             try (InputStream input = request.raw().getPart("uploaded_file").getInputStream()) { // getPart needs to use same "name" as input field in form
                 Files.copy(input, tempFile, StandardCopyOption.REPLACE_EXISTING);
             }
             String img_direccion=tempFile.toAbsolutePath().toString();
             System.out.println("direccion: "+img_direccion);
-
-            //Path prueba=Paths.get(img_direccion);
 
             //guardar archivo
             long id=1;
@@ -783,6 +752,68 @@ public class main {
             Map<String, Object> mapa = new HashMap<>();
             return new ModelAndView(mapa, "ayuda.ftl");
         }, motor);
+
+        get("/inicio/add", (request, response) -> {
+
+            User user =null;
+            String cook=decrypt(request.cookie("test"));
+            //System.out.println("El cookie: "+request.cookie("test"));
+            if(cook != null && !cook.isEmpty()){
+                user=UserServices.getInstancia().find(cook);
+                request.session(true);
+                request.session().attribute("user", user);
+            }
+            else{
+                user= request.session(true).attribute("user");
+            }
+
+            long id=1;
+            Post p1=PostServices.getInstancia().find(id);
+            Path prueba=Paths.get(p1.getImage());
+            p1.setImage(prueba.getFileName().toString());
+
+            Map<String, Object> mapa = new HashMap<>();
+            mapa.put("userl",user);
+            mapa.put("imagen", prueba);
+            mapa.put("img2",p1.getImage());
+
+            return new ModelAndView(mapa, "post_crear.ftl");
+        }, motor);
+
+        post("/inicio/add", (request, response) -> {
+            User user =null;
+            String cook=decrypt(request.cookie("test"));
+            //System.out.println("El cookie: "+request.cookie("test"));
+            if(cook != null && !cook.isEmpty()){
+                //verificar si hay cookies
+                user=UserServices.getInstancia().find(cook);
+                request.session(true);
+                request.session().attribute("user", user);
+                //algo aqui
+            }
+            else{
+                user= request.session(true).attribute("user");
+            }
+
+
+            //recibir archivo
+            Path tempFile = Files.createTempFile(uploadDir.toPath(), "", "");
+            request.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement("/temp"));
+            try (InputStream input = request.raw().getPart("uploaded_file").getInputStream()) { // getPart needs to use same "name" as input field in form
+                Files.copy(input, tempFile, StandardCopyOption.REPLACE_EXISTING);
+            }
+            String img_direccion=tempFile.toAbsolutePath().toString();
+            System.out.println("direccion: "+img_direccion);
+
+            //guardar archivo
+            long id=1;
+            Post p1=PostServices.getInstancia().find(id);
+            p1.setImage(img_direccion);
+            PostServices.getInstancia().editar(p1);
+
+            response.redirect("/inicio");
+            return "";
+        });
 
     }
 
