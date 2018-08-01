@@ -22,10 +22,18 @@
                         <legend></legend>
                         <form action="/inicio/add" method="post" enctype="multipart/form-data">
 
-                        Imagen: <input type="file" name="filecover" value="Upload"/>
+                        Imagen: <input type="file" name="uploaded_file" accept='.png'/>
 
                         <button class="btn btn-default btn-block" type="submit">Log in</button>
                         </form>
+
+                        ${imagen.getFileName()}
+                        <br/>
+                        imagen mostrada <img src='/${imagen.getFileName()}' width="400" height="400" alt="">
+                        <br/>
+                        ${img2}
+                        <br/>
+                        img2 imagen mostrada <img src='/${img2}' width="400" height="400" alt="">
 
                         <legend></legend>
                     </div>

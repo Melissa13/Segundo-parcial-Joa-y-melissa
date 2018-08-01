@@ -15,8 +15,7 @@ public class Post implements Serializable{
     private long id;
     private String Title; //listo
     private String Body;  //listo
-    @OneToOne()
-    private image Image;  //listo
+    private String Image;  //listo
     @OneToOne()
     private User Authorp;  //listo
     private Date DateTime; //listo
@@ -29,7 +28,7 @@ public class Post implements Serializable{
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Likes> likes;
 
-    public Post(String title, String body, image image, User authorp, Date dateTime, Set<Comment> comments, Set<Tag> tags, Set<User> userTags, Set<Likes> likes) {
+    public Post(String title, String body, String image, User authorp, Date dateTime, Set<Comment> comments, Set<Tag> tags, Set<User> userTags, Set<Likes> likes) {
         Title = title;
         Body = body;
         Image = image;
@@ -68,11 +67,11 @@ public class Post implements Serializable{
         Body = body;
     }
 
-    public image getImage() {
+    public String getImage() {
         return Image;
     }
 
-    public void setImage(image image) {
+    public void setImage(String image) {
         Image = image;
     }
 

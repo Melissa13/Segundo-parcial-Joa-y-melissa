@@ -75,16 +75,16 @@ public class main {
         }
 
         //prueba post
-        User m=UserServices.getInstancia().find("Meli");
+        /*User m=UserServices.getInstancia().find("Meli");
         Set<User> esto=new HashSet<>();
         esto.add(m);
         Date today = Calendar.getInstance().getTime();
-        /*Post p1=new Post();
+        Post p1=new Post();
         p1.setAuthorp(a);
         p1.setBody("cuerpo del post");
         p1.setDateTime(today);
         p1.setTitle("post 1");
-        //p1.setUserTags(esto);
+        p1.setUserTags(esto);
         PostServices.getInstancia().crear(p1);*/
 
 
@@ -103,6 +103,9 @@ public class main {
     }
 
     public static void manejadorFremarker()throws SQLException {
+
+        File uploadDir = new File("upload");
+        uploadDir.mkdir();
 
         staticFileLocation("/public");
         staticFiles.externalLocation("upload");
@@ -516,9 +519,15 @@ public class main {
                 user= request.session(true).attribute("user");
             }
 
+            long id=1;
+            Post p1=PostServices.getInstancia().find(id);
+            Path prueba=Paths.get(p1.getImage());
+            p1.setImage(prueba.getFileName().toString());
 
             Map<String, Object> mapa = new HashMap<>();
             mapa.put("userl",user);
+            mapa.put("imagen", prueba);
+            mapa.put("img2",p1.getImage());
 
             return new ModelAndView(mapa, "post_crear.ftl");
         }, motor);
@@ -528,22 +537,35 @@ public class main {
             String cook=decrypt(request.cookie("test"));
             //System.out.println("El cookie: "+request.cookie("test"));
             if(cook != null && !cook.isEmpty()){
+                //verificar si hay cookies
                 user=UserServices.getInstancia().find(cook);
                 request.session(true);
                 request.session().attribute("user", user);
+                //algo aqui
             }
             else{
                 user= request.session(true).attribute("user");
             }
 
 
-            String nombre = getFileName(request.raw().getPart("filecover"));//request.queryParams("filecover");
-            System.out.println("archivo devuelto: "+nombre);
+            //recibir archivo
+            Path tempFile = Files.createTempFile(uploadDir.toPath(), "", "");
 
-            //long id=1;
-            //Post p1=PostServices.getInstancia().find(id);
-            //p1.setUserTags(esto);
-            //PostServices.getInstancia().editar(p1);
+            request.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement("/temp"));
+
+            try (InputStream input = request.raw().getPart("uploaded_file").getInputStream()) { // getPart needs to use same "name" as input field in form
+                Files.copy(input, tempFile, StandardCopyOption.REPLACE_EXISTING);
+            }
+            String img_direccion=tempFile.toAbsolutePath().toString();
+            System.out.println("direccion: "+img_direccion);
+
+            //Path prueba=Paths.get(img_direccion);
+
+            //guardar archivo
+            long id=1;
+            Post p1=PostServices.getInstancia().find(id);
+            p1.setImage(img_direccion);
+            PostServices.getInstancia().editar(p1);
 
             response.redirect("/inicio");
             return "";
@@ -724,12 +746,12 @@ public class main {
                     + "    <input type='file' name='uploaded_file' accept='.png'>" // make sure to call getPart using the same "name" in the post
                     + "    <button>Upload picture</button>"
                     + "</form>"
+                    + "<h1>ruta 1:<h1><img src='upload/6390579131001553725.PNG'>"
+                    + "<h1>ruta 2:<h1><img src='/6390579131001553725.PNG'>"
+                    + "<h1>ruta 3:<h1><img src='C:/Users/Melisa/Documents/PUCMM/ISC-415 Programacion web/segundo parcial/Segundo-parcial-Joa-y-melissa/upload/6390579131001553725.PNG'>"
         );
 
         post("/testImage", (req, res) -> {
-
-            File uploadDir = new File("upload");
-            uploadDir.mkdir();
 
 
             Path tempFile = Files.createTempFile(uploadDir.toPath(), "", "");
@@ -741,6 +763,7 @@ public class main {
             }
 
             logInfo(req, tempFile);
+            System.out.println("direccion: "+tempFile.toAbsolutePath());
             return "<h1>You uploaded this image:<h1><img src='" + tempFile.getFileName() + "'>";
 
         });

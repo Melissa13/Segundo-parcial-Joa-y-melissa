@@ -13,6 +13,7 @@ public class image implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private byte[] Image;
+    private String direccion;
     private String body;
     @ManyToOne()
     private User Author;
@@ -22,10 +23,11 @@ public class image implements Serializable{
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<User> UserTagsi;
     @ManyToMany(fetch = FetchType.EAGER)
-    private Set<User> likesi;
+    private Set<Likes> likesi;
 
-    public image(byte[] image, String body, User author, Date dateTime, Set<Comment> commentsi, Set<User> userTagsi, Set<User> likesi) {
+    public image(byte[] image, String body, String direccion, User author, Date dateTime, Set<Comment> commentsi, Set<User> userTagsi, Set<Likes> likesi) {
         Image = image;
+        this.direccion=direccion;
         this.body = body;
         Author = author;
         DateTime = dateTime;
@@ -93,11 +95,19 @@ public class image implements Serializable{
         UserTagsi = userTagsi;
     }
 
-    public Set<User> getLikesi() {
+    public Set<Likes> getLikesi() {
         return likesi;
     }
 
-    public void setLikesi(Set<User> likesi) {
+    public void setLikesi(Set<Likes> likesi) {
         this.likesi = likesi;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
 }
