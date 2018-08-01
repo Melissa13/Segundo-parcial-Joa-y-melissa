@@ -37,23 +37,40 @@
                         </div>
 
                         <!-- post row -->
-                        <div class="tim-row bordec">
-                            <h2> Titulo del post</h2>
-                            <h6> Autor, fecha</h6>
-                            <legend></legend>
-                            <center>imagen</center>
-                            <p style="margin-bottom: 45px; margin-top: 15px">
-                                cuerpo del post
-                            </p>
-                            <center><a  href="#" type="button" class="btn btn-primary">Leer mas</a></center>
-                            <br/>
-                            <legend></legend>
-                            Tag1, tag2, tag3
-                            <br/>
-                            <br/>
+                        <#if posts??>
+                            <#list posts as post>
+                                <div class="tim-row bordec">
+                                    <h2> ${post.getTitle()}</h2>
+                                    <h6> ${post.getAuthorp().username}, ${post.getDateTime()}</h6>
+                                    <legend></legend>
+                                    <center>
+                                        <img src='/${post.getImage()}' style="max-width: 600px; height: auto; alt="">
+                                    </center>
+                                    <p style="margin-bottom: 45px; margin-top: 15px">
+                                        ${post.getBody()}
+                                    </p>
+                                    <center><a  href="#" type="button" class="btn btn-primary">Leer mas</a></center>
+                                    <br/>
+                                    <legend></legend>
+                                    <#if post.getTags()??>
+                                        <#list post.getTags() as tag>
+                                            <a class="btn btn-info btn-xs" href="/tag/${tag.getId()?string["0"]}"> ${tag.getTag()} </a>
+                                        </#list>
+                                    </#if>
+                                    <#if post.getUserTags()??>
+                                        <#list post.getUserTags() as tagu>
+                                            <a class="btn btn-info btn-xs" href="/tag/${tagu.username}"> ${tagu.username} </a>
+                                        </#list>
+                                    </#if>
+                                    <br/>
+                                    <br/>
 
-                        </div>
+                                </div>
+                            </#list>
+                        </#if>
                         <!-- end row -->
+
+
                         <div class="tim-row bordec">
                             <h2> Post 1</h2>
                             <legend></legend>

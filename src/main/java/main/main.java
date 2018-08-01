@@ -179,8 +179,17 @@ public class main {
                 user= request.session(true).attribute("user");
             }
 
+            List<Post> publicaciones=PostServices.getInstancia().findAll();
+            //List<Post> auz=new ArrayList<Post>();
+            for(Post p: publicaciones){
+                Path prueba=Paths.get(p.getImage());
+                p.setImage(prueba.getFileName().toString());
+
+
+            }
             Map<String, Object> mapa = new HashMap<>();
             mapa.put("userl",user);
+            mapa.put("posts",publicaciones);
 
             return new ModelAndView(mapa, "inicio.ftl");
         }, motor);

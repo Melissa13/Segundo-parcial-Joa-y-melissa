@@ -22,7 +22,7 @@
                         <legend></legend>
                         <form action="/inicio/add" method="post" enctype="multipart/form-data">
 
-                        Imagen: <input type="file" name="uploaded_file" accept='.png'/>
+                        Imagen: <input type="file" name="uploaded_file" accept='.png, .jpg, .jpeg'/>
 
                         <button class="btn btn-default btn-block" type="submit">Log in</button>
                         </form>
