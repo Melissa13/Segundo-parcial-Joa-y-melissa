@@ -918,6 +918,14 @@ public class main {
 
     }
 
+    static int getPuertoHeroku() {
+        ProcessBuilder processBuilder = new ProcessBuilder();
+        if (processBuilder.environment().get("PORT") != null) {
+            return Integer.parseInt(processBuilder.environment().get("PORT"));
+        }
+        return 4567; //En caso de no pasar la información, toma el puerto 4567
+    }
+
     private static void logInfo(Request req, Path tempFile) throws IOException, ServletException {
         System.out.println("Uploaded file '" + getFileName(req.raw().getPart("uploaded_file")) + "' saved as '" + tempFile.toAbsolutePath() + "'");
     }

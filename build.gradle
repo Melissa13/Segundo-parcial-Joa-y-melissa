@@ -2,10 +2,22 @@ plugins {
     id 'java'
 }
 
+
+apply plugin: 'application'
+
 group 'ce.pucmm.edu.do'
 version '1.0-SNAPSHOT'
 
 sourceCompatibility = 1.8
+
+mainClassName = "main"
+
+defaultTasks = ['stage']
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.7'
+}
+
 
 repositories {
     mavenCentral()
@@ -24,4 +36,8 @@ dependencies {
     compile 'com.google.code.gson:gson:2.6.2'
     compile 'org.hibernate:hibernate-core:5.1.0.Final'
     compile 'org.hibernate:hibernate-entitymanager:5.1.0.Final'
+}
+
+task stage {
+    dependsOn installDist
 }
