@@ -1,1 +1,1 @@
-web: build/install/app/bin/app
+web: build/install/Segundo_parcial/bin/Segundo_parcial
