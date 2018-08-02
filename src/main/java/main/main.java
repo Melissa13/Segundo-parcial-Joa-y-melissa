@@ -2,6 +2,7 @@ package main;
 
 import Database.*;
 import Clases.*;
+import SOAP.SOAP_Start;
 import freemarker.template.Configuration;
 import spark.ModelAndView;
 import spark.template.freemarker.FreeMarkerEngine;
@@ -33,6 +34,13 @@ public class main {
     public static void main(String[] args) throws SQLException {
 
         port(getPuertoHeroku());
+
+        try {
+            SOAP_Start.init();
+        }
+        catch (Exception e){
+            System.out.println("Esta vaina no sirve");
+        }
 
         //Iniciando el servicio
         BootStrapService.getInstancia().init();

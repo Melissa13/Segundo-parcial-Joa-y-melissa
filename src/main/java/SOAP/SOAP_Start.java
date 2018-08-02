@@ -1,5 +1,6 @@
 package SOAP;
 
+import SOAP.ws.SOAP_WebService;
 import org.eclipse.jetty.http.spi.HttpSpiContextHandler;
 import org.eclipse.jetty.http.spi.JettyHttpContext;
 import org.eclipse.jetty.http.spi.JettyHttpServer;
@@ -18,8 +19,11 @@ public class SOAP_Start {
         server.setHandler(contextHandlerCollection);
         server.start();
 
-        HttpContext context = build(server, "SOAP/WS");
+        HttpContext context = build(server, "/ws");
 
+        SOAP_WebService wsa = new SOAP_WebService();
+        Endpoint endpoint = Endpoint.create(wsa);
+        endpoint.publish(context);
 
     }
 

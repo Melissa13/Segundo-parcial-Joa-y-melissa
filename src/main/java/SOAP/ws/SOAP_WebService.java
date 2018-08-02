@@ -1,6 +1,7 @@
-package SOAP;
+package SOAP.ws;
 
 import javax.jws.WebMethod;
+import javax.jws.WebService;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +9,7 @@ import Clases.*;
 import Database.PostServices;
 import Database.UserServices;
 
-
+@WebService
 public class SOAP_WebService {
 
 
