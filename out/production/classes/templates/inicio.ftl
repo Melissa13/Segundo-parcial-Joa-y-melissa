@@ -38,7 +38,7 @@
                         <#if posts??>
                             <#list posts as post>
                                 <div class="tim-row bordec">
-                                    <h2> ${post.getTitle()}</h2>
+                                    <h2> <#if post.getTitle()??>${post.getTitle()}</#if></h2>
                                     <h6> ${post.getAuthorp().username}, ${post.getDateTime()}</h6>
                                     <legend></legend>
                                     <center>
@@ -99,9 +99,16 @@
                         <label >Cuerpo</label>
                         <textarea class="form-control" placeholder="Escriba detalles sobre usted" rows="5" name="body" required></textarea>
                         <label >Tags</label>
-                        <input type="text" class="form-control " placeholder="Tags" name="tag">
-                        <label >Etiqueta a tus amigos</label>
-                        <input type="text" class="form-control " placeholder="UserTags" name="taguser">
+                        <input type="text" class="form-control " placeholder="Tag1, tag2, tag3,..." name="tag">
+                        <label >Etiqueta a tus amigos</label>(sostener Ctrl para mas de uno)
+                        <br/>
+                        <#if amigos??>
+                            <select name="amigos" style="width: 90%;" multiple>
+                                <#list amigos as amigo>
+                                        <option value="${amigo.username}">${amigo.username}</option>
+                                </#list>
+                            </select>
+                        </#if>
 
                     </div>
                     <div class="modal-footer">

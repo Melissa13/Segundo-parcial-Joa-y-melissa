@@ -73,6 +73,11 @@ public class main {
         for (User u: pu){
             System.out.println("Username:"+u.getUsername()+" Pass:"+u.getPassword()+" name:"+u.getNombre()+" administrador:"+u.isAdministrador()+" Datebirth:"+u.getDate_birth()+" Placebirth:"+u.getPlace_birth()+" Amigos:"+u.getFriends().size());
         }
+        System.out.println("TAGS!");
+        List<Tag> ss2=TagServices.getInstancia().findAll();
+        for (Tag u: ss2){
+            System.out.println("tag ss2: "+u.getTag()+" ID "+ u.getId());
+        }
 
         //prueba post
         /*User m=UserServices.getInstancia().find("Meli");
@@ -91,7 +96,7 @@ public class main {
         System.out.println("cantidad de post");
         List<Post> p2=PostServices.getInstancia().findAll();
         for (Post p: p2){
-            System.out.println("ID:"+p.getId()+" Title:"+p.getTitle()+" Body:"+p.getBody()+" fecha:"+p.getDateTime()+" Autor:"+p.getAuthorp().getUsername()+" Tags:"+p.getUserTags().size()+" Comentarios:"+p.getComments().size());
+            System.out.println("ID:"+p.getId()+" Title:"+p.getTitle()+" Body:"+p.getBody()+" fecha:"+p.getDateTime()+" Autor:"+p.getAuthorp().getUsername()+" Tags:"+p.getUserTags().size()+" Comentarios:"+p.getComments().size() + " imagen: "+ p.getImage());
         }
 
 
@@ -179,17 +184,19 @@ public class main {
                 user= request.session(true).attribute("user");
             }
 
-            List<Post> publicaciones=PostServices.getInstancia().findAll();
+            List<Post> publicaciones=PostServices.getInstancia().findAllById();
             //List<Post> auz=new ArrayList<Post>();
             for(Post p: publicaciones){
-                Path prueba=Paths.get(p.getImage());
-                p.setImage(prueba.getFileName().toString());
-
+                if(p.getImage()!=null && !p.getImage().isEmpty()) {
+                    Path prueba = Paths.get(p.getImage());
+                    p.setImage(prueba.getFileName().toString());
+                }
 
             }
             Map<String, Object> mapa = new HashMap<>();
             mapa.put("userl",user);
             mapa.put("posts",publicaciones);
+            mapa.put("amigos",UserServices.getInstancia().findAll());
 
             return new ModelAndView(mapa, "inicio.ftl");
         }, motor);
@@ -529,21 +536,86 @@ public class main {
                 user= request.session(true).attribute("user");
             }
 
-
-            //recibir archivo
-            Path tempFile = Files.createTempFile(uploadDir.toPath(), "", "");
+            Post insertar=new Post();
             request.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement("/temp"));
-            try (InputStream input = request.raw().getPart("uploaded_file").getInputStream()) { // getPart needs to use same "name" as input field in form
-                Files.copy(input, tempFile, StandardCopyOption.REPLACE_EXISTING);
+
+            String title =request.queryParams("title");
+            String body =request.queryParams("body");
+            String[] tags =request.queryParams("tag").split(",");
+            Date today = Calendar.getInstance().getTime();
+            String[] lista= request.queryParamsValues("amigos");
+
+            Set<User> amigos=new HashSet<>();
+            if(lista!=null) {
+                for (String esto : lista) {
+                    User u = UserServices.getInstancia().find(esto);
+                    //System.out.println("Valor: "+esto);
+                    amigos.add(u);
+                }
+                insertar.setUserTags(amigos);
             }
-            String img_direccion=tempFile.toAbsolutePath().toString();
-            System.out.println("direccion: "+img_direccion);
+
+
+            insertar.setDateTime(today);
+            insertar.setBody(body);
+            if(title != null && !title.isEmpty()) {
+                insertar.setTitle(title);
+            }
+            insertar.setAuthorp(user);
+
+            //recibir imagen
+            if(getFileName(request.raw().getPart("uploaded_file"))!=null && !getFileName(request.raw().getPart("uploaded_file")).isEmpty()) {
+
+                Path tempFile = Files.createTempFile(uploadDir.toPath(), "", "");
+                try (InputStream input = request.raw().getPart("uploaded_file").getInputStream()) { // getPart needs to use same "name" as input field in form
+                    Files.copy(input, tempFile, StandardCopyOption.REPLACE_EXISTING);
+                }
+                String img_direccion = tempFile.toAbsolutePath().toString();
+                System.out.println("direccion: " + img_direccion);
+
+                insertar.setImage(img_direccion);
+
+            }
+
+            if(tags!=null) {
+                List<Tag> ss = TagServices.getInstancia().findAll();
+                Set<Tag> gt = new HashSet<>();
+                System.out.println("ENTRA AQUI");
+                for (int i = 0; i < tags.length; i++) {
+                    boolean exist = false;
+                    for (Tag u : ss) {
+                        if (u.getTag().equals(tags[i])) {
+                            exist = true;
+                            List<Tag> aux2 = TagServices.getInstancia().findAllBytag(tags[i]);
+                            for (Tag tt : aux2) {
+                                gt.add(tt);
+                                System.out.println("TAG YA CREADO!!: " + tt.getTag() + " ID " + tt.getId());
+                            }
+                        }
+                    }
+                    if (!exist) {
+                        System.out.println("CREAR NUEVO");
+                        Tag t = new Tag();
+                        t.setTag(tags[i]);
+                        System.out.println("A CREAR: " + t.getTag());
+                        TagServices.getInstancia().crear(t);
+                        List<Tag> aux2 = TagServices.getInstancia().findAllBytag(tags[i]);
+                        for (Tag tt : aux2) {
+                            gt.add(tt);
+                            System.out.println("TAG RECIEN CREADO!!: " + tt.getTag() + " ID " + tt.getId());
+                        }
+                    }
+                }
+                for (Tag u : gt) {
+                    System.out.println("tag gt: " + u.getTag() + " ID " + u.getId());
+                }
+                insertar.setTags(gt);
+            }
+
+
+            PostServices.getInstancia().crear(insertar);
 
             //guardar archivo
-            long id=1;
-            Post p1=PostServices.getInstancia().find(id);
-            p1.setImage(img_direccion);
-            PostServices.getInstancia().editar(p1);
 
             response.redirect("/inicio");
             return "";
@@ -776,6 +848,7 @@ public class main {
             mapa.put("userl",user);
             mapa.put("imagen", prueba);
             mapa.put("img2",p1.getImage());
+            mapa.put("amigos",UserServices.getInstancia().findAll());
 
             return new ModelAndView(mapa, "post_crear.ftl");
         }, motor);
@@ -796,9 +869,11 @@ public class main {
             }
 
 
+
             //recibir archivo
             Path tempFile = Files.createTempFile(uploadDir.toPath(), "", "");
             request.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement("/temp"));
+
             try (InputStream input = request.raw().getPart("uploaded_file").getInputStream()) { // getPart needs to use same "name" as input field in form
                 Files.copy(input, tempFile, StandardCopyOption.REPLACE_EXISTING);
             }
@@ -806,10 +881,36 @@ public class main {
             System.out.println("direccion: "+img_direccion);
 
             //guardar archivo
-            long id=1;
-            Post p1=PostServices.getInstancia().find(id);
-            p1.setImage(img_direccion);
-            PostServices.getInstancia().editar(p1);
+            //long id=1;
+            //Post p1=PostServices.getInstancia().find(id);
+            //p1.setImage(img_direccion);
+            //PostServices.getInstancia().editar(p1);
+
+            response.redirect("/inicio");
+            return "";
+        });
+
+        post("/inicio/add2", (request, response) -> {
+            User user =null;
+            String cook=decrypt(request.cookie("test"));
+            //System.out.println("El cookie: "+request.cookie("test"));
+            if(cook != null && !cook.isEmpty()){
+                //verificar si hay cookies
+                user=UserServices.getInstancia().find(cook);
+                request.session(true);
+                request.session().attribute("user", user);
+                //algo aqui
+            }
+            else{
+                user= request.session(true).attribute("user");
+            }
+
+            //codigo checkbox  request.queryParams("description");
+            String[] lista= request.queryParamsValues("cars");
+            for (String esto: lista){
+                System.out.println("Valor: "+esto);
+            }
+
 
             response.redirect("/inicio");
             return "";

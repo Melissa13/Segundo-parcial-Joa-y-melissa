@@ -36,6 +36,19 @@
                         <br/>
                         img2 imagen mostrada <img src='/${img2}' width="400" height="400" alt="">
 
+                        <#if amigos??>
+                            <form action="/inicio/add2" method="post">
+                                <select name="cars" multiple>
+                                    <option value="volvo">Volvo</option>
+                                    <option value="saab">Saab</option>
+                                    <#list amigos as amigo>
+                                            <option value="${amigo.username}">${amigo.username}</option>
+                                    </#list>
+                                </select>
+                                <button class="btn btn-default btn-block" type="submit">form 2</button>
+                            </form>
+                        </#if>
+
                         <legend></legend>
                     </div>
                     <!-- end row -->
