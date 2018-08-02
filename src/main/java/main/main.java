@@ -95,8 +95,10 @@ public class main {
         PostServices.getInstancia().crear(p1);*/
 
 
+        String nombre="User";
         System.out.println("cantidad de post");
-        List<Post> p2=PostServices.getInstancia().findAll();
+        //List<Post> p2=PostServices.getInstancia().findAll();
+        List<Post> p2=user_post(nombre);
         for (Post p: p2){
             System.out.println("ID:"+p.getId()+" Title:"+p.getTitle()+" Body:"+p.getBody()+" fecha:"+p.getDateTime()+" Autor:"+p.getAuthorp().getUsername()+" Tags:"+(p.getUserTags().size()+p.getTags().size())+" Comentarios:"+p.getComments().size() + " imagen: "+ p.getImage());
         }
@@ -1182,6 +1184,18 @@ public class main {
             }
         }
         return gt;
+    }
+
+    public static List<Post> user_post(String nombre)
+    {
+        List<Post> fulano=new ArrayList<>();
+        List<Post> aux=PostServices.getInstancia().findAll();
+        for (Post p:aux){
+            if(p.getAuthorp().getUsername().equals(nombre)){
+                fulano.add(p);
+            }
+        }
+        return fulano;
     }
 
 
