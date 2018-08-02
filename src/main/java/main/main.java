@@ -32,6 +32,8 @@ public class main {
 
     public static void main(String[] args) throws SQLException {
 
+        port(getPuertoHeroku());
+
         //Iniciando el servicio
         BootStrapService.getInstancia().init();
         //pruebas
@@ -915,6 +917,8 @@ public class main {
             response.redirect("/inicio");
             return "";
         });
+
+
 
     }
 
