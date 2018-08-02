@@ -98,7 +98,7 @@ public class main {
         System.out.println("cantidad de post");
         List<Post> p2=PostServices.getInstancia().findAll();
         for (Post p: p2){
-            System.out.println("ID:"+p.getId()+" Title:"+p.getTitle()+" Body:"+p.getBody()+" fecha:"+p.getDateTime()+" Autor:"+p.getAuthorp().getUsername()+" Tags:"+p.getUserTags().size()+" Comentarios:"+p.getComments().size() + " imagen: "+ p.getImage());
+            System.out.println("ID:"+p.getId()+" Title:"+p.getTitle()+" Body:"+p.getBody()+" fecha:"+p.getDateTime()+" Autor:"+p.getAuthorp().getUsername()+" Tags:"+(p.getUserTags().size()+p.getTags().size())+" Comentarios:"+p.getComments().size() + " imagen: "+ p.getImage());
         }
 
 
@@ -523,6 +523,8 @@ public class main {
             return new ModelAndView(mapa,"gestion_error.ftl");
         },motor);
 
+        //posts
+
         post("/inicio/agregar", (request, response) -> {
             User user =null;
             String cook=decrypt(request.cookie("test"));
@@ -546,6 +548,11 @@ public class main {
             String[] tags =request.queryParams("tag").split(",");
             Date today = Calendar.getInstance().getTime();
             String[] lista= request.queryParamsValues("amigos");
+
+            if(!tags[0].isEmpty()){
+                System.out.println("esta lleno");
+            }
+            else { System.out.println("esta vacio"); }
 
             Set<User> amigos=new HashSet<>();
             if(lista!=null) {
@@ -573,44 +580,15 @@ public class main {
                     Files.copy(input, tempFile, StandardCopyOption.REPLACE_EXISTING);
                 }
                 String img_direccion = tempFile.toAbsolutePath().toString();
-                System.out.println("direccion: " + img_direccion);
+                //System.out.println("direccion: " + img_direccion);
 
                 insertar.setImage(img_direccion);
 
             }
 
-            if(tags!=null) {
-                List<Tag> ss = TagServices.getInstancia().findAll();
+            if(!tags[0].isEmpty()) {
                 Set<Tag> gt = new HashSet<>();
-                System.out.println("ENTRA AQUI");
-                for (int i = 0; i < tags.length; i++) {
-                    boolean exist = false;
-                    for (Tag u : ss) {
-                        if (u.getTag().equals(tags[i])) {
-                            exist = true;
-                            List<Tag> aux2 = TagServices.getInstancia().findAllBytag(tags[i]);
-                            for (Tag tt : aux2) {
-                                gt.add(tt);
-                                System.out.println("TAG YA CREADO!!: " + tt.getTag() + " ID " + tt.getId());
-                            }
-                        }
-                    }
-                    if (!exist) {
-                        System.out.println("CREAR NUEVO");
-                        Tag t = new Tag();
-                        t.setTag(tags[i]);
-                        System.out.println("A CREAR: " + t.getTag());
-                        TagServices.getInstancia().crear(t);
-                        List<Tag> aux2 = TagServices.getInstancia().findAllBytag(tags[i]);
-                        for (Tag tt : aux2) {
-                            gt.add(tt);
-                            System.out.println("TAG RECIEN CREADO!!: " + tt.getTag() + " ID " + tt.getId());
-                        }
-                    }
-                }
-                for (Tag u : gt) {
-                    System.out.println("tag gt: " + u.getTag() + " ID " + u.getId());
-                }
+                gt=trabajo_tags(tags);
                 insertar.setTags(gt);
             }
 
@@ -623,7 +601,189 @@ public class main {
             return "";
         });
 
-        //condiciones before
+        get("/inicio/delete/:id", (request, response) -> {
+            System.out.println("entra a delete post");
+            User user =null;
+            String cook=decrypt(request.cookie("test"));
+            //System.out.println("El cookie: "+request.cookie("test"));
+            if(cook != null && !cook.isEmpty()){
+                //verificar si hay cookies
+                user=UserServices.getInstancia().find(cook);
+                request.session(true);
+                request.session().attribute("user", user);
+                //algo aqui
+            }
+            else{
+                user= request.session(true).attribute("user");
+            }
+
+
+            long postid = Long.parseLong(request.params("id"));
+            List<Comment> c=CommentServices.getInstancia().findAll();
+            for(Comment cc:c){
+                if(cc.getPost().getId()==postid){
+                    //caux.add(cc);
+                    CommentServices.getInstancia().eliminar(cc.getId());
+                }
+            }
+
+            PostServices.getInstancia().eliminar(postid);//ps.DeleteProduct(productid);
+
+            //guardar archivo
+
+            response.redirect("/inicio");
+            return "";
+        });
+
+        get("/inicio/edit/:id", (request, response) -> {
+            User user =null;
+            String cook=decrypt(request.cookie("test"));
+            //System.out.println("El cookie: "+request.cookie("test"));
+            if(cook != null && !cook.isEmpty()){
+                user=UserServices.getInstancia().find(cook);
+                request.session(true);
+                request.session().attribute("user", user);
+            }
+            else{
+                user= request.session(true).attribute("user");
+            }
+
+            long postid = Long.parseLong(request.params("id"));
+
+            Post p=PostServices.getInstancia().find(postid);//.getProduct(productid);
+
+            if(p.getImage()!=null && !p.getImage().isEmpty()) {
+                Path prueba = Paths.get(p.getImage());
+                p.setImage(prueba.getFileName().toString());
+            }
+
+            List<User> auxu=UserServices.getInstancia().findAll(); //amigos
+            List<User> u_selec=new ArrayList<>();
+            ArrayList<User> no_select=new ArrayList<>();
+            for (User u2:auxu){
+                no_select.add(u2);
+            }
+            for (User u:p.getUserTags()){
+                for (User u2:auxu){
+                    if(u.getUsername().equals(u2.getUsername())){
+                        u_selec.add(u);
+                        no_select.remove(u2);
+                    }
+                }
+            }
+
+
+            for (User us:u_selec){
+                System.out.println("Amigo seleccionado: "+us.getUsername());
+            }
+            for (User us:no_select){
+                System.out.println("Amigo no seleccionado: "+us.getUsername());
+            }
+
+
+            Map<String, Object> mapa = new HashMap<>();
+
+            if(p.getTags().size()>0){
+                String tag="";
+                for (Tag t:p.getTags()){
+                    tag+=t.getTag()+",";
+                }
+
+                tag=tag.substring(0, Math.min(tag.length(), tag.length()-1));
+
+                mapa.put("tag",tag);
+            }
+            else {mapa.put("tag",null);}
+
+
+            mapa.put("userl",user);
+            mapa.put("post",p);;
+            mapa.put("amigos",UserServices.getInstancia().findAll());
+            mapa.put("amigos_tag",u_selec);
+            mapa.put("amigos_notag",no_select);
+            return new ModelAndView(mapa, "post_editar.ftl");
+        }, motor);
+
+        post("/inicio/edit/:id", (request, response) -> {
+            User user =null;
+            String cook=decrypt(request.cookie("test"));
+            //System.out.println("El cookie: "+request.cookie("test"));
+            if(cook != null && !cook.isEmpty()){
+                //verificar si hay cookies
+                user=UserServices.getInstancia().find(cook);
+                request.session(true);
+                request.session().attribute("user", user);
+                //algo aqui
+            }
+            else{
+                user= request.session(true).attribute("user");
+            }
+
+            long postid = Long.parseLong(request.params("id"));
+            Post insertar=PostServices.getInstancia().find(postid);
+            request.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement("/temp"));
+
+            String title =request.queryParams("title");
+            String body =request.queryParams("body");
+            String[] tags =request.queryParams("tag").split(",");
+            String[] lista= request.queryParamsValues("amigos");
+
+            System.out.println("TAG AMIGOS: ");
+            if(lista!=null) {
+                for (String esto : lista) {
+                    System.out.println("Valor: "+esto);
+                }
+            }
+
+
+            Set<User> amigos=new HashSet<>();
+            if(lista!=null) {
+                for (String esto : lista) {
+                    User u = UserServices.getInstancia().find(esto);
+                    //System.out.println("Valor: "+esto);
+                    amigos.add(u);
+                }
+                insertar.setUserTags(amigos);
+            }
+            else {insertar.setUserTags(null);}
+
+
+            insertar.setBody(body);
+            if(title != null && !title.isEmpty()) {
+                insertar.setTitle(title);
+            }
+            else {insertar.setTitle(null);}
+
+            //recibir imagen
+            if(getFileName(request.raw().getPart("uploaded_file"))!=null && !getFileName(request.raw().getPart("uploaded_file")).isEmpty()) {
+
+                Path tempFile = Files.createTempFile(uploadDir.toPath(), "", "");
+                try (InputStream input = request.raw().getPart("uploaded_file").getInputStream()) { // getPart needs to use same "name" as input field in form
+                    Files.copy(input, tempFile, StandardCopyOption.REPLACE_EXISTING);
+                }
+                String img_direccion = tempFile.toAbsolutePath().toString();
+                //System.out.println("direccion: " + img_direccion);
+
+                insertar.setImage(img_direccion);
+
+            }
+
+            if(!tags[0].isEmpty()) {
+                Set<Tag> gt = new HashSet<>();
+                gt=trabajo_tags2(tags);
+                insertar.setTags(gt);
+            }
+            else {insertar.setTags(null);}
+
+
+            PostServices.getInstancia().editar(insertar);
+
+
+            response.redirect("/inicio");
+            return "";
+        });
+
+         //condiciones before
         before("/",(request, response) -> {
             User user =null;
             String cook=decrypt(request.cookie("test"));
@@ -647,6 +807,21 @@ public class main {
         });
 
         before("/inicio",(request, response) -> {
+            User user =null;
+            String cook=decrypt(request.cookie("test"));
+            System.out.println("El cookie: "+request.cookie("test"));
+            if(cook != null && !cook.isEmpty()){
+            }
+            else{
+                user= request.session(true).attribute("user");
+                if(user == null){
+                    response.redirect("/");
+                    halt(404,"No tiene permiso");
+                }
+            }
+        });
+
+        before("/inicio/*",(request, response) -> {
             User user =null;
             String cook=decrypt(request.cookie("test"));
             System.out.println("El cookie: "+request.cookie("test"));
@@ -919,7 +1094,6 @@ public class main {
         });
 
 
-
     }
 
     static int getPuertoHeroku() {
@@ -958,6 +1132,58 @@ public class main {
 
         return topsecret;
     }
+	
+	public static Set<Tag> trabajo_tags(String[] tags){
+        Set<Tag> gt = new HashSet<>();
+        List<Tag> ss = TagServices.getInstancia().findAll();
+        for (int i = 0; i < tags.length; i++) {
+            boolean exist = false;
+            for (Tag u : ss) {
+                if (u.getTag().equals(tags[i])) {
+                    exist = true;
+                    List<Tag> aux2 = TagServices.getInstancia().findAllBytag(tags[i]);
+                    for (Tag tt : aux2) {
+                        gt.add(tt);
+                    }
+                }
+            }
+            if (!exist) {
+                Tag t = new Tag();
+                t.setTag(tags[i]);
+                TagServices.getInstancia().crear(t);
+                List<Tag> aux2 = TagServices.getInstancia().findAllBytag(tags[i]);
+                for (Tag tt : aux2) {
+                    gt.add(tt);
+                }
+            }
+        }
+        return gt;
+    }
+
+    public static Set<Tag> trabajo_tags2(String[] tags){
+        List<Tag> ss=TagServices.getInstancia().findAll();
+        Set<Tag> gt = new HashSet<>();
+        for (int i=0;i<tags.length;i++){
+            boolean exist=false;
+            for (Tag u: ss){
+                if(u.getTag().equals(tags[i])){
+                    exist=true;
+                    gt.add(u);
+                }
+            }
+            if(!exist){
+                Tag t=new Tag();
+                t.setTag(tags[i]);
+                TagServices.getInstancia().crear(t);
+                List<Tag> aux2=TagServices.getInstancia().findAllBytag(tags[i]);
+                for (Tag tt: aux2){
+                    gt.add(tt);
+                }
+            }
+        }
+        return gt;
+    }
+
 
 }
 

@@ -38,6 +38,18 @@
                         <#if posts??>
                             <#list posts as post>
                                 <div class="tim-row bordec">
+
+                                    <li class="dropdown" style="float: right;">
+                                        <button href="#" class="dropdown-toggle btn btn-info btn-sm" data-toggle="dropdown">...</button>
+                                        <!--                                  You can add classes for different colours on the next element -->
+                                        <ul class="dropdown-menu dropdown-primary dropdown-menu-right">
+                                            <li class="dropdown-header">Opciones</li>
+                                            <li><a href="/inicio/edit/${post.getId()}">Editar</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="/inicio/delete/${post.getId()}">Borrar</a></li>
+                                        </ul>
+                                    </li>
+
                                     <h2> <#if post.getTitle()??>${post.getTitle()}</#if></h2>
                                     <h6> ${post.getAuthorp().username}, ${post.getDateTime()}</h6>
                                     <legend></legend>
@@ -49,7 +61,7 @@
                                     <p style="margin-bottom: 45px; margin-top: 15px">
                                         ${post.getBody()}
                                     </p>
-                                    <center><a  href="#" type="button" class="btn btn-primary">Leer mas</a></center>
+                                    <center><a  href="#" type="button" class="btn btn-info">Leer mas</a></center>
                                     <br/>
                                     <legend></legend>
                                     <#if post.getTags()??>
