@@ -1181,7 +1181,7 @@ public class main {
             return new ModelAndView(mapa, "notificaciones.ftl");
         }, motor);
 
-        post("/inicio/news/see/:id", (request, response) -> {
+        get("/inicio/news/see/:id", (request, response) -> {
             User user =null;
             String cook=decrypt(request.cookie("test"));
             if(cook != null && !cook.isEmpty()){
@@ -1193,14 +1193,30 @@ public class main {
                 user= request.session(true).attribute("user");
             }
 
-            String username = request.params("user");
-            User u=UserServices.getInstancia().find(username);
+            long newid = Long.parseLong(request.params("id"));
+            Notification n=NewsServices.getInstancia().find(newid);
 
-            response.redirect("/inicio/friends");
+            if(n.amistad()){
+                System.out.println("Vamos a ser amigos");
+                User use=UserServices.getInstancia().find(n.getOwner().getUsername());
+                User use2=UserServices.getInstancia().find(n.getOrigen().getUsername());
+                Set<User> esto=use.getFriends();
+                Set<User> esto2=use2.getFriends();
+                esto.add(use);
+                esto2.add(use2);
+                use.setFriends(esto2);
+                use2.setFriends(esto);
+                UserServices.getInstancia().editar(use);
+                UserServices.getInstancia().editar(use2);
+            }
+
+            NewsServices.getInstancia().eliminar(n.getId());
+
+            response.redirect("/inicio/news");
             return "";
         });
 
-        post("/inicio/news/delete/:id", (request, response) -> {
+        get("/inicio/news/delete/:id", (request, response) -> {
             User user =null;
             String cook=decrypt(request.cookie("test"));
             if(cook != null && !cook.isEmpty()){
@@ -1212,10 +1228,11 @@ public class main {
                 user= request.session(true).attribute("user");
             }
 
-            String username = request.params("user");
-            User u=UserServices.getInstancia().find(username);
+            long newid = Long.parseLong(request.params("id"));
+            Notification n=NewsServices.getInstancia().find(newid);
+            NewsServices.getInstancia().eliminar(n.getId());
 
-            response.redirect("/inicio/friends");
+            response.redirect("/inicio/news");
             return "";
         });
 

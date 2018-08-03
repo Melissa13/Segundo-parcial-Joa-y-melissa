@@ -96,4 +96,25 @@ public class Notification implements Serializable{
         }
         return false;
     }
+
+    public boolean post(){
+        if(getMensaje().equals("Este usuario te etiqueto en su Post")){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean imagen(){
+        if(getMensaje().equals("Este usuario te etiqueto en su imagen")){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean rechazo(){
+        if(getMensaje().equals("Este usuario rechazo tu solicitud")){
+            return true;
+        }
+        return false;
+    }
 }
