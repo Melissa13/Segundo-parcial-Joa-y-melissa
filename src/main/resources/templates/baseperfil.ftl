@@ -59,7 +59,7 @@
                         <li><a href="#">Lugar</a></li>
                         <li><a href="#">Estudio</a></li>
                         <li class="divider"></li>
-                        <li><a href="#">Mis amigos</a></li>
+                        <li><a href="/inicio/friend/my">Mis amigos</a></li>
                     </ul>
                 </li>
 
@@ -86,7 +86,7 @@
                         <li class="dropdown-header">Dropdown header</li>
                         <li><a href="/perfil">Perfil</a></li>
                         <li><a href="#">Album</a></li>
-                        <li><a href="#">Amigos</a></li>
+                        <li><a href="/inicio/friend/my">Amigos</a></li>
                         <li class="divider"></li>
                         <li><a href="/perfil/editar">Editar Perfil</a></li>
                         <li class="divider"></li>
@@ -117,12 +117,12 @@
     </div>
     <div class="section">
         <div class="button-container perfil-bar" >
-            <a href="#button" class="btn btn-fill btn-primary espacio btn-lg" style="margin: 7px">Amigos</a>
-            <a href="#button" class="btn btn-fill btn-primary espacio btn-lg redondo btn-tooltip" data-toggle="tooltip" data-placement="top" title="Follow me on Twitter">
-                <i class="fa fa-twitter"></i>
+            <a href="/inicio" class="btn btn-fill btn-primary espacio btn-lg" style="margin: 7px">Mi muro</a>
+            <a href="#button" class="btn btn-fill btn-primary espacio btn-lg" style="margin: 7px">
+                <i class="fa fa-pencil-square-o"></i> Mis post
             </a>
-            <a href="#button" class="btn btn-fill btn-primary espacio btn-lg redondo btn-tooltip" data-toggle="tooltip" data-placement="top" title="Follow me on Instagram">
-                <i class="fa fa-instagram"></i>
+            <a href="#button" class="btn btn-fill btn-primary espacio btn-lg" style="margin: 7px">
+                <i class="fa fa-picture-o"></i>Mis Albunes
             </a>
         </div>
         <div class="container">

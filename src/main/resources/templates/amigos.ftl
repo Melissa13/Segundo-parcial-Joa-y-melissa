@@ -1,7 +1,7 @@
 <#include "base.ftl">
 
 <#macro page_head>
-<title>Amigos- Search</title>
+<title>Amigos- My</title>
 </#macro>
 
 <#macro page_body>
@@ -12,7 +12,7 @@
                 <div class="tim-container">
                     <div class="tim-row bordec-transparent">
                         <div class="area-line">
-                            <h2>Busqueda de Amigos</h2>
+                            <h2>Mis Amigos</h2>
                         </div>
                     </div>
 
@@ -26,24 +26,23 @@
                                     <tr><th>Username</th>
                                         <th>Nombre</th>
                                         <th>Perfil</th>
-                                        <th>Solicitud?</th>
+                                        <th>Eliminar?</th>
                                     </tr>
                                 <#list lista as user>
                                 <tr><td>${user.username}</td>
                                     <td>${user.nombre}</td>
                                     <td><a href="/inicio/perfil/${user.username}" class="btn btn-info btn-sm">Perfil</a></td>
-                                    <td>
-                                        <#if user.esamigo(userl)><a href="/inicio/friendno/${user.username}" class="btn btn-warning btn-sm">Solicitud enviada/ Cancelar?</a>
-                                        <#elseif userl.esamigo(user)><a href="#" class="btn btn-default btn-sm">Te envio Solicitud</a>
-                                        <#else ><a href="/inicio/friends/${user.username}" class="btn btn-info btn-sm">Enviar solicitud</a> </#if>
-                                    </td>
+                                    <td><a href="/inicio/friends/${user.username}" class="btn btn-danger btn-fill btn-sm">Eliminar</a></td>
                                 </tr>
                                 </#list>
                                 </table>
                             </center>
                         <#else >
                             <center>
-                                <h2> No hay usuarios que cumplan con la condicion</h2>
+                                <h2> Usted no tiene Amigos :(</h2>
+                                <a href="/inicio/friends" class="btn btn-primary btn-lg">
+                                    <i class="fa fa-search"></i> Buscar Amigos?
+                                </a>
                             </center>
                         </#if>
                         <legend></legend>

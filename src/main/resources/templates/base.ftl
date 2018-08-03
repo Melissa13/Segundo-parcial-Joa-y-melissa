@@ -58,7 +58,7 @@
                                 <li><a href="#">Lugar</a></li>
                                 <li><a href="#">Estudio</a></li>
                                 <li class="divider"></li>
-                                <li><a href="#">Mis amigos</a></li>
+                                <li><a href="/inicio/friend/my">Mis amigos</a></li>
                             </ul>
                         </li>
 
@@ -84,7 +84,7 @@
                                 <li class="dropdown-header">Dropdown header</li>
                                 <li><a href="/perfil">Perfil</a></li>
                                 <li><a href="#">Album</a></li>
-                                <li><a href="#">Amigos</a></li>
+                                <li><a href="/inicio/friend/my">Amigos</a></li>
                                 <li class="divider"></li>
                                 <li><a href="/perfil/editar">Editar Perfil</a></li>
                                 <li class="divider"></li>
