@@ -37,7 +37,7 @@
 
                 <div class="row">
                     <label class="registro-label">Nombre</label>
-                    <label style="float: left; margin-left: 313px">Fecha de nacimiento</label>
+                    <label style="float: left; margin-left: 313px">Fecha de nacimiento (dd/mm/yyyy)</label>
                 </div>
                 <div class="row">
                     <input type="text" class="form-control registro-form" placeholder="Nombre" name="name" <#if userl.nombre??>value="${userl.nombre}"</#if>>
