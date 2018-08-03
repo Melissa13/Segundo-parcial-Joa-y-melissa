@@ -1205,6 +1205,51 @@ public class main {
             return new ModelAndView(mapa, "amigos.ftl");
         }, motor);
 
+        get("/inicio/amigo/:user", (request, response) -> {
+            User user =null;
+            String cook=decrypt(request.cookie("test"));
+            if(cook != null && !cook.isEmpty()){
+                user=UserServices.getInstancia().find(cook);
+                request.session(true);
+                request.session().attribute("user", user);
+            }
+            else{
+                user= request.session(true).attribute("user");
+            }
+
+            String username = request.params("user");
+            User u=UserServices.getInstancia().find(username);
+
+
+            System.out.println("Ya no quiero ser tu amigo");
+            User use=UserServices.getInstancia().find(user.getUsername());
+            User use2=UserServices.getInstancia().find(u.getUsername());
+            Set<User> esto=use.getFriends();
+            Set<User> esto2=use2.getFriends();
+
+            Set<User> aux=new HashSet<>();
+            Set<User> aux2=new HashSet<>();
+
+            for (User uu:esto){
+                if(!uu.getUsername().equals(use2.getUsername())){
+                   aux.add(uu);
+                }
+            }
+
+            for (User uu:esto2){
+                if(!uu.getUsername().equals(use.getUsername())){
+                    aux2.add(uu);
+                }
+            }
+            use.setFriends(aux);
+            use2.setFriends(aux2);
+            UserServices.getInstancia().editar(use);
+            UserServices.getInstancia().editar(use2);
+
+            response.redirect("/inicio/friend/my");
+            return "";
+        });
+
         //notificaciones
         get("/inicio/news", (request, response) -> {
             User user =null;
@@ -1245,10 +1290,10 @@ public class main {
                 User use2=UserServices.getInstancia().find(n.getOrigen().getUsername());
                 Set<User> esto=use.getFriends();
                 Set<User> esto2=use2.getFriends();
-                esto.add(use);
-                esto2.add(use2);
-                use.setFriends(esto2);
-                use2.setFriends(esto);
+                esto.add(use2);
+                esto2.add(use);
+                use.setFriends(esto);
+                use2.setFriends(esto2);
                 UserServices.getInstancia().editar(use);
                 UserServices.getInstancia().editar(use2);
             }

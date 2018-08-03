@@ -32,7 +32,7 @@
                                 <tr><td>${user.username}</td>
                                     <td>${user.nombre}</td>
                                     <td><a href="/inicio/perfil/${user.username}" class="btn btn-info btn-sm">Perfil</a></td>
-                                    <td><a href="/inicio/friends/${user.username}" class="btn btn-danger btn-fill btn-sm">Eliminar</a></td>
+                                    <td><a href="/inicio/amigo/${user.username}" class="btn btn-danger btn-fill btn-sm">Eliminar</a></td>
                                 </tr>
                                 </#list>
                                 </table>
