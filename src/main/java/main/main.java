@@ -1326,6 +1326,14 @@ public class main {
             UserServices.getInstancia().editar(use);
             UserServices.getInstancia().editar(use2);
 
+            Notification nn=new Notification();
+            nn.setOwner(u);
+            nn.setOrigen(user);
+            nn.setMensaje("Este usuario ha dejado de ser tu amigo");
+            NewsServices.getInstancia().crear(nn);
+
+
+
             response.redirect("/inicio/friend/my");
             return "";
         });
@@ -1377,6 +1385,12 @@ public class main {
                 UserServices.getInstancia().editar(use);
                 UserServices.getInstancia().editar(use2);
                 NewsServices.getInstancia().eliminar(n.getId());
+
+                Notification nn=new Notification();
+                nn.setOwner(n.getOrigen());
+                nn.setOrigen(user);
+                nn.setMensaje("Este usuario ha aceptado su solicitud de amistad");
+                NewsServices.getInstancia().crear(nn);
             }
             else if (n.post()){  //validado
                 NewsServices.getInstancia().eliminar(n.getId());
@@ -1386,11 +1400,11 @@ public class main {
                 NewsServices.getInstancia().eliminar(n.getId());
                 response.redirect("/inicio/post/"+n.getPost().getId());
             }
-            else if (n.comento()){
+            else if (n.comento()){  //validado
                 NewsServices.getInstancia().eliminar(n.getId());
                 response.redirect("/inicio/post/"+n.getPost().getId());
             }
-            else if (n.aceptar()){
+            else if (n.aceptar()){  //
                 NewsServices.getInstancia().eliminar(n.getId());
                 response.redirect("/inicio/perfil/"+n.getOrigen().getUsername());
             }
@@ -1399,11 +1413,9 @@ public class main {
 
             }
             else if (n.rechazo()){
-                NewsServices.getInstancia().eliminar(n.getId());
                 response.redirect("/inicio/anuncio/"+n.getId());
             }
             else if (n.enemistad()){
-                NewsServices.getInstancia().eliminar(n.getId());
                 response.redirect("/inicio/anuncio/"+n.getId());
             }
 
@@ -1426,6 +1438,12 @@ public class main {
             long newid = Long.parseLong(request.params("id"));
             Notification n=NewsServices.getInstancia().find(newid);
             NewsServices.getInstancia().eliminar(n.getId());
+
+            Notification nn=new Notification();
+            nn.setOwner(n.getOrigen());
+            nn.setOrigen(user);
+            nn.setMensaje("Este usuario rechazo tu solicitud");
+            NewsServices.getInstancia().crear(nn);
 
             response.redirect("/inicio/news");
             return "";
@@ -1454,6 +1472,8 @@ public class main {
             else if (n.enemistad()){
                 mensaje="El Usuario "+n.getOrigen().getUsername()+" le ha eliminado de su lista de amigos";
             }
+
+            NewsServices.getInstancia().eliminar(n.getId());
 
             Map<String,Object> mapa = new HashMap<>();
             mapa.put("userl",user);
