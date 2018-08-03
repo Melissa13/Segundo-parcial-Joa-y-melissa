@@ -896,6 +896,79 @@ public class main {
             return "";
         });
 
+        get("/post/editc/:id", (request, response) -> {
+            User user =null;
+            String cook=decrypt(request.cookie("test"));
+            //System.out.println("El cookie: "+request.cookie("test"));
+            if(cook != null && !cook.isEmpty()){
+                user=UserServices.getInstancia().find(cook);
+                request.session(true);
+                request.session().attribute("user", user);
+            }
+            else{
+                user= request.session(true).attribute("user");
+            }
+
+            long commid = Long.parseLong(request.params("id"));
+            Comment c=CommentServices.getInstancia().find(commid);//comentario
+
+            Map<String, Object> mapa = new HashMap<>();
+            mapa.put("userl",user);
+            mapa.put("comm",c);
+
+            return new ModelAndView(mapa, "comment_edit.ftl");
+        }, motor);
+
+        post("/post/editc/:id", (request, response) -> {
+            User user =null;
+            String cook=decrypt(request.cookie("test"));
+            if(cook != null && !cook.isEmpty()){
+                user=UserServices.getInstancia().find(cook);
+                request.session(true);
+                request.session().attribute("user", user);
+            }
+            else{
+                user= request.session(true).attribute("user");
+            }
+
+            long commid = Long.parseLong(request.params("id"));
+            String body =request.queryParams("body");
+
+            Comment insertar = CommentServices.getInstancia().find(commid);
+            insertar.setText(body);
+            CommentServices.getInstancia().editar(insertar);
+
+            response.redirect("/inicio/post/"+insertar.getPost().getId());
+            return "";
+        });
+
+        get("/post/deletec/:id", (request, response) -> {
+            User user =null;
+            String cook=decrypt(request.cookie("test"));
+            if(cook != null && !cook.isEmpty()){
+                user=UserServices.getInstancia().find(cook);
+                request.session(true);
+                request.session().attribute("user", user);
+            }
+            else{
+                user= request.session(true).attribute("user");
+            }
+
+            long postid = Long.parseLong(request.params("id"));
+            Post p=PostServices.getInstancia().find(postid);//
+
+            String body =request.queryParams("body");
+
+            Comment insertar = new Comment();
+            insertar.setUsuario(user);
+            insertar.setText(body);
+            insertar.setPost(p);
+            CommentServices.getInstancia().crear(insertar);
+
+            response.redirect("/inicio/post/"+p.getId());
+            return "";
+        });
+
         //condiciones before
         before("/",(request, response) -> {
             User user =null;
@@ -1079,35 +1152,20 @@ public class main {
             }
         });
 
-        get("/inicio/post/:id", (request, response) -> {
+        before("/post/*",(request, response) -> {
             User user =null;
             String cook=decrypt(request.cookie("test"));
+            System.out.println("El cookie: "+request.cookie("test"));
             if(cook != null && !cook.isEmpty()){
-                user=UserServices.getInstancia().find(cook);
-                request.session(true);
-                request.session().attribute("user", user);
             }
             else{
                 user= request.session(true).attribute("user");
+                if(user == null){
+                    response.redirect("/");
+                    halt(404,"No tiene permiso");
+                }
             }
-
-            long postid = Long.parseLong(request.params("id"));
-
-            Post p=PostServices.getInstancia().find(postid);//.getProduct(productid);
-
-            if(p.getImage()!=null && !p.getImage().isEmpty()) {
-                Path prueba = Paths.get(p.getImage());
-                p.setImage(prueba.getFileName().toString());
-            }
-
-            Map<String, Object> mapa = new HashMap<>();
-            mapa.put("userl",user);
-            mapa.put("post",p);
-            mapa.put("amigos",UserServices.getInstancia().findAll()); //amigos
-
-            return new ModelAndView(mapa, "post.ftl");
-        }, motor);
-
+        });
 
 
 

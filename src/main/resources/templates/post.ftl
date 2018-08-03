@@ -1,7 +1,7 @@
 <#include "base.ftl">
 
 <#macro page_head>
-<title xmlns="http://www.w3.org/1999/html">Inicio</title>
+<title >Post</title>
 </#macro>
 
 <#macro page_body>
@@ -110,9 +110,9 @@
                                         <!--                                  You can add classes for different colours on the next element -->
                                         <ul class="dropdown-menu dropdown-primary dropdown-menu-right">
                                             <li class="dropdown-header">Opciones</li>
-                                            <li><a href="/inicio/edit/${post.getId()}">Editar</a></li>
+                                            <li><a href="/post/editc/${comm.getId()}">Editar</a></li>
                                             <li class="divider"></li>
-                                            <li><a href="/inicio/delete/${post.getId()}">Borrar</a></li>
+                                            <li><a href="/post/deletec/${comm.getId()}">Borrar</a></li>
                                         </ul>
                                     </li>
                                     </#if>
