@@ -22,7 +22,7 @@ public class WebService_sopy {
     public ArrayList<String> getUserPosts(String username)
     {
         ArrayList<String> postsUser = new ArrayList<String>();
-        postsUser = main.main.Poesteos(username);
+        postsUser = main.main.Posteo(username);
         /*User temp = new User();
         for (User user:userList) {
             if (user.getUsername().equalsIgnoreCase(username))
