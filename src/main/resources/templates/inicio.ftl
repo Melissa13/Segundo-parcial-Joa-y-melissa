@@ -49,7 +49,7 @@
                                                 <li class="dropdown-header">Likes:</li>
                                                 <#if post.getLikes()??>
                                                     <#list post.getLikes() as like>
-                                                    <li><a href="/inicio/perfil/${like.getLike().username}">${like.getLike().username}</a></li>
+                                                    <li><a href="/inicio/perfil/${like.getLike().username}"><i class="fa fa-user"></i>${like.getLike().username}</a></li>
                                                     </#list>
                                                 </#if>
                                             </ul>
@@ -84,7 +84,7 @@
                                     <center><a  href="/inicio/post/${post.getId()}" type="button" class="btn btn-info">Leer mas</a></center>
                                     <br/>
                                     <legend></legend>
-                                    <a href="/post/like/${post.getId()}" class="btn btn-dark btn-sm opcion"><i class="fa fa-thumbs-up"></i>Like</a>
+                                    <a <#if post.validar(userl) >href="/post/dislike/${post.getId()}" class="btn btn-success btn-fill btn-sm opcion"<#else >href="/post/like/${post.getId()}" class="btn btn-dark btn-sm opcion"</#if>><i class="fa fa-thumbs-up"></i>Like</a>
                                     <#if post.getTags()??>
                                         <#list post.getTags() as tag>
                                             <a class="btn btn-info btn-xs" href="/tag/${tag.getId()?string["0"]}"> ${tag.getTag()} </a>

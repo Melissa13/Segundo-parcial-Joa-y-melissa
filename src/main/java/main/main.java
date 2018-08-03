@@ -1021,6 +1021,37 @@ public class main {
             return "";
         });
 
+        get("/post/dislike/:id", (request, response) -> {
+            User user =null;
+            String cook=decrypt(request.cookie("test"));
+            if(cook != null && !cook.isEmpty()){
+                user=UserServices.getInstancia().find(cook);
+                request.session(true);
+                request.session().attribute("user", user);
+            }
+            else{
+                user= request.session(true).attribute("user");
+            }
+
+            long postid = Long.parseLong(request.params("id"));
+            Post p=PostServices.getInstancia().find(postid);
+
+            //para agregar a post likes
+            Set<Likes> like=new HashSet<>();
+            for (Likes l:p.getLikes()){
+                if(!l.getLike().getUsername().equals(user.getUsername())){
+                    like.add(l);
+                }
+            }
+
+            p.setLikes(like);
+            PostServices.getInstancia().editar(p);
+
+
+            response.redirect("/inicio");
+            return "";
+        });
+
 
         //condiciones before
         before("/",(request, response) -> {

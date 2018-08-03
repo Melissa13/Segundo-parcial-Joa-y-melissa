@@ -122,4 +122,14 @@ public class Post implements Serializable{
     public void setLikes(Set<Likes> likes) {
         this.likes = likes;
     }
+
+    public boolean validar(User u){
+
+        for (Likes l:getLikes()){
+            if(l.getLike().getUsername().equals(u.getUsername())){
+                return true;
+            }
+        }
+        return false;
+    }
 }
