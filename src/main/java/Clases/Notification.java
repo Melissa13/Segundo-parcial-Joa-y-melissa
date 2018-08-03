@@ -117,4 +117,18 @@ public class Notification implements Serializable{
         }
         return false;
     }
+
+    public boolean enemistad(){
+        if(getMensaje().equals("Este usuario ha dejado de ser tu amigo")){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean aceptar(){
+        if(getMensaje().equals("Este usuario ha aceptado su solicitud de amistad")){
+            return true;
+        }
+        return false;
+    }
 }

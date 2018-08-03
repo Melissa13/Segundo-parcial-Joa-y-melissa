@@ -588,7 +588,6 @@ public class main {
                 insertar.setUserTags(amigos);
             }
 
-
             insertar.setDateTime(today);
             insertar.setBody(body);
             if(title != null && !title.isEmpty()) {
@@ -619,7 +618,22 @@ public class main {
 
             PostServices.getInstancia().crear(insertar);
 
-            //guardar archivo
+            //guardar notificacion
+            List<Post> litap=PostServices.getInstancia().findAllById();
+            Post obj=litap.get(0);
+            if(lista!=null) {
+                for (String esto : lista) {
+                    User u = UserServices.getInstancia().find(esto);
+
+                    Notification n=new Notification();
+                    n.setOwner(u);
+                    n.setOrigen(user);
+                    n.setPost(obj);
+                    n.setMensaje("Este usuario te etiqueto en su Post");
+                    NewsServices.getInstancia().crear(n);
+
+                }
+            }
 
             response.redirect("/inicio");
             return "";
@@ -774,6 +788,13 @@ public class main {
                     User u = UserServices.getInstancia().find(esto);
                     //System.out.println("Valor: "+esto);
                     amigos.add(u);
+
+                    Notification n=new Notification();
+                    n.setOwner(u);
+                    n.setOrigen(user);
+                    n.setPost(insertar);
+                    n.setMensaje("Este usuario te etiqueto en su Post");
+                    NewsServices.getInstancia().crear(n);
                 }
                 insertar.setUserTags(amigos);
             }
@@ -1296,9 +1317,28 @@ public class main {
                 use2.setFriends(esto2);
                 UserServices.getInstancia().editar(use);
                 UserServices.getInstancia().editar(use2);
+                NewsServices.getInstancia().eliminar(n.getId());
             }
+            else if (n.post()){
+                NewsServices.getInstancia().eliminar(n.getId());
+                response.redirect("/inicio/post/"+n.getPost().getId());
+            }
+            else if (n.aceptar()){
+                NewsServices.getInstancia().eliminar(n.getId());
+                response.redirect("/inicio/perfil/"+n.getOrigen().getUsername());
+            }
+            else if (n.imagen()){
+                NewsServices.getInstancia().eliminar(n.getId());
 
-            NewsServices.getInstancia().eliminar(n.getId());
+            }
+            else if (n.rechazo()){
+                NewsServices.getInstancia().eliminar(n.getId());
+                response.redirect("/inicio/anuncio/"+n.getId());
+            }
+            else if (n.enemistad()){
+                NewsServices.getInstancia().eliminar(n.getId());
+                response.redirect("/inicio/anuncio/"+n.getId());
+            }
 
             response.redirect("/inicio/news");
             return "";
@@ -1323,6 +1363,37 @@ public class main {
             response.redirect("/inicio/news");
             return "";
         });
+
+        get("/inicio/anuncio/:id", (request, response) -> {
+            User user =null;
+            String cook=decrypt(request.cookie("test"));
+            //System.out.println("El cookie: "+request.cookie("test"));
+            if(cook != null && !cook.isEmpty()){
+                user=UserServices.getInstancia().find(cook);
+                request.session(true);
+                request.session().attribute("user", user);
+            }
+            else{
+                user= request.session(true).attribute("user");
+            }
+
+            long newid = Long.parseLong(request.params("id"));
+            Notification n=NewsServices.getInstancia().find(newid);
+            String mensaje="";
+
+            if (n.rechazo()){
+                mensaje="El Usuario "+n.getOrigen().getUsername()+" ha rechazado la oferta de amigo que le ha enviado";
+            }
+            else if (n.enemistad()){
+                mensaje="El Usuario "+n.getOrigen().getUsername()+" le ha eliminado de su lista de amigos";
+            }
+
+            Map<String,Object> mapa = new HashMap<>();
+            mapa.put("userl",user);
+            mapa.put("msg",mensaje);
+            mapa.put("news",n);
+            return new ModelAndView(mapa, "noticia.ftl");
+        }, motor);
 
 
 
