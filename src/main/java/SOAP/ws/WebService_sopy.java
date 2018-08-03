@@ -10,7 +10,7 @@ import Database.PostServices;
 import Database.UserServices;
 
 @WebService
-public class SOAP_WebService {
+public class WebService_sopy {
 
 
     List<Post> postList = PostServices.getInstancia().findAll();

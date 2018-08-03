@@ -40,6 +40,7 @@ public class main {
         }
         catch (Exception e){
             System.out.println("Esta vaina no sirve");
+            e.printStackTrace();
         }
 
         //Iniciando el servicio
