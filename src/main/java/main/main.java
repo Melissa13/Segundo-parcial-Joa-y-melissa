@@ -647,6 +647,14 @@ public class main {
                 }
             }
 
+            List<Likes> l=LikeService.getInstancia().findAll();
+            for(Likes ll:l){
+                if(ll.getPostl().getId()==postid){
+                    //caux.add(cc);
+                    LikeService.getInstancia().eliminar(ll.getId());
+                }
+            }
+
             PostServices.getInstancia().eliminar(postid);//ps.DeleteProduct(productid);
 
             //guardar archivo
