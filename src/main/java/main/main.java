@@ -1137,6 +1137,31 @@ public class main {
             return "";
         });
 
+        get("/inicio/friendno/:user", (request, response) -> {
+            User user =null;
+            String cook=decrypt(request.cookie("test"));
+            if(cook != null && !cook.isEmpty()){
+                user=UserServices.getInstancia().find(cook);
+                request.session(true);
+                request.session().attribute("user", user);
+            }
+            else{
+                user= request.session(true).attribute("user");
+            }
+
+            System.out.println("entra a generar notificacion");
+            String username = request.params("user");
+            User u=UserServices.getInstancia().find(username);
+
+            if(u.solicituAdmistad(user)!=null){
+                Notification n=u.solicituAdmistad(user);
+                NewsServices.getInstancia().eliminar(n.getId());
+            }
+
+            response.redirect("/inicio/friends");
+            return "";
+        });
+
         //notificaciones
         get("/inicio/news", (request, response) -> {
             User user =null;

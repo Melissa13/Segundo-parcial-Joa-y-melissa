@@ -33,7 +33,7 @@
                                     <td>${user.nombre}</td>
                                     <td><a href="/inicio/perfil/${user.username}" class="btn btn-info btn-sm">Perfil</a></td>
                                     <td>
-                                        <#if user.esamigo(userl)><a href="/inicio/friends/${user.username}" class="btn btn-warning btn-sm">Solicitud enviada/ Cancelar?</a>
+                                        <#if user.esamigo(userl)><a href="/inicio/friendno/${user.username}" class="btn btn-warning btn-sm">Solicitud enviada/ Cancelar?</a>
                                         <#elseif userl.esamigo(user)><a href="#" class="btn btn-default btn-sm">Te envio Solicitud</a>
                                         <#else ><a href="/inicio/friends/${user.username}" class="btn btn-info btn-sm">Enviar solicitud</a> </#if>
                                     </td>

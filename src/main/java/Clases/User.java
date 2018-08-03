@@ -169,4 +169,15 @@ public class User implements Serializable{
         }
         return false;
     }
+
+    public Notification solicituAdmistad(User u){
+
+        for(Notification n:getNews()) {
+            if (n.amistad() && n.getOrigen().getUsername().equals(u.getUsername())) {
+                return n;
+            }
+        }
+
+        return null;
+    }
 }
