@@ -40,19 +40,36 @@
                         <!-- post row -->
                         <div class="tim-row bordec">
 
-                            <#if userl.isAdministrador() || userl.username == post.getAuthorp().username>
+                            <div>
+                                <a href="/inicio/post/${post.getId()}" class="btn btn-info btn-sm opcion"><i class="fa fa-comment"></i>${post.getComments()?size}</a>
 
-                            <li class="dropdown" style="float: right;">
-                                <button href="#" class="dropdown-toggle btn btn-info btn-sm" data-toggle="dropdown">...</button>
-                                <!--                                  You can add classes for different colours on the next element -->
-                                <ul class="dropdown-menu dropdown-primary dropdown-menu-right">
-                                    <li class="dropdown-header">Opciones</li>
-                                    <li><a href="/inicio/edit/${post.getId()}">Editar</a></li>
-                                    <li class="divider"></li>
-                                    <li><a href="/inicio/delete/${post.getId()}">Borrar</a></li>
-                                </ul>
-                            </li>
-                            </#if>
+                                <li class="dropdown opcion">
+                                    <button href="#" class="dropdown-toggle btn btn-info btn-sm" data-toggle="dropdown"><i class="fa fa-heart"></i>${post.getLikes()?size}</button>
+                                    <!--                                  You can add classes for different colours on the next element -->
+                                    <ul class="dropdown-menu dropdown-primary dropdown-menu-right">
+                                        <li class="dropdown-header">Likes:</li>
+                                                <#if post.getLikes()??>
+                                                    <#list post.getLikes() as like>
+                                                    <li><a href="/inicio/perfil/${like.getLike().username}"><i class="fa fa-user"></i>${like.getLike().username}</a></li>
+                                                    </#list>
+                                                </#if>
+                                    </ul>
+                                </li>
+
+                                        <#if userl.isAdministrador() || userl.username == post.getAuthorp().username>
+
+                                        <li class="dropdown opcion">
+                                            <button href="#" class="dropdown-toggle btn btn-info btn-sm" data-toggle="dropdown">...</button>
+                                            <!--                                  You can add classes for different colours on the next element -->
+                                            <ul class="dropdown-menu dropdown-primary dropdown-menu-right">
+                                                <li class="dropdown-header">Opciones</li>
+                                                <li><a href="/inicio/edit/${post.getId()}">Editar</a></li>
+                                                <li class="divider"></li>
+                                                <li><a href="/inicio/delete/${post.getId()}">Borrar</a></li>
+                                            </ul>
+                                        </li>
+                                        </#if>
+                            </div>
 
                             <h2> <#if post.getTitle()??>${post.getTitle()}</#if></h2>
                             <h6> ${post.getAuthorp().username}, ${post.getDateTime()}</h6>
@@ -68,6 +85,7 @@
                             </p>
                             <br/>
                             <legend></legend>
+                            <a <#if post.validar(userl) >href="/post/dislike2/${post.getId()}" class="btn btn-success btn-fill btn-sm opcion"<#else >href="/post/like2/${post.getId()}" class="btn btn-dark btn-sm opcion"</#if>><i class="fa fa-thumbs-up"></i>Like</a>
                             <#if post.getTags()??>
                                 <#list post.getTags() as tag>
                                     <a class="btn btn-info btn-xs" href="/tag/${tag.getId()?string["0"]}"> ${tag.getTag()} </a>
