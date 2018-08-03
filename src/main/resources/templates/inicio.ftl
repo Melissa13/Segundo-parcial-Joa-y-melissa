@@ -7,7 +7,7 @@
 <#macro page_body>
 <div class="main">
     <div class="section section-nude">
-        <div class="container">
+        <div class="container" style="min-height: 500px">
             <div class="fixed-bar">
                 <center>
                     <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i> Agregar Post</button>
@@ -61,10 +61,10 @@
                                             <img src='/${post.getImage()}' style="max-width: 600px; height: auto; alt="">
                                         </#if>
                                     </center>
-                                    <p style="margin-bottom: 45px; margin-top: 15px">
-                                        ${post.getBody()}
+                                    <p>
+                                        <h5 class="texto-arreglo">${post.getBody()}</h5>
                                     </p>
-                                    <center><a  href="#" type="button" class="btn btn-info">Leer mas</a></center>
+                                    <center><a  href="/inicio/post/${post.getId()}" type="button" class="btn btn-info">Leer mas</a></center>
                                     <br/>
                                     <legend></legend>
                                     <#if post.getTags()??>
@@ -74,7 +74,7 @@
                                     </#if>
                                     <#if post.getUserTags()??>
                                         <#list post.getUserTags() as tagu>
-                                            <a class="btn btn-info btn-xs" href="/tag/${tagu.username}"> ${tagu.username} </a>
+                                            <a class="btn btn-info btn-xs" href="/tag/${tagu.username}"><i class="fa fa-user"></i>${tagu.username} </a>
                                         </#list>
                                     </#if>
                                     <br/>

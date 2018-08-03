@@ -794,7 +794,37 @@ public class main {
             return "";
         });
 
-         //condiciones before
+        get("/inicio/post/:id", (request, response) -> {
+            User user =null;
+            String cook=decrypt(request.cookie("test"));
+            if(cook != null && !cook.isEmpty()){
+                user=UserServices.getInstancia().find(cook);
+                request.session(true);
+                request.session().attribute("user", user);
+            }
+            else{
+                user= request.session(true).attribute("user");
+            }
+
+            long postid = Long.parseLong(request.params("id"));
+
+            Post p=PostServices.getInstancia().find(postid);//.getProduct(productid);
+
+            if(p.getImage()!=null && !p.getImage().isEmpty()) {
+                Path prueba = Paths.get(p.getImage());
+                p.setImage(prueba.getFileName().toString());
+            }
+
+            Map<String, Object> mapa = new HashMap<>();
+            mapa.put("userl",user);
+            mapa.put("post",p);
+            mapa.put("amigos",UserServices.getInstancia().findAll()); //amigos
+
+            return new ModelAndView(mapa, "post.ftl");
+        }, motor);
+
+
+        //condiciones before
         before("/",(request, response) -> {
             User user =null;
             String cook=decrypt(request.cookie("test"));
@@ -1204,6 +1234,21 @@ public class main {
             }
         }
         return fulano;
+    }
+
+    public static ArrayList<String> Posteo(String username)
+    {
+
+        String nombre=username;
+        ArrayList<String> postes = new ArrayList<String>();
+        System.out.println("cantidad de post");
+        //List<Post> p2=PostServices.getInstancia().findAll();
+        List<Post> p2=user_post(nombre);
+        for (Post p: p2){
+            postes.add("ID:"+p.getId()+" Title:"+p.getTitle()+" Body:"+p.getBody()+" fecha:"+p.getDateTime()+" Autor:"+p.getAuthorp().getUsername()+" Tags:"+(p.getUserTags().size()+p.getTags().size())+" Comentarios:"+p.getComments().size() + " imagen: "+ p.getImage());
+            System.out.println("ID:"+p.getId()+" Title:"+p.getTitle()+" Body:"+p.getBody()+" fecha:"+p.getDateTime()+" Autor:"+p.getAuthorp().getUsername()+" Tags:"+(p.getUserTags().size()+p.getTags().size())+" Comentarios:"+p.getComments().size() + " imagen: "+ p.getImage());
+        }
+        return postes;
     }
 
 

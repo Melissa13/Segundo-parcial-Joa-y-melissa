@@ -201,3 +201,9 @@ tr:nth-child(even) {
 label{
     margin-top: 5px;
 }
+
+.texto-arreglo{
+    margin-bottom: 45px;
+    margin-top: 35px;
+    white-space: pre-wrap;
+}

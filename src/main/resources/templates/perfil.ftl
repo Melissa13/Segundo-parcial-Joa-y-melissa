@@ -40,7 +40,7 @@
                     <div class="nav-tabs-wrapper">
                         <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
                             <li class="active"><a href="#personal" data-toggle="tab">Personal</a></li>
-                            <li><a href="#profile" data-toggle="tab">Profecional</a></li>
+                            <li><a href="#profile" data-toggle="tab">Profesional</a></li>
                             <li><a href="#actividad" data-toggle="tab">Actividad</a></li>
                         </ul>
                     </div>
