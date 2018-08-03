@@ -2,7 +2,10 @@ package main;
 
 import Database.*;
 import Clases.*;
+import REST.JSON;
+import REST.WebService_resty;
 import SOAP.SOAP_Start;
+import com.google.gson.Gson;
 import freemarker.template.Configuration;
 import spark.ModelAndView;
 import spark.template.freemarker.FreeMarkerEngine;
@@ -1231,6 +1234,32 @@ public class main {
 
             response.redirect("/inicio");
             return "";
+        });
+
+        path("/RESTy", () ->
+        {
+            WebService_resty resty = new WebService_resty();
+
+            afterAfter("/*",(request, response) -> {
+                if (request.headers("Accept").equalsIgnoreCase("application/json")){
+                    response.header("Content-Type","application/json");
+                }
+            });
+
+            get("/una_rutica_ahi_jevi/:username",(request, response) -> {
+                return new Gson().toJson(resty.getUserPosts(request.params("username")));
+            }, JSON.json());
+
+            post("/La_ruta_al_POST/:username","application/json",((request, response) -> {
+                Post post = null;
+                String username = request.params("username");
+                if (request.headers("Content-Type").equalsIgnoreCase("application/json"))
+                {
+                    post= new Gson().fromJson(request.body(),Post.class);
+
+                }
+                return resty.Postear(post,username);
+            }),JSON.json());
         });
 
 

@@ -4,6 +4,7 @@ import Clases.Post;
 import Clases.User;
 import Database.PostServices;
 import Database.UserServices;
+import javafx.geometry.Pos;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -25,24 +26,19 @@ public class WebService_resty {
         return postsUser;
     }
 
-    public void Postear(String title, String body, String image, String username)
+    public Post Postear(Post post,String username)
     {
-        User temp = new User();
-        for (User user:userList) {
-            if (user.getUsername().equalsIgnoreCase(username))
-                temp=user;
+        User user = new User();
+        for (User tmp: userList) {
+            if (tmp.getUsername().equalsIgnoreCase(username))
+                user = tmp;
         }
-        System.out.println(temp.getUsername());
         Date today = Calendar.getInstance().getTime();
-        Post post = new Post();
-        System.out.println(post.getId());
-        post.setTitle(title);
-        post.setBody(body);
-        post.setImage(image);
-        post.setAuthorp(temp);
+        post.setAuthorp(user);
         post.setDateTime(today);
-        System.out.println(post.getBody()+" "+post.getImage());
-        PostServices.getInstancia().crear(post);
+        System.out.println(post.getTitle());
+      PostServices.getInstancia().crear(post);
+      return post;
     }
 
 }
