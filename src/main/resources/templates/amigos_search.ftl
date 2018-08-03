@@ -18,8 +18,31 @@
 
                     <!-- post row -->
                     <div class="tim-row bordec" style="min-height: 300px">
-                        <center><h4> Usuarios existentes</h4></center>
-
+                        <center><h4> Usuarios Encontrados</h4></center>
+                        <legend></legend>
+                        <#if lista??>
+                            <center>
+                                <table>
+                                    <tr><th>Username</th>
+                                        <th>Nombre</th>
+                                        <th>Perfil</th>
+                                        <th>Solicitud?</th>
+                                    </tr>
+                                <#list lista as user>
+                                <tr><td>${user.username}</td>
+                                    <td>${user.nombre}</td>
+                                    <td><a href="/inicio/perfil/${user.username}" class="btn btn-info btn-sm">Perfil</a></td>
+                                    <td><a href="/inicio/friends/${user.username}" class="btn btn-info btn-sm">Enviar solicitud</a></td>
+                                </tr>
+                                </#list>
+                                </table>
+                            </center>
+                        <#else >
+                            <center>
+                                <h2> No hay usuarios que cumplan con la condicion</h2>
+                            </center>
+                        </#if>
+                        <legend></legend>
                     </div>
                     <!-- end row -->
                 </div>

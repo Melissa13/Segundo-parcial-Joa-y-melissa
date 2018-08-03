@@ -77,4 +77,23 @@ public class Notification implements Serializable{
     public void setMensaje(String mensaje) {
         this.mensaje = mensaje;
     }
+
+    public String tipo(){
+        String tipo="";
+        if(getPost()!=null){
+            tipo="Post";
+        }
+        else if(getImagen()!=null){
+            tipo="imagen";
+        }
+        else {tipo="amistad";}
+        return  tipo;
+    }
+
+    public boolean amistad(){
+        if(getMensaje().equals("Este usuario quiere ser su amigo")){
+            return true;
+        }
+        return false;
+    }
 }

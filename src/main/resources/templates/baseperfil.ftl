@@ -46,7 +46,6 @@
                     <#if userl.isAdministrador() >
                             <li>
                                 <a href="/gestion" class="btn btn-fill btn-primary">Gestión</a>
-                                </a>
                             </li>
                     </#if>
                 </#if>
@@ -65,8 +64,7 @@
                 </li>
 
                 <li>
-                    <a href="/gestion" class="btn btn-fill btn-primary"><i class="fa fa-bell"></i></a>
-                    </a>
+                    <a href="/inicio/news" <#if userl.getNews()?has_content>class="btn btn-fill btn-danger"<#else>class="btn btn-fill btn-primary"</#if>><i class="fa fa-bell"></i></a>
                 </li>
 
                 <!-- usuario-->

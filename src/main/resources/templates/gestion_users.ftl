@@ -28,7 +28,6 @@
                                     <th>Nombre</th>
                                     <th>Administrador</th>
                                     <th>Estatus?</th>
-                                    <th>editar</th>
                                     <th>Eliminar</th>
                                 </tr>
                                 <#list lista as user>
@@ -38,7 +37,6 @@
                                     <td><a href="/gestion/promove/${user.username}" <#if user.isAdministrador() >class="btn btn-fill btn-warning btn-sm"<#else >class="btn btn-fill btn-success btn-sm"</#if>>
                                            <#if user.isAdministrador() >Degradar<#else >Promover</#if>
                                         </a></td>
-                                    <td><a href="/gestion/edit/${user.username}" class="btn btn-info btn-sm">Editar</a></td>
                                     <td><a href="/gestion/delete/${user.username}" class="btn btn-danger btn-sm">Eliminar</a></td>
                                 </tr>
                                 </#list>

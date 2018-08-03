@@ -1096,13 +1096,104 @@ public class main {
                 user= request.session(true).attribute("user");
             }
 
+            System.out.println("entra a amigos");
             List<User> lista= UserServices.getInstancia().findAll();
+            List<User> aux=new ArrayList<>();
+            for (User u:lista){
+                if(!u.getUsername().equals(user.getUsername())){
+                    aux.add(u);
+                }
+            }
 
             Map<String, Object> mapa = new HashMap<>();
             mapa.put("userl",user);
-            mapa.put("lista", lista);
+            mapa.put("lista", aux);
             return new ModelAndView(mapa, "amigos_search.ftl");
         }, motor);
+
+        get("/inicio/friends/:user", (request, response) -> {
+            User user =null;
+            String cook=decrypt(request.cookie("test"));
+            if(cook != null && !cook.isEmpty()){
+                user=UserServices.getInstancia().find(cook);
+                request.session(true);
+                request.session().attribute("user", user);
+            }
+            else{
+                user= request.session(true).attribute("user");
+            }
+
+            System.out.println("entra a generar notificacion");
+            String username = request.params("user");
+            User u=UserServices.getInstancia().find(username);
+
+            Notification n=new Notification();
+            n.setOwner(u);
+            n.setOrigen(user);
+            n.setMensaje("Este usuario quiere ser su amigo");
+            NewsServices.getInstancia().crear(n);
+
+            response.redirect("/inicio/friends");
+            return "";
+        });
+
+        //notificaciones
+        get("/inicio/news", (request, response) -> {
+            User user =null;
+            String cook=decrypt(request.cookie("test"));
+            //System.out.println("El cookie: "+request.cookie("test"));
+            if(cook != null && !cook.isEmpty()){
+                user=UserServices.getInstancia().find(cook);
+                request.session(true);
+                request.session().attribute("user", user);
+            }
+            else{
+                user= request.session(true).attribute("user");
+            }
+
+            Map<String, Object> mapa = new HashMap<>();
+            mapa.put("userl",user);
+            return new ModelAndView(mapa, "notificaciones.ftl");
+        }, motor);
+
+        post("/inicio/news/see/:id", (request, response) -> {
+            User user =null;
+            String cook=decrypt(request.cookie("test"));
+            if(cook != null && !cook.isEmpty()){
+                user=UserServices.getInstancia().find(cook);
+                request.session(true);
+                request.session().attribute("user", user);
+            }
+            else{
+                user= request.session(true).attribute("user");
+            }
+
+            String username = request.params("user");
+            User u=UserServices.getInstancia().find(username);
+
+            response.redirect("/inicio/friends");
+            return "";
+        });
+
+        post("/inicio/news/delete/:id", (request, response) -> {
+            User user =null;
+            String cook=decrypt(request.cookie("test"));
+            if(cook != null && !cook.isEmpty()){
+                user=UserServices.getInstancia().find(cook);
+                request.session(true);
+                request.session().attribute("user", user);
+            }
+            else{
+                user= request.session(true).attribute("user");
+            }
+
+            String username = request.params("user");
+            User u=UserServices.getInstancia().find(username);
+
+            response.redirect("/inicio/friends");
+            return "";
+        });
+
 
 
         //condiciones before
