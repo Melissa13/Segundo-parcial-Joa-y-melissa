@@ -673,6 +673,16 @@ public class main {
                 }
             }
 
+            List<Notification> n=NewsServices.getInstancia().findAll();
+            for(Notification nn:n){
+                if(nn.getPost()!=null) {
+                    if (nn.getPost().getId() == postid) {
+                        //caux.add(cc);
+                        NewsServices.getInstancia().eliminar(nn.getId());
+                    }
+                }
+            }
+
             PostServices.getInstancia().eliminar(postid);//ps.DeleteProduct(productid);
 
             //guardar archivo
@@ -1021,6 +1031,13 @@ public class main {
             ul.setPostl(p);
             LikeService.getInstancia().crear(ul);
 
+            Notification n=new Notification();
+            n.setOwner(p.getAuthorp());
+            n.setOrigen(user);
+            n.setPost(p);
+            n.setMensaje("Este usuario ha dado like en un post tuyo");
+            NewsServices.getInstancia().crear(n);
+
 
             response.redirect("/inicio");
             return "";
@@ -1050,6 +1067,16 @@ public class main {
             }
             LikeService.getInstancia().eliminar(like.getId());
 
+
+            List<Notification> n=NewsServices.getInstancia().findAll();
+            for(Notification nn:n){
+                if(nn.getPost()!=null) {
+                    if (nn.getPost().getId() == postid && nn.dioLike() && nn.getOrigen().getUsername().equals(user.getUsername())) {
+                        NewsServices.getInstancia().eliminar(nn.getId());
+                    }
+                }
+            }
+
             response.redirect("/inicio");
             return "";
         });
@@ -1073,6 +1100,13 @@ public class main {
             ul.setLike(user);
             ul.setPostl(p);
             LikeService.getInstancia().crear(ul);
+
+            Notification n=new Notification();
+            n.setOwner(p.getAuthorp());
+            n.setOrigen(user);
+            n.setPost(p);
+            n.setMensaje("Este usuario ha dado like en un post tuyo");
+            NewsServices.getInstancia().crear(n);
 
 
             response.redirect("/inicio/post/"+p.getId());
@@ -1102,6 +1136,15 @@ public class main {
                 }
             }
             LikeService.getInstancia().eliminar(like.getId());
+
+            List<Notification> n=NewsServices.getInstancia().findAll();
+            for(Notification nn:n){
+                if(nn.getPost()!=null) {
+                    if (nn.getPost().getId() == postid && nn.dioLike() && nn.getOrigen().getUsername().equals(user.getUsername())) {
+                        NewsServices.getInstancia().eliminar(nn.getId());
+                    }
+                }
+            }
 
             response.redirect("/inicio/post/"+p.getId());
             return "";
@@ -1320,6 +1363,10 @@ public class main {
                 NewsServices.getInstancia().eliminar(n.getId());
             }
             else if (n.post()){
+                NewsServices.getInstancia().eliminar(n.getId());
+                response.redirect("/inicio/post/"+n.getPost().getId());
+            }
+            else if (n.dioLike()){
                 NewsServices.getInstancia().eliminar(n.getId());
                 response.redirect("/inicio/post/"+n.getPost().getId());
             }

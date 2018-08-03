@@ -131,4 +131,11 @@ public class Notification implements Serializable{
         }
         return false;
     }
+
+    public boolean dioLike(){
+        if(getMensaje().equals("Este usuario ha dado like en un post tuyo")){
+            return true;
+        }
+        return false;
+    }
 }
