@@ -86,6 +86,8 @@ public class main {
         List<User> pu=UserServices.getInstancia().findAll();
         for (User u: pu){
             System.out.println("Username:"+u.getUsername()+" Pass:"+u.getPassword()+" name:"+u.getNombre()+" administrador:"+u.isAdministrador()+" Datebirth:"+u.getDate_birth()+" Placebirth:"+u.getPlace_birth()+" Amigos:"+u.getFriends().size());
+            //u.setFriends(null);
+            //UserServices.getInstancia().editar(u);
         }
         System.out.println("TAGS!");
         List<Tag> ss2=TagServices.getInstancia().findAll();
@@ -205,7 +207,8 @@ public class main {
                 user= request.session(true).attribute("user");
             }
 
-            List<Post> publicaciones=PostServices.getInstancia().findAllById();
+            //List<Post> publicaciones=PostServices.getInstancia().findAllById();
+            List<Post> publicaciones=amigo_pos(user);
             //List<Post> auz=new ArrayList<Post>();
             for(Post p: publicaciones){
                 if(p.getImage()!=null && !p.getImage().isEmpty()) {
@@ -217,7 +220,7 @@ public class main {
             Map<String, Object> mapa = new HashMap<>();
             mapa.put("userl",user);
             mapa.put("posts",publicaciones);
-            mapa.put("amigos",UserServices.getInstancia().findAll());
+            mapa.put("amigos",user.getFriends());
 
             return new ModelAndView(mapa, "inicio.ftl");
         }, motor);
@@ -452,6 +455,7 @@ public class main {
             return "";
         });
 
+        //gestion
         get("/gestion", (request, response) -> {
 
             System.out.println("entra a gestion");
@@ -685,7 +689,7 @@ public class main {
                 p.setImage(prueba.getFileName().toString());
             }
 
-            List<User> auxu=UserServices.getInstancia().findAll(); //amigos
+            Set<User> auxu=p.getAuthorp().getFriends(); //amigos
             List<User> u_selec=new ArrayList<>();
             ArrayList<User> no_select=new ArrayList<>();
             for (User u2:auxu){
@@ -835,7 +839,7 @@ public class main {
             Map<String, Object> mapa = new HashMap<>();
             mapa.put("userl",user);
             mapa.put("post",p);
-            mapa.put("amigos",UserServices.getInstancia().findAll()); //amigos
+            mapa.put("amigos",user.getFriends()); //amigos
 
             return new ModelAndView(mapa, "post.ftl");
         }, motor);
@@ -1105,9 +1109,24 @@ public class main {
                 }
             }
 
+            List<User> aux2=new ArrayList<>();
+            boolean esta;
+            for (User u:aux){
+                esta=false;
+                for (User u2:user.getFriends()){
+                    if(u.getUsername().equals(u2.getUsername())){
+                        esta=true;
+                    }
+                }
+                if (!esta){
+                    aux2.add(u);
+                }
+            }
+
+
             Map<String, Object> mapa = new HashMap<>();
             mapa.put("userl",user);
-            mapa.put("lista", aux);
+            mapa.put("lista", aux2);
             return new ModelAndView(mapa, "amigos_search.ftl");
         }, motor);
 
@@ -1704,6 +1723,24 @@ public class main {
             System.out.println("ID:"+p.getId()+" Title:"+p.getTitle()+" Body:"+p.getBody()+" fecha:"+p.getDateTime()+" Autor:"+p.getAuthorp().getUsername()+" Tags:"+(p.getUserTags().size()+p.getTags().size())+" Comentarios:"+p.getComments().size() + " imagen: "+ p.getImage());
         }
         return postes;
+    }
+
+    public static List<Post> amigo_pos(User user){
+        List<Post> fulano=new ArrayList<>();
+        for (User u:user.getFriends()){
+            List<Post> aux=user_post(u.getUsername());
+            for (Post p:aux){
+                fulano.add(p);
+            }
+        }
+        List<Post> aux=user_post(user.getUsername());
+        for (Post p:aux){
+            fulano.add(p);
+        }
+
+        fulano.sort(Comparator.comparing(Post::getId).reversed());
+
+        return fulano;
     }
 
 
