@@ -39,19 +39,38 @@
                             <#list posts as post>
                                 <div class="tim-row bordec">
 
-                                    <#if userl.isAdministrador() || userl.username == post.getAuthorp().username>
+                                    <div>
+                                        <a href="/inicio/post/${post.getId()}" class="btn btn-info btn-sm opcion"><i class="fa fa-comment"></i>${post.getComments()?size}</a>
 
-                                    <li class="dropdown" style="float: right;">
-                                        <button href="#" class="dropdown-toggle btn btn-info btn-sm" data-toggle="dropdown">...</button>
-                                        <!--                                  You can add classes for different colours on the next element -->
-                                        <ul class="dropdown-menu dropdown-primary dropdown-menu-right">
-                                            <li class="dropdown-header">Opciones</li>
-                                            <li><a href="/inicio/edit/${post.getId()}">Editar</a></li>
-                                            <li class="divider"></li>
-                                            <li><a href="/inicio/delete/${post.getId()}">Borrar</a></li>
-                                        </ul>
-                                    </li>
-                                    </#if>
+                                        <li class="dropdown opcion">
+                                            <button href="#" class="dropdown-toggle btn btn-info btn-sm" data-toggle="dropdown"><i class="fa fa-heart"></i>${post.getLikes()?size}</button>
+                                            <!--                                  You can add classes for different colours on the next element -->
+                                            <ul class="dropdown-menu dropdown-primary dropdown-menu-right">
+                                                <li class="dropdown-header">Likes:</li>
+                                                <li><a href="/inicio/edit/${post.getId()}">Editar</a></li>
+                                                <li><a href="/inicio/delete/${post.getId()}">Borrar</a></li>
+                                                <#if post.getLikes()??>
+                                                    <#list post.getLikes() as like>
+                                                    <li><a href="/inicio/perfil/${post.getId()}">user</a></li>
+                                                    </#list>
+                                                </#if>
+                                            </ul>
+                                        </li>
+
+                                        <#if userl.isAdministrador() || userl.username == post.getAuthorp().username>
+
+                                        <li class="dropdown opcion">
+                                            <button href="#" class="dropdown-toggle btn btn-info btn-sm" data-toggle="dropdown">...</button>
+                                            <!--                                  You can add classes for different colours on the next element -->
+                                            <ul class="dropdown-menu dropdown-primary dropdown-menu-right">
+                                                <li class="dropdown-header">Opciones</li>
+                                                <li><a href="/inicio/edit/${post.getId()}">Editar</a></li>
+                                                <li class="divider"></li>
+                                                <li><a href="/inicio/delete/${post.getId()}">Borrar</a></li>
+                                            </ul>
+                                        </li>
+                                        </#if>
+                                    </div>
 
                                     <h2> <#if post.getTitle()??>${post.getTitle()}</#if></h2>
                                     <h6> ${post.getAuthorp().username}, ${post.getDateTime()}</h6>
