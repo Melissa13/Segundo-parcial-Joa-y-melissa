@@ -160,4 +160,13 @@ public class User implements Serializable{
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
+
+    public boolean esamigo(User u){
+        for(Notification n:getNews()){
+            if(n.amistad() && n.getOrigen().getUsername().equals(u.getUsername())){
+                return true;
+            }
+        }
+        return false;
+    }
 }
