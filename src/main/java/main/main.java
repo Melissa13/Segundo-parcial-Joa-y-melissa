@@ -35,13 +35,13 @@ public class main {
 
         port(getPuertoHeroku());
 
-        try {
-            SOAP_Start.init();
+       /* try {
+         //   SOAP_Start.init();
         }
         catch (Exception e){
             System.out.println("Esta vaina no sirve");
             e.printStackTrace();
-        }
+        }*/
 
         //Iniciando el servicio
         BootStrapService.getInstancia().init();
