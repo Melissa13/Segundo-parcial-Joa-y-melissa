@@ -51,33 +51,21 @@
                         </#if>
 
                         <li class="dropdown">
-                            <button href="#" class="dropdown-toggle btn btn-fill btn-primary" data-toggle="dropdown">Primary 2<b class="caret"></b></button>
+                            <button href="#" class="dropdown-toggle btn btn-fill btn-primary" data-toggle="dropdown">Amigos<b class="caret"></b></button>
                             <!--                                  You can add classes for different colours on the next element -->
                             <ul class="dropdown-menu dropdown-primary dropdown-menu-right">
-                                <li class="dropdown-header">Dropdown header</li>
-                                <li><a href="#">Action</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something else here</a></li>
+                                <li class="dropdown-header">Buscar por:</li>
+                                <li><a href="/inicio/friends">General</a></li>
+                                <li><a href="#">Lugar</a></li>
+                                <li><a href="#">Estudio</a></li>
                                 <li class="divider"></li>
-                                <li><a href="#">Separated link</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">One more separated link</a></li>
+                                <li><a href="#">Mis amigos</a></li>
                             </ul>
                         </li>
 
-                        <li class="dropdown">
-                            <button href="#" class="dropdown-toggle btn btn-fill btn-primary" data-toggle="dropdown">Primary 3 <b class="caret"></b></button>
-                            <!--                                  You can add classes for different colours on the next element -->
-                            <ul class="dropdown-menu dropdown-primary dropdown-menu-right">
-                                <li class="dropdown-header">Dropdown header</li>
-                                <li><a href="#">Action</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something else here</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">Separated link</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">One more separated link</a></li>
-                            </ul>
+                        <li>
+                            <a href="/gestion" class="btn btn-fill btn-primary"><i class="fa fa-bell"></i></a>
+                            </a>
                         </li>
 
                         <!-- usuario-->

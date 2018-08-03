@@ -1082,6 +1082,28 @@ public class main {
             return "";
         });
 
+        //amigos
+        get("/inicio/friends", (request, response) -> {
+            User user =null;
+            String cook=decrypt(request.cookie("test"));
+            //System.out.println("El cookie: "+request.cookie("test"));
+            if(cook != null && !cook.isEmpty()){
+                user=UserServices.getInstancia().find(cook);
+                request.session(true);
+                request.session().attribute("user", user);
+            }
+            else{
+                user= request.session(true).attribute("user");
+            }
+
+            List<User> lista= UserServices.getInstancia().findAll();
+
+            Map<String, Object> mapa = new HashMap<>();
+            mapa.put("userl",user);
+            mapa.put("lista", lista);
+            return new ModelAndView(mapa, "amigos_search.ftl");
+        }, motor);
+
 
         //condiciones before
         before("/",(request, response) -> {
