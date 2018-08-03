@@ -74,7 +74,7 @@
                                     </#if>
                                     <#if post.getUserTags()??>
                                         <#list post.getUserTags() as tagu>
-                                            <a class="btn btn-info btn-xs" href="/tag/${tagu.username}"><i class="fa fa-user"></i>${tagu.username} </a>
+                                            <a class="btn btn-info btn-xs" href="/inicio/perfil/${tagu.username}"><i class="fa fa-user"></i>${tagu.username} </a>
                                         </#list>
                                     </#if>
                                     <br/>

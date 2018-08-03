@@ -1,7 +1,7 @@
 <#include "base.ftl">
 
 <#macro page_head>
-<title>Inicio</title>
+<title xmlns="http://www.w3.org/1999/html">Inicio</title>
 </#macro>
 
 <#macro page_body>
@@ -83,6 +83,60 @@
 
                         </div>
                         <!-- end row -->
+
+                        <!--Comments-->
+                        <div class="tim-row bordecc">
+                            <br/>
+                            <h2>Comentarios</h2>
+                            <legend></legend>
+
+                            <form method="POST" action="/post/addc/${post.getId()?string["0"]}">
+                                <label >Comentario:</label><br/>
+                                <textarea class="form-control" placeholder="Escriba aqui su comentario" rows="5" name="body" required></textarea>
+
+                                <br/>
+                                <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i>Agregar</button>
+                            </form>
+                            <legend></legend>
+                            <b><legend></legend></b>
+                            <legend></legend>
+                            <#if post.getComments()?has_content>
+                                <#list post.getComments() as comm>
+
+                                    <#if userl.isAdministrador() || userl.username == comm.getUsuario().username>
+
+                                    <li class="dropdown" style="float: right;">
+                                        <button href="#" class="dropdown-toggle btn btn-info btn-sm" data-toggle="dropdown">...</button>
+                                        <!--                                  You can add classes for different colours on the next element -->
+                                        <ul class="dropdown-menu dropdown-primary dropdown-menu-right">
+                                            <li class="dropdown-header">Opciones</li>
+                                            <li><a href="/inicio/edit/${post.getId()}">Editar</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="/inicio/delete/${post.getId()}">Borrar</a></li>
+                                        </ul>
+                                    </li>
+                                    </#if>
+
+                                    <h4> ${comm.getUsuario().username}</h4>
+                                    <br/>
+                                    <p>
+                                    <h5 class="texto-arreglo">${comm.getText()}</h5>
+                                    </p>
+                                    <br/>
+                                    <br/>
+                                    <#if comm.getTags()??>
+                                        <#list comm.getTags() as tag>
+                                            <a class="btn btn-info btn-xs" href="/tag/${comm.getId()?string["0"]}"> ${comm.getTag()} </a>
+                                        </#list>
+                                    </#if>
+                                    <br/>
+                                    <legend></legend>
+                                </#list>
+                            <#else >
+                            <center><h4>Nadie ha comentado en este post aun...</h4><h3>¡Se el primero!</h3></center>
+                            </#if>
+                        </div>
+                        <!--Comments end-->
 
                     </div>
                     <!-- end container -->

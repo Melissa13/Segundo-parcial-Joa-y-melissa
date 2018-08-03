@@ -15,6 +15,16 @@
     margin-bottom: 15px;
 }
 
+.bordecc {
+    border: 2px solid;
+    border-radius: 20px;
+    background-color: rgba(230, 245, 255,0.8);
+    border-color: #7A9E9F;
+    padding: 10px 18px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
 .bordep {
     border: 2px solid;
     border-radius: 20px;

@@ -244,8 +244,10 @@ public class main {
 
             Map<String, Object> mapa = new HashMap<>();
             mapa.put("userl",user);
+            mapa.put("useri",user);
             mapa.put("fecha",fecha);
             mapa.put("edad",edad);
+            mapa.put("posts",user_post(user.getUsername()));
 
             return new ModelAndView(mapa, "perfil.ftl");
         }, motor);
@@ -823,6 +825,106 @@ public class main {
             return new ModelAndView(mapa, "post.ftl");
         }, motor);
 
+        get("/inicio/perfil/:user", (request, response) -> {
+            User user =null;
+            String cook=decrypt(request.cookie("test"));
+            if(cook != null && !cook.isEmpty()){
+                user=UserServices.getInstancia().find(cook);
+                request.session(true);
+                request.session().attribute("user", user);
+            }
+            else{
+                user= request.session(true).attribute("user");
+            }
+
+            String username = request.params("user");
+
+            User u=UserServices.getInstancia().find(username);//
+
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            String fecha="";
+            String edad="";
+            if(u.getDate_birth() != null) {
+                fecha = dateFormat.format(u.getDate_birth());
+
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(u.getDate_birth());
+                int year = cal.get(Calendar.YEAR);
+                cal.setTime(Calendar.getInstance().getTime());
+                int year_now = cal.get(Calendar.YEAR);
+                edad = String.valueOf(year_now - year);
+            }
+
+            Map<String, Object> mapa = new HashMap<>();
+            mapa.put("userl",user);
+            mapa.put("useri",u);
+            mapa.put("fecha",fecha);
+            mapa.put("edad",edad);
+            mapa.put("posts",user_post(u.getUsername()));
+
+            return new ModelAndView(mapa, "perfil.ftl");
+        }, motor);
+
+        //comentarios
+        post("/post/addc/:id", (request, response) -> {
+
+            String username =request.queryParams("username") != null ? request.queryParams("username") : "unknown";
+            String pass =request.queryParams("password") != null ? request.queryParams("password") : "unknown";
+            String nombre =request.queryParams("name");
+            String nacimiento =request.queryParams("date");
+            String descripcion =request.queryParams("description");
+            String lugarnacimiento =request.queryParams("place_birth");
+            String lugaractual =request.queryParams("actual_place");
+            String trabajo =request.queryParams("job");
+            String lugartrabajo =request.queryParams("workplace");
+            String estudios =request.queryParams("studies");
+
+            Date date=null;
+            if(nacimiento != null && !nacimiento.isEmpty()) {
+                try {
+                    DateFormat formatter;
+                    formatter = new SimpleDateFormat("dd/MM/yyyy");
+                    date = formatter.parse(nacimiento);
+                    System.out.println(date);
+                } catch (java.text.ParseException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+
+            User insertar = new User();
+            insertar.setUsername(username);
+            if(nombre != null && !nombre.isEmpty()) {
+                insertar.setNombre(nombre);
+            }
+            insertar.setPassword(pass);
+            insertar.setAdministrador(false);
+            if(nacimiento != null && !nacimiento.isEmpty()) {
+                insertar.setDate_birth(date);
+            }
+            if(lugaractual != null && !lugaractual.isEmpty()) {
+                insertar.setActual_place(lugaractual);
+            }
+            if(descripcion != null && !descripcion.isEmpty()) {
+                insertar.setDescripcion(descripcion);
+            }
+            if(lugarnacimiento != null && !lugarnacimiento.isEmpty()) {
+                insertar.setPlace_birth(lugarnacimiento);
+            }
+            if(trabajo!= null && !trabajo.isEmpty()) {
+                insertar.setJob(trabajo);
+            }
+            if(estudios != null && !estudios.isEmpty()) {
+                insertar.setStudies(estudios);
+            }
+            if(lugartrabajo != null && !lugartrabajo.isEmpty()) {
+                insertar.setWorkplace(lugartrabajo);
+            }
+            UserServices.getInstancia().crear(insertar);
+
+            response.redirect("/loginsucess");
+            return "";
+        });
 
         //condiciones before
         before("/",(request, response) -> {
@@ -1265,7 +1367,6 @@ public class main {
         }
         return fulano;
     }
-
 
     public static ArrayList<String> Posteo(String username)
     {
