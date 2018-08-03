@@ -87,7 +87,7 @@
                         <!--Comments-->
                         <div class="tim-row bordec">
                             <br/>
-                            <h2>Comentarios</h2>
+                            <h2>Comentarios: ${post.getComments()?size}</h2>
                             <legend></legend>
 
                             <form method="POST" action="/post/addc/${post.getId()?string["0"]}">

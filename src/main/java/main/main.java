@@ -92,6 +92,11 @@ public class main {
         for (Tag u: ss2){
             System.out.println("tag ss2: "+u.getTag()+" ID "+ u.getId());
         }
+        System.out.println("Likes!");
+        List<Likes> ss3=LikeService.getInstancia().findAll();
+        for (Likes u: ss3){
+            System.out.println("id: "+u.getId()+" User: "+ u.getLike().getUsername());
+        }
 
         //prueba post
         /*User m=UserServices.getInstancia().find("Meli");
@@ -540,7 +545,6 @@ public class main {
         },motor);
 
         //posts
-
         post("/inicio/agregar", (request, response) -> {
             User user =null;
             String cook=decrypt(request.cookie("test"));
@@ -813,7 +817,7 @@ public class main {
 
             long postid = Long.parseLong(request.params("id"));
 
-            Post p=PostServices.getInstancia().find(postid);//.getProduct(productid);
+            Post p=PostServices.getInstancia().find(postid);
 
             if(p.getImage()!=null && !p.getImage().isEmpty()) {
                 Path prueba = Paths.get(p.getImage());
@@ -962,6 +966,61 @@ public class main {
             response.redirect("/inicio/post/"+cc.getPost().getId());
             return "";
         });
+
+        //likes
+        get("/post/like/:id", (request, response) -> {
+            User user =null;
+            String cook=decrypt(request.cookie("test"));
+            if(cook != null && !cook.isEmpty()){
+                user=UserServices.getInstancia().find(cook);
+                request.session(true);
+                request.session().attribute("user", user);
+            }
+            else{
+                user= request.session(true).attribute("user");
+            }
+
+            long postid = Long.parseLong(request.params("id"));
+            Post p=PostServices.getInstancia().find(postid);
+
+            Likes ul=new Likes();
+            ul.setLike(user);
+
+            //chequea si el like ya esta
+            List<Likes> a=new ArrayList<>();
+            a=LikeService.getInstancia().findAllBylike(user);
+            boolean likeyes=false;
+            for (Likes ll:a){
+                if(ll.getLike().getUsername().equals(user.getUsername())){
+                    likeyes=true;
+                }
+            }
+            if(!likeyes){
+                LikeService.getInstancia().crear(ul);
+            }
+
+            //para agregar a post likes
+            Set<Likes> like=p.getLikes();
+            boolean cancel=false;
+            for (Likes l:p.getLikes()){
+                if(l.getLike().getUsername().equals(user.getUsername())){
+                    cancel=true;
+                }
+            }
+            if(!cancel){
+                System.out.println("NO le ha dado like");
+                like.add(ul);
+
+            }else {System.out.println("ha dado like");}
+
+            p.setLikes(like);
+            PostServices.getInstancia().editar(p);
+
+
+            response.redirect("/inicio");
+            return "";
+        });
+
 
         //condiciones before
         before("/",(request, response) -> {

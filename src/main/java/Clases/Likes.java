@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
+@NamedQueries({@NamedQuery(name = "Likes.findAllBylike", query = "select p from Likes  p where p.like.username like :user")})
 public class Likes implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,6 +14,9 @@ public class Likes implements Serializable{
 
     public Likes(User like) {
         this.like = like;
+    }
+
+    public Likes() {
     }
 
     public long getId() {

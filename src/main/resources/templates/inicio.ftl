@@ -47,11 +47,9 @@
                                             <!--                                  You can add classes for different colours on the next element -->
                                             <ul class="dropdown-menu dropdown-primary dropdown-menu-right">
                                                 <li class="dropdown-header">Likes:</li>
-                                                <li><a href="/inicio/edit/${post.getId()}">Editar</a></li>
-                                                <li><a href="/inicio/delete/${post.getId()}">Borrar</a></li>
                                                 <#if post.getLikes()??>
                                                     <#list post.getLikes() as like>
-                                                    <li><a href="/inicio/perfil/${post.getId()}">user</a></li>
+                                                    <li><a href="/inicio/perfil/${like.getLike().username}">${like.getLike().username}</a></li>
                                                     </#list>
                                                 </#if>
                                             </ul>
@@ -86,6 +84,7 @@
                                     <center><a  href="/inicio/post/${post.getId()}" type="button" class="btn btn-info">Leer mas</a></center>
                                     <br/>
                                     <legend></legend>
+                                    <a href="/post/like/${post.getId()}" class="btn btn-dark btn-sm opcion"><i class="fa fa-thumbs-up"></i>Like</a>
                                     <#if post.getTags()??>
                                         <#list post.getTags() as tag>
                                             <a class="btn btn-info btn-xs" href="/tag/${tag.getId()?string["0"]}"> ${tag.getTag()} </a>
