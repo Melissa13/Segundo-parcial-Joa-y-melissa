@@ -85,24 +85,24 @@
                         <!-- end row -->
 
                         <!--Comments-->
-                        <div class="tim-row bordecc">
+                        <div class="tim-row bordec">
                             <br/>
                             <h2>Comentarios</h2>
                             <legend></legend>
 
                             <form method="POST" action="/post/addc/${post.getId()?string["0"]}">
                                 <label >Comentario:</label><br/>
-                                <textarea class="form-control" placeholder="Escriba aqui su comentario" rows="5" name="body" required></textarea>
+                                <textarea class="form-control area-borde" placeholder="Escriba aqui su comentario" rows="5" name="body" required></textarea>
 
                                 <br/>
                                 <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i>Agregar</button>
                             </form>
-                            <legend></legend>
-                            <b><legend></legend></b>
-                            <legend></legend>
+                            <legend style="color: black"></legend>
+                            <legend style="color: black"></legend>
                             <#if post.getComments()?has_content>
                                 <#list post.getComments() as comm>
 
+                                    <div class="burbuja">
                                     <#if userl.isAdministrador() || userl.username == comm.getUsuario().username>
 
                                     <li class="dropdown" style="float: right;">
@@ -118,18 +118,16 @@
                                     </#if>
 
                                     <h4> ${comm.getUsuario().username}</h4>
-                                    <br/>
                                     <p>
-                                    <h5 class="texto-arreglo">${comm.getText()}</h5>
+                                    <h5 class="comm-arreglo">${comm.getText()}</h5>
                                     </p>
-                                    <br/>
-                                    <br/>
                                     <#if comm.getTags()??>
                                         <#list comm.getTags() as tag>
                                             <a class="btn btn-info btn-xs" href="/tag/${comm.getId()?string["0"]}"> ${comm.getTag()} </a>
                                         </#list>
                                     </#if>
                                     <br/>
+                                    </div>
                                     <legend></legend>
                                 </#list>
                             <#else >

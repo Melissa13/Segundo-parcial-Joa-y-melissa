@@ -106,8 +106,8 @@ public class main {
 
         String nombre="Admin";
         System.out.println("cantidad de post");
-        //List<Post> p2=PostServices.getInstancia().findAll();
-        List<Post> p2=user_post(nombre);
+        List<Post> p2=PostServices.getInstancia().findAll();
+        //List<Post> p2=user_post(nombre);
         for (Post p: p2){
             System.out.println("ID:"+p.getId()+" Title:"+p.getTitle()+" Body:"+p.getBody()+" fecha:"+p.getDateTime()+" Autor:"+p.getAuthorp().getUsername()+" Tags:"+(p.getUserTags().size()+p.getTags().size())+" Comentarios:"+p.getComments().size() + " imagen: "+ p.getImage());
         }
@@ -867,62 +867,29 @@ public class main {
 
         //comentarios
         post("/post/addc/:id", (request, response) -> {
-
-            String username =request.queryParams("username") != null ? request.queryParams("username") : "unknown";
-            String pass =request.queryParams("password") != null ? request.queryParams("password") : "unknown";
-            String nombre =request.queryParams("name");
-            String nacimiento =request.queryParams("date");
-            String descripcion =request.queryParams("description");
-            String lugarnacimiento =request.queryParams("place_birth");
-            String lugaractual =request.queryParams("actual_place");
-            String trabajo =request.queryParams("job");
-            String lugartrabajo =request.queryParams("workplace");
-            String estudios =request.queryParams("studies");
-
-            Date date=null;
-            if(nacimiento != null && !nacimiento.isEmpty()) {
-                try {
-                    DateFormat formatter;
-                    formatter = new SimpleDateFormat("dd/MM/yyyy");
-                    date = formatter.parse(nacimiento);
-                    System.out.println(date);
-                } catch (java.text.ParseException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
+            User user =null;
+            String cook=decrypt(request.cookie("test"));
+            if(cook != null && !cook.isEmpty()){
+                user=UserServices.getInstancia().find(cook);
+                request.session(true);
+                request.session().attribute("user", user);
+            }
+            else{
+                user= request.session(true).attribute("user");
             }
 
-            User insertar = new User();
-            insertar.setUsername(username);
-            if(nombre != null && !nombre.isEmpty()) {
-                insertar.setNombre(nombre);
-            }
-            insertar.setPassword(pass);
-            insertar.setAdministrador(false);
-            if(nacimiento != null && !nacimiento.isEmpty()) {
-                insertar.setDate_birth(date);
-            }
-            if(lugaractual != null && !lugaractual.isEmpty()) {
-                insertar.setActual_place(lugaractual);
-            }
-            if(descripcion != null && !descripcion.isEmpty()) {
-                insertar.setDescripcion(descripcion);
-            }
-            if(lugarnacimiento != null && !lugarnacimiento.isEmpty()) {
-                insertar.setPlace_birth(lugarnacimiento);
-            }
-            if(trabajo!= null && !trabajo.isEmpty()) {
-                insertar.setJob(trabajo);
-            }
-            if(estudios != null && !estudios.isEmpty()) {
-                insertar.setStudies(estudios);
-            }
-            if(lugartrabajo != null && !lugartrabajo.isEmpty()) {
-                insertar.setWorkplace(lugartrabajo);
-            }
-            UserServices.getInstancia().crear(insertar);
+            long postid = Long.parseLong(request.params("id"));
+            Post p=PostServices.getInstancia().find(postid);//
 
-            response.redirect("/loginsucess");
+            String body =request.queryParams("body");
+
+            Comment insertar = new Comment();
+            insertar.setUsuario(user);
+            insertar.setText(body);
+            insertar.setPost(p);
+            CommentServices.getInstancia().crear(insertar);
+
+            response.redirect("/inicio/post/"+p.getId());
             return "";
         });
 
