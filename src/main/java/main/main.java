@@ -939,6 +939,13 @@ public class main {
             insertar.setPost(p);
             CommentServices.getInstancia().crear(insertar);
 
+            Notification n=new Notification();
+            n.setOwner(p.getAuthorp());
+            n.setOrigen(user);
+            n.setPost(p);
+            n.setMensaje("Este usuario ha comentado en un post tuyo");
+            NewsServices.getInstancia().crear(n);
+
             response.redirect("/inicio/post/"+p.getId());
             return "";
         });
@@ -1005,6 +1012,15 @@ public class main {
 
             Comment cc= CommentServices.getInstancia().find(commid);
             CommentServices.getInstancia().eliminar(cc.getId());
+
+            List<Notification> n=NewsServices.getInstancia().findAll();
+            for(Notification nn:n){
+                if(nn.getPost()!=null) {
+                    if (nn.getPost().getId() == cc.getPost().getId() && nn.comento() && nn.getOrigen().getUsername().equals(user.getUsername())) {
+                        NewsServices.getInstancia().eliminar(nn.getId());
+                    }
+                }
+            }
 
             response.redirect("/inicio/post/"+cc.getPost().getId());
             return "";
@@ -1362,11 +1378,15 @@ public class main {
                 UserServices.getInstancia().editar(use2);
                 NewsServices.getInstancia().eliminar(n.getId());
             }
-            else if (n.post()){
+            else if (n.post()){  //validado
                 NewsServices.getInstancia().eliminar(n.getId());
                 response.redirect("/inicio/post/"+n.getPost().getId());
             }
-            else if (n.dioLike()){
+            else if (n.dioLike()){  //validado
+                NewsServices.getInstancia().eliminar(n.getId());
+                response.redirect("/inicio/post/"+n.getPost().getId());
+            }
+            else if (n.comento()){
                 NewsServices.getInstancia().eliminar(n.getId());
                 response.redirect("/inicio/post/"+n.getPost().getId());
             }

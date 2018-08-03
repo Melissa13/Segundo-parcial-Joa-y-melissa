@@ -138,4 +138,11 @@ public class Notification implements Serializable{
         }
         return false;
     }
+
+    public boolean comento(){
+        if(getMensaje().equals("Este usuario ha comentado en un post tuyo")){
+            return true;
+        }
+        return false;
+    }
 }
