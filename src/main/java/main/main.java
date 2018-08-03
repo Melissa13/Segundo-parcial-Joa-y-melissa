@@ -35,13 +35,7 @@ public class main {
 
         port(getPuertoHeroku());
 
-       /* try {
-         //   SOAP_Start.init();
-        }
-        catch (Exception e){
-            System.out.println("Esta vaina no sirve");
-            e.printStackTrace();
-        }*/
+
 
         //Iniciando el servicio
         BootStrapService.getInstancia().init();
@@ -63,6 +57,16 @@ public class main {
             System.out.println("Username "+a.getUsername()+" Contraseña"+a.getPassword());
         }
         else {System.out.println("no esta");}
+
+
+        //ESTO DA USO A AL SERVICIO SOAP, SOLO HAY QUE DESCOMENTARLO
+        /* try {
+         //   SOAP_Start.init();
+        }
+        catch (Exception e){
+            System.out.println("Esta vaina no sirve");
+            e.printStackTrace();
+        }*/
 
         //prueba amigos
         /*
@@ -104,13 +108,6 @@ public class main {
         PostServices.getInstancia().crear(p1);*/
 
 
-        String nombre="Admin";
-        System.out.println("cantidad de post");
-        //List<Post> p2=PostServices.getInstancia().findAll();
-        List<Post> p2=user_post(nombre);
-        for (Post p: p2){
-            System.out.println("ID:"+p.getId()+" Title:"+p.getTitle()+" Body:"+p.getBody()+" fecha:"+p.getDateTime()+" Autor:"+p.getAuthorp().getUsername()+" Tags:"+(p.getUserTags().size()+p.getTags().size())+" Comentarios:"+p.getComments().size() + " imagen: "+ p.getImage());
-        }
 
 
         //fecha prueba
@@ -794,7 +791,7 @@ public class main {
             return "";
         });
 
-         //condiciones before
+        //condiciones before
         before("/",(request, response) -> {
             User user =null;
             String cook=decrypt(request.cookie("test"));
@@ -980,13 +977,13 @@ public class main {
 
 
         get("/testImage",(request, response) ->
-            "<form method='post' enctype='multipart/form-data'>" // note the enctype
-                    + "    <input type='file' name='uploaded_file' accept='.png'>" // make sure to call getPart using the same "name" in the post
-                    + "    <button>Upload picture</button>"
-                    + "</form>"
-                    + "<h1>ruta 1:<h1><img src='upload/6390579131001553725.PNG'>"
-                    + "<h1>ruta 2:<h1><img src='/6390579131001553725.PNG'>"
-                    + "<h1>ruta 3:<h1><img src='C:/Users/Melisa/Documents/PUCMM/ISC-415 Programacion web/segundo parcial/Segundo-parcial-Joa-y-melissa/upload/6390579131001553725.PNG'>"
+                "<form method='post' enctype='multipart/form-data'>" // note the enctype
+                        + "    <input type='file' name='uploaded_file' accept='.png'>" // make sure to call getPart using the same "name" in the post
+                        + "    <button>Upload picture</button>"
+                        + "</form>"
+                        + "<h1>ruta 1:<h1><img src='upload/6390579131001553725.PNG'>"
+                        + "<h1>ruta 2:<h1><img src='/6390579131001553725.PNG'>"
+                        + "<h1>ruta 3:<h1><img src='C:/Users/Melisa/Documents/PUCMM/ISC-415 Programacion web/segundo parcial/Segundo-parcial-Joa-y-melissa/upload/6390579131001553725.PNG'>"
         );
 
         post("/testImage", (req, res) -> {
@@ -1105,6 +1102,8 @@ public class main {
         });
 
 
+
+
     }
 
     static int getPuertoHeroku() {
@@ -1143,8 +1142,8 @@ public class main {
 
         return topsecret;
     }
-	
-	public static Set<Tag> trabajo_tags(String[] tags){
+
+    public static Set<Tag> trabajo_tags(String[] tags){
         Set<Tag> gt = new HashSet<>();
         List<Tag> ss = TagServices.getInstancia().findAll();
         for (int i = 0; i < tags.length; i++) {
@@ -1204,6 +1203,21 @@ public class main {
             }
         }
         return fulano;
+    }
+
+    public static ArrayList<String> Posteo(String username)
+    {
+
+        String nombre=username;
+        ArrayList<String> postes = new ArrayList<String>();
+        System.out.println("cantidad de post");
+        //List<Post> p2=PostServices.getInstancia().findAll();
+        List<Post> p2=user_post(nombre);
+        for (Post p: p2){
+            postes.add("ID:"+p.getId()+" Title:"+p.getTitle()+" Body:"+p.getBody()+" fecha:"+p.getDateTime()+" Autor:"+p.getAuthorp().getUsername()+" Tags:"+(p.getUserTags().size()+p.getTags().size())+" Comentarios:"+p.getComments().size() + " imagen: "+ p.getImage());
+            System.out.println("ID:"+p.getId()+" Title:"+p.getTitle()+" Body:"+p.getBody()+" fecha:"+p.getDateTime()+" Autor:"+p.getAuthorp().getUsername()+" Tags:"+(p.getUserTags().size()+p.getTags().size())+" Comentarios:"+p.getComments().size() + " imagen: "+ p.getImage());
+        }
+        return postes;
     }
 
 
