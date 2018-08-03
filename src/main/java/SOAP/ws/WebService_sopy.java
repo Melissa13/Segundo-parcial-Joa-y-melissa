@@ -22,17 +22,20 @@ public class WebService_sopy {
     public ArrayList<String> getUserPosts(String username)
     {
         ArrayList<String> postsUser = new ArrayList<String>();
-        User temp = new User();
+        postsUser = main.main.Poesteos(username);
+        /*User temp = new User();
         for (User user:userList) {
             if (user.getUsername().equalsIgnoreCase(username))
                 temp=user;
         }
+        System.out.println(temp.getUsername());
 
         for (Post post: postList) {
             if (post.getAuthorp()==temp){
                 postsUser.add(post.getTitle()+" "+post.getAuthorp().getUsername());
             }
-        }
+        }*/
+        System.out.println(postsUser);
         return postsUser;
     }
 
@@ -44,14 +47,17 @@ public class WebService_sopy {
             if (user.getUsername().equalsIgnoreCase(username))
                 temp=user;
         }
+        System.out.println(temp.getUsername());
         Date today = Calendar.getInstance().getTime();
         Post post = new Post();
-        post.setId(2);
+        System.out.println(post.getId());
         post.setTitle(title);
         post.setBody(body);
         post.setImage(image);
         post.setAuthorp(temp);
         post.setDateTime(today);
+        System.out.println(post.getBody()+" "+post.getImage());
+        PostServices.getInstancia().crear(post);
     }
 
 }

@@ -25,6 +25,8 @@ public class SOAP_Start {
         Endpoint endpoint = Endpoint.create(wsa);
         endpoint.publish(context);
 
+        // Para acceder al wsdl en http://localhost:7777/ws/WebService_sopy?wsdl
+
     }
 
     private static HttpContext build(Server server, String contextString) throws Exception {
