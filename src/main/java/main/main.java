@@ -954,18 +954,12 @@ public class main {
                 user= request.session(true).attribute("user");
             }
 
-            long postid = Long.parseLong(request.params("id"));
-            Post p=PostServices.getInstancia().find(postid);//
+            long commid = Long.parseLong(request.params("id"));
 
-            String body =request.queryParams("body");
+            Comment cc= CommentServices.getInstancia().find(commid);
+            CommentServices.getInstancia().eliminar(cc.getId());
 
-            Comment insertar = new Comment();
-            insertar.setUsuario(user);
-            insertar.setText(body);
-            insertar.setPost(p);
-            CommentServices.getInstancia().crear(insertar);
-
-            response.redirect("/inicio/post/"+p.getId());
+            response.redirect("/inicio/post/"+cc.getPost().getId());
             return "";
         });
 
