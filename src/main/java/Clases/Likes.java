@@ -11,9 +11,15 @@ public class Likes implements Serializable{
     private long id;
     @OneToOne()
     private User like;
+    @ManyToOne()
+    private Post postl;
+    @ManyToOne()
+    private image imagel;
 
-    public Likes(User like) {
+    public Likes(User like, Post postl, image imagel) {
         this.like = like;
+        this.postl = postl;
+        this.imagel = imagel;
     }
 
     public Likes() {
@@ -33,5 +39,21 @@ public class Likes implements Serializable{
 
     public void setLike(User like) {
         this.like = like;
+    }
+
+    public Post getPostl() {
+        return postl;
+    }
+
+    public void setPostl(Post postl) {
+        this.postl = postl;
+    }
+
+    public image getImagel() {
+        return imagel;
+    }
+
+    public void setImagel(image imagel) {
+        this.imagel = imagel;
     }
 }

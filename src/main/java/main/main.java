@@ -985,36 +985,8 @@ public class main {
 
             Likes ul=new Likes();
             ul.setLike(user);
-
-            //chequea si el like ya esta
-            List<Likes> a=new ArrayList<>();
-            a=LikeService.getInstancia().findAllBylike(user);
-            boolean likeyes=false;
-            for (Likes ll:a){
-                if(ll.getLike().getUsername().equals(user.getUsername())){
-                    likeyes=true;
-                }
-            }
-            if(!likeyes){
-                LikeService.getInstancia().crear(ul);
-            }
-
-            //para agregar a post likes
-            Set<Likes> like=p.getLikes();
-            boolean cancel=false;
-            for (Likes l:p.getLikes()){
-                if(l.getLike().getUsername().equals(user.getUsername())){
-                    cancel=true;
-                }
-            }
-            if(!cancel){
-                System.out.println("NO le ha dado like");
-                like.add(ul);
-
-            }else {System.out.println("ha dado like");}
-
-            p.setLikes(like);
-            PostServices.getInstancia().editar(p);
+            ul.setPostl(p);
+            LikeService.getInstancia().crear(ul);
 
 
             response.redirect("/inicio");
@@ -1037,16 +1009,13 @@ public class main {
             Post p=PostServices.getInstancia().find(postid);
 
             //para agregar a post likes
-            Set<Likes> like=new HashSet<>();
+            Likes like=new Likes();
             for (Likes l:p.getLikes()){
-                if(!l.getLike().getUsername().equals(user.getUsername())){
-                    like.add(l);
+                if(l.getLike().getUsername().equals(user.getUsername())){
+                    like=l;
                 }
             }
-
-            p.setLikes(like);
-            PostServices.getInstancia().editar(p);
-
+            LikeService.getInstancia().eliminar(like.getId());
 
             response.redirect("/inicio");
             return "";

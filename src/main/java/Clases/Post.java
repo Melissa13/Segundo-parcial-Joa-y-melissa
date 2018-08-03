@@ -25,7 +25,7 @@ public class Post implements Serializable{
     private Set<Tag> tags;
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<User> UserTags;
-    @ManyToMany(fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "postl", fetch = FetchType.EAGER)
     private Set<Likes> likes;
 
     public Post(String title, String body, String image, User authorp, Date dateTime, Set<Comment> comments, Set<Tag> tags, Set<User> userTags, Set<Likes> likes) {
