@@ -4,7 +4,6 @@ import Clases.Post;
 import Clases.User;
 import Database.PostServices;
 import Database.UserServices;
-import javafx.geometry.Pos;
 
 import java.util.ArrayList;
 import java.util.Calendar;
